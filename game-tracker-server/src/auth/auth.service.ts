@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { prisma } from '../../lib/prisma.js';
 import * as bcrypt from 'bcrypt'
@@ -48,5 +48,24 @@ export class AuthService {
     const accessToken = await this.jwt.signAsync(accessPayload)
 
     return { accessToken, user }
+  }
+
+  async loginUser(email: string, password: string) {
+    const user = await prisma.user.findUnique({
+      where: { email },
+      select: { password: true }
+    })
+
+    if (!user) {
+      throw new UnauthorizedException('Incorrect login or password.')
+    }
+
+    const isPasswordExist = await bcrypt.compare(password, user!.password)
+
+    if (!isPasswordExist) {
+      throw new UnauthorizedException('Incorrect login or password.')
+    }
+
+    
   }
 }
