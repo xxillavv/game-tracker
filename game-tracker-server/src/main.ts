@@ -3,6 +3,7 @@ import { AppModule } from './app.module.js';
 import 'dotenv/config'
 import { ValidationPipe } from '@nestjs/common';
 import { GlobalExceptionFilter } from './exceptionFilters/global.filter.js';
+import cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -16,6 +17,7 @@ async function bootstrap() {
     transform: true,
     forbidNonWhitelisted: true
   }))
+  app.use(cookieParser())
   app.useGlobalFilters(new GlobalExceptionFilter())
   await app.listen(process.env.PORT ?? 3000);
 }
