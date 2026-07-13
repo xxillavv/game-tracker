@@ -21,7 +21,15 @@ export class AuthController {
   }
 
   @Post('login')
-  loginUser(@Body() body: LoginUserDto, @Res({passthrough: true}) response: Response) {
-    return this.authService.loginUser(body.email, body.password)
+  async loginUser(@Body() body: LoginUserDto, @Res({ passthrough: true }) response: Response) {
+    const { accessToken, user } = await this.authService.loginUser(body.email, body.password)
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 10 * 60 * 1000)
+    })
+
+    return { user }
   }
 }
