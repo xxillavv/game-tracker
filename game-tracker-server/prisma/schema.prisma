@@ -6,3 +6,76 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  userId Int @id @default(autoincrement()) @map("user_id")
+
+  email    String @unique @map("email")
+  password String @map("password")
+  username String @unique @map("username")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  sessions      Session[]
+  matches       Match[]
+  platformInfos PlatformInfo[]
+}
+
+model Session {
+  sessionId Int @id @default(autoincrement()) @map("session_id")
+
+  token     String   @unique @map("token")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  sessionUserId Int @map("user_id")
+
+  user User @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
+}
+
+model Game {
+  gameId Int @id @default(autoincrement()) @map("game_id")
+
+  name String @unique @map("name")
+
+  matches Match[]
+}
+
+enum MatchResult {
+  WIN
+  LOSS
+  DRAW
+}
+
+model Match {
+  matchId     Int @id @default(autoincrement()) @map("match_id")
+  userMatchId Int @map("user_id")
+  gameMatchId Int @map("game_id")
+
+  result MatchResult @map("result")
+  score  String      @map("score")
+
+  metadata Json // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
+
+  user User @relation(fields: [userMatchId], references: [userId], onDelete: Cascade)
+  game Game @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+}
+
+model News {
+  newsId Int @id @default(autoincrement()) @map("news_id")
+
+  title     String   @map("title")
+  content   String   @map("content")
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+model PlatformInfo {
+  platformId     Int @id @default(autoincrement()) @map("platform_id")
+  platformUserId Int @map("user_id")
+
+  platformName String  @unique @map("name")
+  externalId   String // Тег, айдішка юзера на конкретній платформі
+  accessToken  String? @map("access_token")
+
+  user User @relation(fields: [platformUserId], references: [userId], onDelete: Cascade)
+}
