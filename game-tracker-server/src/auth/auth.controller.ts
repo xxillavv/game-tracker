@@ -1,12 +1,22 @@
-import { Controller, Post } from '@nestjs/common';
-import { AuthService } from './auth.service';
+import { Body, Controller, Post, Res } from '@nestjs/common';
+import { AuthService } from './auth.service.js';
+import { CreateUserDto } from '../dto/users.dto.js';
+import type { Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   @Post('register')
-  registerUser() {
-    return this.authService.registerUser()
+  async registerUser(@Body() body: CreateUserDto, @Res({ passthrough: true }) response: Response) {
+    const { accessToken, user } = await this.authService.registerUser(body.username, body.email, body.password)
+
+    response.cookie('accessToken', accessToken, {
+      httpOnly: true,
+      expires: new Date(Date.now() + 10 * 60 * 1000),
+      sameSite: 'lax'
+    })
+
+    return user
   }
 }
