@@ -2,7 +2,6 @@ import { ConflictException, Injectable, InternalServerErrorException, Unauthoriz
 import { JwtService } from '@nestjs/jwt';
 import { prisma } from '../../lib/prisma.js';
 import * as bcrypt from 'bcrypt'
-import { response } from 'express';
 
 @Injectable()
 export class AuthService {
