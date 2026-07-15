@@ -25,8 +25,10 @@ model User {
 model Session {
   sessionId Int @id @default(autoincrement()) @map("session_id")
 
-  token     String   @unique @map("token")
+  token String @unique @map("token")
+
   createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
 
   sessionUserId Int @unique @map("user_id")
 
