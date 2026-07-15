@@ -17,7 +17,7 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  sessions      Session[]
+  sessions      Session?
   matches       Match[]
   platformInfos PlatformInfo[]
 }
@@ -28,7 +28,7 @@ model Session {
   token     String   @unique @map("token")
   createdAt DateTime @default(now()) @map("created_at")
 
-  sessionUserId Int @map("user_id")
+  sessionUserId Int @unique @map("user_id")
 
   user User @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
 }

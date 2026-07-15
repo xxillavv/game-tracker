@@ -1,7 +1,7 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Post, Res, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
-import { CreateUserDto, LoginUserDto } from '../dto/users.dto.js';
-import type { Response } from 'express';
+import { CreateUserDto, LoginUserDto } from '../../utils/dto/users.dto.js';
+import type { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -31,5 +31,10 @@ export class AuthController {
     })
 
     return { user }
+  }
+
+  @Get('refresh')
+  refreshToken(@Req() request: Request) {
+    return this.authService.refreshToken(request.cookies['accessToken'])
   }
 }

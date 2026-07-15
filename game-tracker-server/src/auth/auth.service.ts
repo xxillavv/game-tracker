@@ -6,7 +6,6 @@ import * as bcrypt from 'bcrypt'
 @Injectable()
 export class AuthService {
   constructor(private readonly jwt: JwtService) { }
-
   private salt = 10
 
   async registerUser(username: string, userEmail: string, password: string) {
@@ -54,6 +53,7 @@ export class AuthService {
 
     return { accessToken, user }
   }
+
 
   async loginUser(userRmail: string, userPassword: string) {
     const user = await prisma.user.findUnique({
@@ -110,5 +110,58 @@ export class AuthService {
     const { password, ...userResponse } = user
 
     return { accessToken, user: userResponse }
+  }
+
+
+  async refreshToken(token: string) {
+    const payload = await this.jwt.decode(token)
+    const userId = +payload.sub
+
+    if (!payload || isNaN(userId)) {
+      throw new UnauthorizedException("Invalid token.")
+    }
+
+    const userData = await prisma.user.findUnique({
+      where: { userId },
+      select: {
+        email: true,
+        sessions: {
+          select: {
+            token: true
+          }
+        }
+      }
+    })
+
+    if (!userData || !userData.sessions) {
+      throw new UnauthorizedException("Token is not valid")
+    }
+
+    const refreshPayload = await this.jwt.verifyAsync(userData.sessions.token)
+
+    if (!refreshPayload) {
+      throw new UnauthorizedException("Token is not valid")
+    }
+
+    const newRefreshToken = await this.jwt.signAsync(refreshPayload)
+
+    try {
+      await prisma.$transaction([
+        prisma.session.deleteMany({
+          where: { sessionUserId: userId }
+        }),
+
+        prisma.session.create({
+          data: {
+            token: newRefreshToken,
+            sessionUserId: userId
+          }
+        })
+      ])
+    } catch {
+      throw new InternalServerErrorException("Failed to update current session.")
+    }
+
+    
   }
 }
