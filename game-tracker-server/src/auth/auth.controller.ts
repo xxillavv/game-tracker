@@ -14,10 +14,11 @@ export class AuthController {
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
       expires: new Date(Date.now() + 10 * 60 * 1000),
-      sameSite: 'lax'
+      sameSite: 'lax',
+      secure: true
     })
 
-    return user
+    return { user }
   }
 
   @Post('login')
@@ -27,14 +28,22 @@ export class AuthController {
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
       sameSite: 'lax',
-      expires: new Date(Date.now() + 10 * 60 * 1000)
+      expires: new Date(Date.now() + 10 * 60 * 1000),
+      secure: true
     })
 
     return { user }
   }
 
   @Get('refresh')
-  refreshToken(@Req() request: Request) {
-    return this.authService.refreshToken(request.cookies['accessToken'])
+  async refreshToken(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+    const { newAccessToken } = await this.authService.refreshToken(request.cookies['accessToken'])
+
+    response.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 10 * 60 * 1000),
+      secure: true
+    })
   }
 }
