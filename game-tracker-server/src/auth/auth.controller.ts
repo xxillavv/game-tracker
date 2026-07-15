@@ -1,7 +1,7 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, Post, Res, Get, Req } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
-import { CreateUserDto, LoginUserDto } from '../dto/users.dto.js';
-import type { Response } from 'express';
+import { CreateUserDto, LoginUserDto } from '../../utils/dto/users.dto.js';
+import type { Request, Response } from 'express';
 
 @Controller('auth')
 export class AuthController {
@@ -14,10 +14,11 @@ export class AuthController {
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
       expires: new Date(Date.now() + 10 * 60 * 1000),
-      sameSite: 'lax'
+      sameSite: 'lax',
+      secure: true
     })
 
-    return user
+    return { user }
   }
 
   @Post('login')
@@ -27,9 +28,22 @@ export class AuthController {
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
       sameSite: 'lax',
-      expires: new Date(Date.now() + 10 * 60 * 1000)
+      expires: new Date(Date.now() + 10 * 60 * 1000),
+      secure: true
     })
 
     return { user }
+  }
+
+  @Get('refresh')
+  async refreshToken(@Req() request: Request, @Res({ passthrough: true }) response: Response) {
+    const { newAccessToken } = await this.authService.refreshToken(request.cookies['accessToken'])
+
+    response.cookie('accessToken', newAccessToken, {
+      httpOnly: true,
+      sameSite: 'lax',
+      expires: new Date(Date.now() + 10 * 60 * 1000),
+      secure: true
+    })
   }
 }

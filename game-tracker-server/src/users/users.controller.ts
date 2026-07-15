@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Patch, Query, Req, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
-import type { TRequestWithUser } from '../types/request.types.js';
-import { EditUserDto } from '../dto/users.dto.js';
+import type { TRequestWithUser } from '../../utils/types/request.types.js';
+import { EditUserDto } from '../../utils/dto/users.dto.js';
 
 @Controller('users')
 export class UsersController {

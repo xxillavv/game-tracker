@@ -6,7 +6,6 @@ import * as bcrypt from 'bcrypt'
 @Injectable()
 export class AuthService {
   constructor(private readonly jwt: JwtService) { }
-
   private salt = 10
 
   async registerUser(username: string, userEmail: string, password: string) {
@@ -55,6 +54,7 @@ export class AuthService {
     return { accessToken, user }
   }
 
+
   async loginUser(userRmail: string, userPassword: string) {
     const user = await prisma.user.findUnique({
       where: { email: userRmail },
@@ -88,27 +88,68 @@ export class AuthService {
     const accessToken = await this.jwt.signAsync(accessPayload)
     const refreshToken = await this.jwt.signAsync(refreshPayload, { expiresIn: '7d' })
 
-
-    try {
-      await prisma.$transaction([
-        prisma.session.deleteMany({
-          where: { sessionUserId: user.userId }
-        }),
-
-        prisma.session.create({
-          data: {
-            token: refreshToken,
-            sessionUserId: user.userId
-          }
-        })
-      ])
-    } catch {
-      throw new InternalServerErrorException("Failed to update current session.")
-    }
-
+    await prisma.session.upsert({
+      where: { sessionUserId: user.userId },
+      update: {
+        token: refreshToken
+      },
+      create: {
+        sessionUserId: user.userId,
+        token: refreshToken
+      }
+    })
 
     const { password, ...userResponse } = user
 
     return { accessToken, user: userResponse }
+  }
+
+
+  async refreshToken(token: string) {
+    const payload = await this.jwt.decode(token)
+    const userId = +payload.sub
+
+    if (!payload || isNaN(userId)) {
+      throw new UnauthorizedException("Invalid token.")
+    }
+
+    const userData = await prisma.user.findUnique({
+      where: { userId },
+      select: {
+        email: true,
+        sessions: {
+          select: {
+            token: true
+          }
+        }
+      }
+    })
+
+    if (!userData || !userData.sessions) {
+      throw new UnauthorizedException("Token is not valid.")
+    }
+
+    const refreshPayload = await this.jwt.verifyAsync(userData.sessions.token)
+
+    if (!refreshPayload) {
+      throw new UnauthorizedException("Refresh token is expired.")
+    }
+
+    const newRefreshToken = await this.jwt.signAsync(refreshPayload)
+
+    await prisma.session.upsert({
+      where: { sessionUserId: userId },
+      update: {
+        token: newRefreshToken
+      },
+      create: {
+        sessionUserId: userId,
+        token: newRefreshToken
+      }
+    })
+
+    const newAccessToken = await this.jwt.signAsync({ sub: userId, email: userData.email })
+
+    return { newAccessToken }
   }
 }
