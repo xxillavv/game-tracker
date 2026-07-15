@@ -950,7 +950,8 @@ export const PlatformInfoScalarFieldEnum = {
   platformUserId: 'platformUserId',
   platformName: 'platformName',
   externalId: 'externalId',
-  accessToken: 'accessToken'
+  accessToken: 'accessToken',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[keyof typeof PlatformInfoScalarFieldEnum]

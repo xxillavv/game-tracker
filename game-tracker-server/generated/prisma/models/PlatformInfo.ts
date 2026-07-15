@@ -42,6 +42,7 @@ export type PlatformInfoMinAggregateOutputType = {
   platformName: string | null
   externalId: string | null
   accessToken: string | null
+  updatedAt: Date | null
 }
 
 export type PlatformInfoMaxAggregateOutputType = {
@@ -50,6 +51,7 @@ export type PlatformInfoMaxAggregateOutputType = {
   platformName: string | null
   externalId: string | null
   accessToken: string | null
+  updatedAt: Date | null
 }
 
 export type PlatformInfoCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type PlatformInfoCountAggregateOutputType = {
   platformName: number
   externalId: number
   accessToken: number
+  updatedAt: number
   _all: number
 }
 
@@ -78,6 +81,7 @@ export type PlatformInfoMinAggregateInputType = {
   platformName?: true
   externalId?: true
   accessToken?: true
+  updatedAt?: true
 }
 
 export type PlatformInfoMaxAggregateInputType = {
@@ -86,6 +90,7 @@ export type PlatformInfoMaxAggregateInputType = {
   platformName?: true
   externalId?: true
   accessToken?: true
+  updatedAt?: true
 }
 
 export type PlatformInfoCountAggregateInputType = {
@@ -94,6 +99,7 @@ export type PlatformInfoCountAggregateInputType = {
   platformName?: true
   externalId?: true
   accessToken?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -189,6 +195,7 @@ export type PlatformInfoGroupByOutputType = {
   platformName: string
   externalId: string
   accessToken: string | null
+  updatedAt: Date
   _count: PlatformInfoCountAggregateOutputType | null
   _avg: PlatformInfoAvgAggregateOutputType | null
   _sum: PlatformInfoSumAggregateOutputType | null
@@ -220,6 +227,7 @@ export type PlatformInfoWhereInput = {
   platformName?: Prisma.StringFilter<"PlatformInfo"> | string
   externalId?: Prisma.StringFilter<"PlatformInfo"> | string
   accessToken?: Prisma.StringNullableFilter<"PlatformInfo"> | string | null
+  updatedAt?: Prisma.DateTimeFilter<"PlatformInfo"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
@@ -229,6 +237,7 @@ export type PlatformInfoOrderByWithRelationInput = {
   platformName?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
 }
 
@@ -241,6 +250,7 @@ export type PlatformInfoWhereUniqueInput = Prisma.AtLeast<{
   platformUserId?: Prisma.IntFilter<"PlatformInfo"> | number
   externalId?: Prisma.StringFilter<"PlatformInfo"> | string
   accessToken?: Prisma.StringNullableFilter<"PlatformInfo"> | string | null
+  updatedAt?: Prisma.DateTimeFilter<"PlatformInfo"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "platformId" | "platformName">
 
@@ -250,6 +260,7 @@ export type PlatformInfoOrderByWithAggregationInput = {
   platformName?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.PlatformInfoCountOrderByAggregateInput
   _avg?: Prisma.PlatformInfoAvgOrderByAggregateInput
   _max?: Prisma.PlatformInfoMaxOrderByAggregateInput
@@ -266,12 +277,14 @@ export type PlatformInfoScalarWhereWithAggregatesInput = {
   platformName?: Prisma.StringWithAggregatesFilter<"PlatformInfo"> | string
   externalId?: Prisma.StringWithAggregatesFilter<"PlatformInfo"> | string
   accessToken?: Prisma.StringNullableWithAggregatesFilter<"PlatformInfo"> | string | null
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"PlatformInfo"> | Date | string
 }
 
 export type PlatformInfoCreateInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutPlatformInfosInput
 }
 
@@ -281,12 +294,14 @@ export type PlatformInfoUncheckedCreateInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
 }
 
 export type PlatformInfoUpdateInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutPlatformInfosNestedInput
 }
 
@@ -296,6 +311,7 @@ export type PlatformInfoUncheckedUpdateInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlatformInfoCreateManyInput = {
@@ -304,12 +320,14 @@ export type PlatformInfoCreateManyInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
 }
 
 export type PlatformInfoUpdateManyMutationInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlatformInfoUncheckedUpdateManyInput = {
@@ -318,6 +336,7 @@ export type PlatformInfoUncheckedUpdateManyInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlatformInfoListRelationFilter = {
@@ -336,6 +355,7 @@ export type PlatformInfoCountOrderByAggregateInput = {
   platformName?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PlatformInfoAvgOrderByAggregateInput = {
@@ -349,6 +369,7 @@ export type PlatformInfoMaxOrderByAggregateInput = {
   platformName?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PlatformInfoMinOrderByAggregateInput = {
@@ -357,6 +378,7 @@ export type PlatformInfoMinOrderByAggregateInput = {
   platformName?: Prisma.SortOrder
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
 }
 
 export type PlatformInfoSumOrderByAggregateInput = {
@@ -414,6 +436,7 @@ export type PlatformInfoCreateWithoutUserInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
 }
 
 export type PlatformInfoUncheckedCreateWithoutUserInput = {
@@ -421,6 +444,7 @@ export type PlatformInfoUncheckedCreateWithoutUserInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
 }
 
 export type PlatformInfoCreateOrConnectWithoutUserInput = {
@@ -458,6 +482,7 @@ export type PlatformInfoScalarWhereInput = {
   platformName?: Prisma.StringFilter<"PlatformInfo"> | string
   externalId?: Prisma.StringFilter<"PlatformInfo"> | string
   accessToken?: Prisma.StringNullableFilter<"PlatformInfo"> | string | null
+  updatedAt?: Prisma.DateTimeFilter<"PlatformInfo"> | Date | string
 }
 
 export type PlatformInfoCreateManyUserInput = {
@@ -465,12 +490,14 @@ export type PlatformInfoCreateManyUserInput = {
   platformName: string
   externalId: string
   accessToken?: string | null
+  updatedAt?: Date | string
 }
 
 export type PlatformInfoUpdateWithoutUserInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlatformInfoUncheckedUpdateWithoutUserInput = {
@@ -478,6 +505,7 @@ export type PlatformInfoUncheckedUpdateWithoutUserInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type PlatformInfoUncheckedUpdateManyWithoutUserInput = {
@@ -485,6 +513,7 @@ export type PlatformInfoUncheckedUpdateManyWithoutUserInput = {
   platformName?: Prisma.StringFieldUpdateOperationsInput | string
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -495,6 +524,7 @@ export type PlatformInfoSelect<ExtArgs extends runtime.Types.Extensions.Internal
   platformName?: boolean
   externalId?: boolean
   accessToken?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platformInfo"]>
 
@@ -504,6 +534,7 @@ export type PlatformInfoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   platformName?: boolean
   externalId?: boolean
   accessToken?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platformInfo"]>
 
@@ -513,6 +544,7 @@ export type PlatformInfoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   platformName?: boolean
   externalId?: boolean
   accessToken?: boolean
+  updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["platformInfo"]>
 
@@ -522,9 +554,10 @@ export type PlatformInfoSelectScalar = {
   platformName?: boolean
   externalId?: boolean
   accessToken?: boolean
+  updatedAt?: boolean
 }
 
-export type PlatformInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"platformId" | "platformUserId" | "platformName" | "externalId" | "accessToken", ExtArgs["result"]["platformInfo"]>
+export type PlatformInfoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"platformId" | "platformUserId" | "platformName" | "externalId" | "accessToken" | "updatedAt", ExtArgs["result"]["platformInfo"]>
 export type PlatformInfoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -546,6 +579,7 @@ export type $PlatformInfoPayload<ExtArgs extends runtime.Types.Extensions.Intern
     platformName: string
     externalId: string
     accessToken: string | null
+    updatedAt: Date
   }, ExtArgs["result"]["platformInfo"]>
   composites: {}
 }
@@ -975,6 +1009,7 @@ export interface PlatformInfoFieldRefs {
   readonly platformName: Prisma.FieldRef<"PlatformInfo", 'String'>
   readonly externalId: Prisma.FieldRef<"PlatformInfo", 'String'>
   readonly accessToken: Prisma.FieldRef<"PlatformInfo", 'String'>
+  readonly updatedAt: Prisma.FieldRef<"PlatformInfo", 'DateTime'>
 }
     
 
