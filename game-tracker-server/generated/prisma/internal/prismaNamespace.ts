@@ -389,7 +389,8 @@ export const ModelName = {
   Game: 'Game',
   Match: 'Match',
   News: 'News',
-  PlatformInfo: 'PlatformInfo'
+  PlatformInfo: 'PlatformInfo',
+  GameStats: 'GameStats'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +406,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo"
+    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo" | "gameStats"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +854,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GameStats: {
+      payload: Prisma.$GameStatsPayload<ExtArgs>
+      fields: Prisma.GameStatsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameStatsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameStatsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        findFirst: {
+          args: Prisma.GameStatsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameStatsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        findMany: {
+          args: Prisma.GameStatsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        create: {
+          args: Prisma.GameStatsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        createMany: {
+          args: Prisma.GameStatsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameStatsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        delete: {
+          args: Prisma.GameStatsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        update: {
+          args: Prisma.GameStatsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameStatsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameStatsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameStatsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameStatsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        aggregate: {
+          args: Prisma.GameStatsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameStats>
+        }
+        groupBy: {
+          args: Prisma.GameStatsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameStatsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameStatsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameStatsCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -955,6 +1030,18 @@ export const PlatformInfoScalarFieldEnum = {
 } as const
 
 export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[keyof typeof PlatformInfoScalarFieldEnum]
+
+
+export const GameStatsScalarFieldEnum = {
+  statId: 'statId',
+  platformId: 'platformId',
+  lastPlayedAt: 'lastPlayedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1187,6 +1274,7 @@ export type GlobalOmitConfig = {
   match?: Prisma.MatchOmit
   news?: Prisma.NewsOmit
   platformInfo?: Prisma.PlatformInfoOmit
+  gameStats?: Prisma.GameStatsOmit
 }
 
 /* Types for Logging */

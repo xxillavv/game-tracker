@@ -56,7 +56,8 @@ export const ModelName = {
   Game: 'Game',
   Match: 'Match',
   News: 'News',
-  PlatformInfo: 'PlatformInfo'
+  PlatformInfo: 'PlatformInfo',
+  GameStats: 'GameStats'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -138,6 +139,18 @@ export const PlatformInfoScalarFieldEnum = {
 } as const
 
 export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[keyof typeof PlatformInfoScalarFieldEnum]
+
+
+export const GameStatsScalarFieldEnum = {
+  statId: 'statId',
+  platformId: 'platformId',
+  lastPlayedAt: 'lastPlayedAt',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
 
 
 export const SortOrder = {

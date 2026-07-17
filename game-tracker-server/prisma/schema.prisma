@@ -75,8 +75,11 @@ model Match {
 model News {
   newsId Int @id @default(autoincrement()) @map("news_id")
 
-  title     String   @map("title")
-  content   String   @map("content")
+  title   String @map("title")
+  content String @map("content")
+
+  game String @map("game")
+
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("news")
