@@ -110,7 +110,7 @@ export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof Game
 
 export const MatchScalarFieldEnum = {
   matchId: 'matchId',
-  userMatchId: 'userMatchId',
+  statsMatchId: 'statsMatchId',
   gameMatchId: 'gameMatchId',
   result: 'result',
   score: 'score',

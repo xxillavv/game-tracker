@@ -18,7 +18,6 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   sessions      Session?
-  matches       Match[]
   platformInfos PlatformInfo[]
 
   @@map("users")
@@ -36,7 +35,7 @@ model Session {
 
   user User @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
 
-  @@map("sesstion")
+  @@map("sessions")
 }
 
 model Game {
@@ -57,17 +56,17 @@ enum MatchResult {
 
 // Таблиця з статистикою зібраних матчів користувача.
 model Match {
-  matchId     Int @id @default(autoincrement()) @map("match_id")
-  userMatchId Int @map("user_id")
-  gameMatchId Int @map("game_id")
+  matchId      Int @id @default(autoincrement()) @map("match_id")
+  statsMatchId Int @map("stats_id")
+  gameMatchId  Int @map("game_id")
 
   result MatchResult @map("result")
   score  String      @map("score")
 
   metadata Json // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
 
-  user User @relation(fields: [userMatchId], references: [userId], onDelete: Cascade)
-  game Game @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+  stats GameStats @relation(fields: [statsMatchId], references: [statId], onDelete: Cascade)
+  game  Game      @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
 
   @@map("matches")
 }
@@ -114,6 +113,7 @@ model GameStats {
   createdAt     DateTime      @default(now()) @map("created_at")
   updatedAt     DateTime      @updatedAt @map("updated_at")
   rankHistories RankHistory[]
+  matches       Match[]
 
   @@map("game_stats")
 }

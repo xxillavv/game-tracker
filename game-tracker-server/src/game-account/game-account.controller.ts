@@ -15,7 +15,7 @@ export class GameAccountController {
   }
 
   @UseGuards(AuthGuard)
-  @Post('')
+  @Post()
   createConnection(@Req() request: TRequestWithUser, @Body() body: CreateConnectionDto) {
     return this.gameAccountService.createConnection(request.user.userId, body.accessToken, body.externalId, body.platformName)
   }

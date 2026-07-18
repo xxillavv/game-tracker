@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { StatisticsService } from './statistics.service.js';
 import { StatisticsController } from './statistics.controller.js';
-import { DotaApiProvider } from '../providers/dota-api.service.js';
+import { DotaProvider } from '../providers/dota-api.service.js';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   controllers: [StatisticsController],
-  providers: [StatisticsService, DotaApiProvider],
+  providers: [StatisticsService, DotaProvider],
+  imports: [HttpModule]
 })
 export class StatisticsModule {}

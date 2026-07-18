@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios'
 import { StatisticsModule } from './statistics/statistics.module.js';
 import { MatchesModule } from './matches/matches.module.js';
+import { GameAccountModule } from './game-account/game-account.module.js';
 
 @Module({
   imports: [UsersModule, AuthModule, ConfigModule.forRoot({
@@ -13,7 +14,9 @@ import { MatchesModule } from './matches/matches.module.js';
   }),
     HttpModule,
     StatisticsModule,
-    MatchesModule],
+    MatchesModule,
+    GameAccountModule
+  ],
   controllers: [],
   providers: [],
 })

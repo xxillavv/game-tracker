@@ -90,7 +90,7 @@ export class StatisticsService {
 
     const dataToInsert = ratingsList.map((r) => ({
       statId: userInfo.gameStats!.statId,
-      achievedAt: new Date(r.time),
+      achivedAt: new Date(r.time),
       rankTier: r.rank_tier
     }));
 

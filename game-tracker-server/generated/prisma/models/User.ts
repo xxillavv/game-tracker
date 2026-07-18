@@ -225,7 +225,6 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   sessions?: Prisma.XOR<Prisma.SessionNullableScalarRelationFilter, Prisma.SessionWhereInput> | null
-  matches?: Prisma.MatchListRelationFilter
   platformInfos?: Prisma.PlatformInfoListRelationFilter
 }
 
@@ -237,7 +236,6 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   sessions?: Prisma.SessionOrderByWithRelationInput
-  matches?: Prisma.MatchOrderByRelationAggregateInput
   platformInfos?: Prisma.PlatformInfoOrderByRelationAggregateInput
 }
 
@@ -252,7 +250,6 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   sessions?: Prisma.XOR<Prisma.SessionNullableScalarRelationFilter, Prisma.SessionWhereInput> | null
-  matches?: Prisma.MatchListRelationFilter
   platformInfos?: Prisma.PlatformInfoListRelationFilter
 }, "userId" | "email" | "username">
 
@@ -289,7 +286,6 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedOneWithoutUserInput
-  matches?: Prisma.MatchCreateNestedManyWithoutUserInput
   platformInfos?: Prisma.PlatformInfoCreateNestedManyWithoutUserInput
 }
 
@@ -301,7 +297,6 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedOneWithoutUserInput
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutUserInput
   platformInfos?: Prisma.PlatformInfoUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -312,7 +307,6 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateOneWithoutUserNestedInput
-  matches?: Prisma.MatchUpdateManyWithoutUserNestedInput
   platformInfos?: Prisma.PlatformInfoUpdateManyWithoutUserNestedInput
 }
 
@@ -324,7 +318,6 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateOneWithoutUserNestedInput
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutUserNestedInput
   platformInfos?: Prisma.PlatformInfoUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -424,20 +417,6 @@ export type UserUpdateOneRequiredWithoutSessionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionsInput, Prisma.UserUpdateWithoutSessionsInput>, Prisma.UserUncheckedUpdateWithoutSessionsInput>
 }
 
-export type UserCreateNestedOneWithoutMatchesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMatchesInput, Prisma.UserUncheckedCreateWithoutMatchesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMatchesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutMatchesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMatchesInput, Prisma.UserUncheckedCreateWithoutMatchesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMatchesInput
-  upsert?: Prisma.UserUpsertWithoutMatchesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutMatchesInput, Prisma.UserUpdateWithoutMatchesInput>, Prisma.UserUncheckedUpdateWithoutMatchesInput>
-}
-
 export type UserCreateNestedOneWithoutPlatformInfosInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutPlatformInfosInput, Prisma.UserUncheckedCreateWithoutPlatformInfosInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutPlatformInfosInput
@@ -458,7 +437,6 @@ export type UserCreateWithoutSessionsInput = {
   username: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  matches?: Prisma.MatchCreateNestedManyWithoutUserInput
   platformInfos?: Prisma.PlatformInfoCreateNestedManyWithoutUserInput
 }
 
@@ -469,7 +447,6 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   username: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutUserInput
   platformInfos?: Prisma.PlatformInfoUncheckedCreateNestedManyWithoutUserInput
 }
 
@@ -495,7 +472,6 @@ export type UserUpdateWithoutSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matches?: Prisma.MatchUpdateManyWithoutUserNestedInput
   platformInfos?: Prisma.PlatformInfoUpdateManyWithoutUserNestedInput
 }
 
@@ -506,65 +482,6 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutUserNestedInput
-  platformInfos?: Prisma.PlatformInfoUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutMatchesInput = {
-  email: string
-  password: string
-  username: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionCreateNestedOneWithoutUserInput
-  platformInfos?: Prisma.PlatformInfoCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutMatchesInput = {
-  userId?: number
-  email: string
-  password: string
-  username: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  sessions?: Prisma.SessionUncheckedCreateNestedOneWithoutUserInput
-  platformInfos?: Prisma.PlatformInfoUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutMatchesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutMatchesInput, Prisma.UserUncheckedCreateWithoutMatchesInput>
-}
-
-export type UserUpsertWithoutMatchesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutMatchesInput, Prisma.UserUncheckedUpdateWithoutMatchesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutMatchesInput, Prisma.UserUncheckedCreateWithoutMatchesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutMatchesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutMatchesInput, Prisma.UserUncheckedUpdateWithoutMatchesInput>
-}
-
-export type UserUpdateWithoutMatchesInput = {
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUpdateOneWithoutUserNestedInput
-  platformInfos?: Prisma.PlatformInfoUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutMatchesInput = {
-  userId?: Prisma.IntFieldUpdateOperationsInput | number
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  password?: Prisma.StringFieldUpdateOperationsInput | string
-  username?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  sessions?: Prisma.SessionUncheckedUpdateOneWithoutUserNestedInput
   platformInfos?: Prisma.PlatformInfoUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -575,7 +492,6 @@ export type UserCreateWithoutPlatformInfosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionCreateNestedOneWithoutUserInput
-  matches?: Prisma.MatchCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutPlatformInfosInput = {
@@ -586,7 +502,6 @@ export type UserUncheckedCreateWithoutPlatformInfosInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   sessions?: Prisma.SessionUncheckedCreateNestedOneWithoutUserInput
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutPlatformInfosInput = {
@@ -612,7 +527,6 @@ export type UserUpdateWithoutPlatformInfosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUpdateOneWithoutUserNestedInput
-  matches?: Prisma.MatchUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPlatformInfosInput = {
@@ -623,7 +537,6 @@ export type UserUncheckedUpdateWithoutPlatformInfosInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   sessions?: Prisma.SessionUncheckedUpdateOneWithoutUserNestedInput
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -632,12 +545,10 @@ export type UserUncheckedUpdateWithoutPlatformInfosInput = {
  */
 
 export type UserCountOutputType = {
-  matches: number
   platformInfos: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  matches?: boolean | UserCountOutputTypeCountMatchesArgs
   platformInfos?: boolean | UserCountOutputTypeCountPlatformInfosArgs
 }
 
@@ -649,13 +560,6 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MatchWhereInput
 }
 
 /**
@@ -674,7 +578,6 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  matches?: boolean | Prisma.User$matchesArgs<ExtArgs>
   platformInfos?: boolean | Prisma.User$platformInfosArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -709,7 +612,6 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"userId" | "email" | "password" | "username" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
-  matches?: boolean | Prisma.User$matchesArgs<ExtArgs>
   platformInfos?: boolean | Prisma.User$platformInfosArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -720,7 +622,6 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     sessions: Prisma.$SessionPayload<ExtArgs> | null
-    matches: Prisma.$MatchPayload<ExtArgs>[]
     platformInfos: Prisma.$PlatformInfoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1125,7 +1026,6 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.Prisma__SessionClient<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  matches<T extends Prisma.User$matchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$matchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   platformInfos<T extends Prisma.User$platformInfosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$platformInfosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PlatformInfoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1571,30 +1471,6 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.SessionInclude<ExtArgs> | null
   where?: Prisma.SessionWhereInput
-}
-
-/**
- * User.matches
- */
-export type User$matchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Match
-   */
-  select?: Prisma.MatchSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Match
-   */
-  omit?: Prisma.MatchOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MatchInclude<ExtArgs> | null
-  where?: Prisma.MatchWhereInput
-  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
-  cursor?: Prisma.MatchWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
 }
 
 /**

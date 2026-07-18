@@ -3,7 +3,7 @@ import { BadRequestException, Injectable, NotFoundException, ServiceUnavailableE
 import { prisma } from "../../lib/prisma.js";
 import { ConfigService } from "@nestjs/config";
 import { AxiosError } from "axios";
-import { IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate } from "../../utils/types/providers.types.js";
+import { IDotaMatches, IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate } from "../../utils/types/providers.types.js";
 import { firstValueFrom } from "rxjs";
 
 @Injectable()
@@ -51,6 +51,24 @@ export class DotaProvider {
   async getPlayerRatings(accountId) {
     try {
       const observable = await this.httpService.get<IDotaRatings[]>(`${this.dotaApi}/players/${accountId}/ratings`)
+
+      const response = await firstValueFrom(observable)
+
+      return response.data
+    } catch (error) {
+      const axiosError = error as AxiosError<{ error: string }>;
+
+      if (axiosError?.response?.status === 404) {
+        throw new NotFoundException("Player not found.")
+      }
+
+      throw new ServiceUnavailableException("Issues with the statistics server. Please try again later.")
+    }
+  }
+
+  async getMatches(accountId) {
+    try {
+      const observable = await this.httpService.get<IDotaMatches[]>(`${this.dotaApi}/players/${accountId}/recentMatches`)
 
       const response = await firstValueFrom(observable)
 
