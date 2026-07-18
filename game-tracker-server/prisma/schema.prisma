@@ -109,12 +109,22 @@ model GameStats {
   platformId Int          @unique @map("platform_id")
   platform   PlatformInfo @relation(fields: [platformId], references: [platformId], onDelete: Cascade)
 
-  lastPlayedAt DateTime @map("last_played_at")
-
   metadata Json @default("{}")
 
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  rankHistories RankHistory[]
 
   @@map("game_stats")
+}
+
+model RankHistory {
+  rankId    Int      @id @default(autoincrement()) @map("rank_id")
+  rankTier  Int      @map("rank_tier")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  statId    Int       @map("stat_id")
+  gameStats GameStats @relation(fields: [statId], references: [statId], onDelete: Cascade)
+
+  @@map("rank_history")
 }

@@ -76,3 +76,8 @@ export type PlatformInfo = Prisma.PlatformInfoModel
  * 
  */
 export type GameStats = Prisma.GameStatsModel
+/**
+ * Model RankHistory
+ * 
+ */
+export type RankHistory = Prisma.RankHistoryModel

@@ -390,7 +390,8 @@ export const ModelName = {
   Match: 'Match',
   News: 'News',
   PlatformInfo: 'PlatformInfo',
-  GameStats: 'GameStats'
+  GameStats: 'GameStats',
+  RankHistory: 'RankHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -406,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo" | "gameStats"
+    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo" | "gameStats" | "rankHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -928,6 +929,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    RankHistory: {
+      payload: Prisma.$RankHistoryPayload<ExtArgs>
+      fields: Prisma.RankHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RankHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RankHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.RankHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RankHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.RankHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.RankHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.RankHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RankHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.RankHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        update: {
+          args: Prisma.RankHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.RankHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RankHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RankHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.RankHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.RankHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRankHistory>
+        }
+        groupBy: {
+          args: Prisma.RankHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RankHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RankHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RankHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1014,6 +1089,7 @@ export const NewsScalarFieldEnum = {
   newsId: 'newsId',
   title: 'title',
   content: 'content',
+  game: 'game',
   createdAt: 'createdAt'
 } as const
 
@@ -1035,13 +1111,22 @@ export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[k
 export const GameStatsScalarFieldEnum = {
   statId: 'statId',
   platformId: 'platformId',
-  lastPlayedAt: 'lastPlayedAt',
   metadata: 'metadata',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
+
+
+export const RankHistoryScalarFieldEnum = {
+  rankId: 'rankId',
+  rankTier: 'rankTier',
+  createdAt: 'createdAt',
+  statId: 'statId'
+} as const
+
+export type RankHistoryScalarFieldEnum = (typeof RankHistoryScalarFieldEnum)[keyof typeof RankHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1275,6 +1360,7 @@ export type GlobalOmitConfig = {
   news?: Prisma.NewsOmit
   platformInfo?: Prisma.PlatformInfoOmit
   gameStats?: Prisma.GameStatsOmit
+  rankHistory?: Prisma.RankHistoryOmit
 }
 
 /* Types for Logging */

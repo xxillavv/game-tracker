@@ -57,7 +57,8 @@ export const ModelName = {
   Match: 'Match',
   News: 'News',
   PlatformInfo: 'PlatformInfo',
-  GameStats: 'GameStats'
+  GameStats: 'GameStats',
+  RankHistory: 'RankHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -123,6 +124,7 @@ export const NewsScalarFieldEnum = {
   newsId: 'newsId',
   title: 'title',
   content: 'content',
+  game: 'game',
   createdAt: 'createdAt'
 } as const
 
@@ -144,13 +146,22 @@ export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[k
 export const GameStatsScalarFieldEnum = {
   statId: 'statId',
   platformId: 'platformId',
-  lastPlayedAt: 'lastPlayedAt',
   metadata: 'metadata',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
+
+
+export const RankHistoryScalarFieldEnum = {
+  rankId: 'rankId',
+  rankTier: 'rankTier',
+  createdAt: 'createdAt',
+  statId: 'statId'
+} as const
+
+export type RankHistoryScalarFieldEnum = (typeof RankHistoryScalarFieldEnum)[keyof typeof RankHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

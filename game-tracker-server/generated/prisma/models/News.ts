@@ -38,6 +38,7 @@ export type NewsMinAggregateOutputType = {
   newsId: number | null
   title: string | null
   content: string | null
+  game: string | null
   createdAt: Date | null
 }
 
@@ -45,6 +46,7 @@ export type NewsMaxAggregateOutputType = {
   newsId: number | null
   title: string | null
   content: string | null
+  game: string | null
   createdAt: Date | null
 }
 
@@ -52,6 +54,7 @@ export type NewsCountAggregateOutputType = {
   newsId: number
   title: number
   content: number
+  game: number
   createdAt: number
   _all: number
 }
@@ -69,6 +72,7 @@ export type NewsMinAggregateInputType = {
   newsId?: true
   title?: true
   content?: true
+  game?: true
   createdAt?: true
 }
 
@@ -76,6 +80,7 @@ export type NewsMaxAggregateInputType = {
   newsId?: true
   title?: true
   content?: true
+  game?: true
   createdAt?: true
 }
 
@@ -83,6 +88,7 @@ export type NewsCountAggregateInputType = {
   newsId?: true
   title?: true
   content?: true
+  game?: true
   createdAt?: true
   _all?: true
 }
@@ -177,6 +183,7 @@ export type NewsGroupByOutputType = {
   newsId: number
   title: string
   content: string
+  game: string
   createdAt: Date
   _count: NewsCountAggregateOutputType | null
   _avg: NewsAvgAggregateOutputType | null
@@ -207,6 +214,7 @@ export type NewsWhereInput = {
   newsId?: Prisma.IntFilter<"News"> | number
   title?: Prisma.StringFilter<"News"> | string
   content?: Prisma.StringFilter<"News"> | string
+  game?: Prisma.StringFilter<"News"> | string
   createdAt?: Prisma.DateTimeFilter<"News"> | Date | string
 }
 
@@ -214,6 +222,7 @@ export type NewsOrderByWithRelationInput = {
   newsId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  game?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -224,6 +233,7 @@ export type NewsWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.NewsWhereInput | Prisma.NewsWhereInput[]
   title?: Prisma.StringFilter<"News"> | string
   content?: Prisma.StringFilter<"News"> | string
+  game?: Prisma.StringFilter<"News"> | string
   createdAt?: Prisma.DateTimeFilter<"News"> | Date | string
 }, "newsId">
 
@@ -231,6 +241,7 @@ export type NewsOrderByWithAggregationInput = {
   newsId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  game?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   _count?: Prisma.NewsCountOrderByAggregateInput
   _avg?: Prisma.NewsAvgOrderByAggregateInput
@@ -246,12 +257,14 @@ export type NewsScalarWhereWithAggregatesInput = {
   newsId?: Prisma.IntWithAggregatesFilter<"News"> | number
   title?: Prisma.StringWithAggregatesFilter<"News"> | string
   content?: Prisma.StringWithAggregatesFilter<"News"> | string
+  game?: Prisma.StringWithAggregatesFilter<"News"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"News"> | Date | string
 }
 
 export type NewsCreateInput = {
   title: string
   content: string
+  game: string
   createdAt?: Date | string
 }
 
@@ -259,12 +272,14 @@ export type NewsUncheckedCreateInput = {
   newsId?: number
   title: string
   content: string
+  game: string
   createdAt?: Date | string
 }
 
 export type NewsUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  game?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -272,6 +287,7 @@ export type NewsUncheckedUpdateInput = {
   newsId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  game?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -279,12 +295,14 @@ export type NewsCreateManyInput = {
   newsId?: number
   title: string
   content: string
+  game: string
   createdAt?: Date | string
 }
 
 export type NewsUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  game?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -292,6 +310,7 @@ export type NewsUncheckedUpdateManyInput = {
   newsId?: Prisma.IntFieldUpdateOperationsInput | number
   title?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  game?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -299,6 +318,7 @@ export type NewsCountOrderByAggregateInput = {
   newsId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  game?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -310,6 +330,7 @@ export type NewsMaxOrderByAggregateInput = {
   newsId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  game?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -317,6 +338,7 @@ export type NewsMinOrderByAggregateInput = {
   newsId?: Prisma.SortOrder
   title?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  game?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
 }
 
@@ -330,6 +352,7 @@ export type NewsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   newsId?: boolean
   title?: boolean
   content?: boolean
+  game?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["news"]>
 
@@ -337,6 +360,7 @@ export type NewsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   newsId?: boolean
   title?: boolean
   content?: boolean
+  game?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["news"]>
 
@@ -344,6 +368,7 @@ export type NewsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   newsId?: boolean
   title?: boolean
   content?: boolean
+  game?: boolean
   createdAt?: boolean
 }, ExtArgs["result"]["news"]>
 
@@ -351,10 +376,11 @@ export type NewsSelectScalar = {
   newsId?: boolean
   title?: boolean
   content?: boolean
+  game?: boolean
   createdAt?: boolean
 }
 
-export type NewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"newsId" | "title" | "content" | "createdAt", ExtArgs["result"]["news"]>
+export type NewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"newsId" | "title" | "content" | "game" | "createdAt", ExtArgs["result"]["news"]>
 
 export type $NewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "News"
@@ -363,6 +389,7 @@ export type $NewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     newsId: number
     title: string
     content: string
+    game: string
     createdAt: Date
   }, ExtArgs["result"]["news"]>
   composites: {}
@@ -790,6 +817,7 @@ export interface NewsFieldRefs {
   readonly newsId: Prisma.FieldRef<"News", 'Int'>
   readonly title: Prisma.FieldRef<"News", 'String'>
   readonly content: Prisma.FieldRef<"News", 'String'>
+  readonly game: Prisma.FieldRef<"News", 'String'>
   readonly createdAt: Prisma.FieldRef<"News", 'DateTime'>
 }
     
