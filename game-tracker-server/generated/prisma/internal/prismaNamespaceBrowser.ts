@@ -157,7 +157,7 @@ export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof t
 export const RankHistoryScalarFieldEnum = {
   rankId: 'rankId',
   rankTier: 'rankTier',
-  createdAt: 'createdAt',
+  achivedAt: 'achivedAt',
   statId: 'statId'
 } as const
 

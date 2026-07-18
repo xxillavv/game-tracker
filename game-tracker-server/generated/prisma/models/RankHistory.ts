@@ -41,21 +41,21 @@ export type RankHistorySumAggregateOutputType = {
 export type RankHistoryMinAggregateOutputType = {
   rankId: number | null
   rankTier: number | null
-  createdAt: Date | null
+  achivedAt: Date | null
   statId: number | null
 }
 
 export type RankHistoryMaxAggregateOutputType = {
   rankId: number | null
   rankTier: number | null
-  createdAt: Date | null
+  achivedAt: Date | null
   statId: number | null
 }
 
 export type RankHistoryCountAggregateOutputType = {
   rankId: number
   rankTier: number
-  createdAt: number
+  achivedAt: number
   statId: number
   _all: number
 }
@@ -76,21 +76,21 @@ export type RankHistorySumAggregateInputType = {
 export type RankHistoryMinAggregateInputType = {
   rankId?: true
   rankTier?: true
-  createdAt?: true
+  achivedAt?: true
   statId?: true
 }
 
 export type RankHistoryMaxAggregateInputType = {
   rankId?: true
   rankTier?: true
-  createdAt?: true
+  achivedAt?: true
   statId?: true
 }
 
 export type RankHistoryCountAggregateInputType = {
   rankId?: true
   rankTier?: true
-  createdAt?: true
+  achivedAt?: true
   statId?: true
   _all?: true
 }
@@ -184,7 +184,7 @@ export type RankHistoryGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inte
 export type RankHistoryGroupByOutputType = {
   rankId: number
   rankTier: number
-  createdAt: Date
+  achivedAt: Date
   statId: number
   _count: RankHistoryCountAggregateOutputType | null
   _avg: RankHistoryAvgAggregateOutputType | null
@@ -214,7 +214,7 @@ export type RankHistoryWhereInput = {
   NOT?: Prisma.RankHistoryWhereInput | Prisma.RankHistoryWhereInput[]
   rankId?: Prisma.IntFilter<"RankHistory"> | number
   rankTier?: Prisma.IntFilter<"RankHistory"> | number
-  createdAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
+  achivedAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
   statId?: Prisma.IntFilter<"RankHistory"> | number
   gameStats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
 }
@@ -222,7 +222,7 @@ export type RankHistoryWhereInput = {
 export type RankHistoryOrderByWithRelationInput = {
   rankId?: Prisma.SortOrder
   rankTier?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  achivedAt?: Prisma.SortOrder
   statId?: Prisma.SortOrder
   gameStats?: Prisma.GameStatsOrderByWithRelationInput
 }
@@ -233,7 +233,7 @@ export type RankHistoryWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.RankHistoryWhereInput[]
   NOT?: Prisma.RankHistoryWhereInput | Prisma.RankHistoryWhereInput[]
   rankTier?: Prisma.IntFilter<"RankHistory"> | number
-  createdAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
+  achivedAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
   statId?: Prisma.IntFilter<"RankHistory"> | number
   gameStats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
 }, "rankId">
@@ -241,7 +241,7 @@ export type RankHistoryWhereUniqueInput = Prisma.AtLeast<{
 export type RankHistoryOrderByWithAggregationInput = {
   rankId?: Prisma.SortOrder
   rankTier?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  achivedAt?: Prisma.SortOrder
   statId?: Prisma.SortOrder
   _count?: Prisma.RankHistoryCountOrderByAggregateInput
   _avg?: Prisma.RankHistoryAvgOrderByAggregateInput
@@ -256,52 +256,52 @@ export type RankHistoryScalarWhereWithAggregatesInput = {
   NOT?: Prisma.RankHistoryScalarWhereWithAggregatesInput | Prisma.RankHistoryScalarWhereWithAggregatesInput[]
   rankId?: Prisma.IntWithAggregatesFilter<"RankHistory"> | number
   rankTier?: Prisma.IntWithAggregatesFilter<"RankHistory"> | number
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"RankHistory"> | Date | string
+  achivedAt?: Prisma.DateTimeWithAggregatesFilter<"RankHistory"> | Date | string
   statId?: Prisma.IntWithAggregatesFilter<"RankHistory"> | number
 }
 
 export type RankHistoryCreateInput = {
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
   gameStats: Prisma.GameStatsCreateNestedOneWithoutRankHistoriesInput
 }
 
 export type RankHistoryUncheckedCreateInput = {
   rankId?: number
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
   statId: number
 }
 
 export type RankHistoryUpdateInput = {
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUpdateOneRequiredWithoutRankHistoriesNestedInput
 }
 
 export type RankHistoryUncheckedUpdateInput = {
   rankId?: Prisma.IntFieldUpdateOperationsInput | number
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type RankHistoryCreateManyInput = {
   rankId?: number
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
   statId: number
 }
 
 export type RankHistoryUpdateManyMutationInput = {
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RankHistoryUncheckedUpdateManyInput = {
   rankId?: Prisma.IntFieldUpdateOperationsInput | number
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   statId?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
@@ -318,7 +318,7 @@ export type RankHistoryOrderByRelationAggregateInput = {
 export type RankHistoryCountOrderByAggregateInput = {
   rankId?: Prisma.SortOrder
   rankTier?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  achivedAt?: Prisma.SortOrder
   statId?: Prisma.SortOrder
 }
 
@@ -331,14 +331,14 @@ export type RankHistoryAvgOrderByAggregateInput = {
 export type RankHistoryMaxOrderByAggregateInput = {
   rankId?: Prisma.SortOrder
   rankTier?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  achivedAt?: Prisma.SortOrder
   statId?: Prisma.SortOrder
 }
 
 export type RankHistoryMinOrderByAggregateInput = {
   rankId?: Prisma.SortOrder
   rankTier?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  achivedAt?: Prisma.SortOrder
   statId?: Prisma.SortOrder
 }
 
@@ -392,13 +392,13 @@ export type RankHistoryUncheckedUpdateManyWithoutGameStatsNestedInput = {
 
 export type RankHistoryCreateWithoutGameStatsInput = {
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
 }
 
 export type RankHistoryUncheckedCreateWithoutGameStatsInput = {
   rankId?: number
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
 }
 
 export type RankHistoryCreateOrConnectWithoutGameStatsInput = {
@@ -433,31 +433,31 @@ export type RankHistoryScalarWhereInput = {
   NOT?: Prisma.RankHistoryScalarWhereInput | Prisma.RankHistoryScalarWhereInput[]
   rankId?: Prisma.IntFilter<"RankHistory"> | number
   rankTier?: Prisma.IntFilter<"RankHistory"> | number
-  createdAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
+  achivedAt?: Prisma.DateTimeFilter<"RankHistory"> | Date | string
   statId?: Prisma.IntFilter<"RankHistory"> | number
 }
 
 export type RankHistoryCreateManyGameStatsInput = {
   rankId?: number
   rankTier: number
-  createdAt?: Date | string
+  achivedAt?: Date | string
 }
 
 export type RankHistoryUpdateWithoutGameStatsInput = {
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RankHistoryUncheckedUpdateWithoutGameStatsInput = {
   rankId?: Prisma.IntFieldUpdateOperationsInput | number
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type RankHistoryUncheckedUpdateManyWithoutGameStatsInput = {
   rankId?: Prisma.IntFieldUpdateOperationsInput | number
   rankTier?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  achivedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -465,7 +465,7 @@ export type RankHistoryUncheckedUpdateManyWithoutGameStatsInput = {
 export type RankHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   rankId?: boolean
   rankTier?: boolean
-  createdAt?: boolean
+  achivedAt?: boolean
   statId?: boolean
   gameStats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rankHistory"]>
@@ -473,7 +473,7 @@ export type RankHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalA
 export type RankHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   rankId?: boolean
   rankTier?: boolean
-  createdAt?: boolean
+  achivedAt?: boolean
   statId?: boolean
   gameStats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rankHistory"]>
@@ -481,7 +481,7 @@ export type RankHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
 export type RankHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   rankId?: boolean
   rankTier?: boolean
-  createdAt?: boolean
+  achivedAt?: boolean
   statId?: boolean
   gameStats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["rankHistory"]>
@@ -489,11 +489,11 @@ export type RankHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
 export type RankHistorySelectScalar = {
   rankId?: boolean
   rankTier?: boolean
-  createdAt?: boolean
+  achivedAt?: boolean
   statId?: boolean
 }
 
-export type RankHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"rankId" | "rankTier" | "createdAt" | "statId", ExtArgs["result"]["rankHistory"]>
+export type RankHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"rankId" | "rankTier" | "achivedAt" | "statId", ExtArgs["result"]["rankHistory"]>
 export type RankHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   gameStats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
 }
@@ -512,7 +512,7 @@ export type $RankHistoryPayload<ExtArgs extends runtime.Types.Extensions.Interna
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     rankId: number
     rankTier: number
-    createdAt: Date
+    achivedAt: Date
     statId: number
   }, ExtArgs["result"]["rankHistory"]>
   composites: {}
@@ -940,7 +940,7 @@ export interface Prisma__RankHistoryClient<T, Null = never, ExtArgs extends runt
 export interface RankHistoryFieldRefs {
   readonly rankId: Prisma.FieldRef<"RankHistory", 'Int'>
   readonly rankTier: Prisma.FieldRef<"RankHistory", 'Int'>
-  readonly createdAt: Prisma.FieldRef<"RankHistory", 'DateTime'>
+  readonly achivedAt: Prisma.FieldRef<"RankHistory", 'DateTime'>
   readonly statId: Prisma.FieldRef<"RankHistory", 'Int'>
 }
     

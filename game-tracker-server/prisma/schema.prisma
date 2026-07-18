@@ -121,7 +121,7 @@ model GameStats {
 model RankHistory {
   rankId    Int      @id @default(autoincrement()) @map("rank_id")
   rankTier  Int      @map("rank_tier")
-  createdAt DateTime @default(now()) @map("created_at")
+  achivedAt DateTime @default(now()) @map("achived_at")
 
   statId    Int       @map("stat_id")
   gameStats GameStats @relation(fields: [statId], references: [statId], onDelete: Cascade)

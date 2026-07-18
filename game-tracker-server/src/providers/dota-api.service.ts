@@ -50,7 +50,7 @@ export class DotaProvider {
 
   async getPlayerRatings(accountId) {
     try {
-      const observable = await this.httpService.get<IDotaRatings>(`${this.dotaApi}/players/${accountId}/ratings`)
+      const observable = await this.httpService.get<IDotaRatings[]>(`${this.dotaApi}/players/${accountId}/ratings`)
 
       const response = await firstValueFrom(observable)
 
