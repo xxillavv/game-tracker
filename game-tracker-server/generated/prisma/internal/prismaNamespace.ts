@@ -1077,8 +1077,6 @@ export const MatchScalarFieldEnum = {
   matchId: 'matchId',
   statsMatchId: 'statsMatchId',
   gameMatchId: 'gameMatchId',
-  result: 'result',
-  score: 'score',
   metadata: 'metadata'
 } as const
 
@@ -1214,20 +1212,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'MatchResult'
- */
-export type EnumMatchResultFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchResult'>
-    
-
-
-/**
- * Reference to a field of type 'MatchResult[]'
- */
-export type ListEnumMatchResultFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MatchResult[]'>
     
 
 

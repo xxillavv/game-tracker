@@ -99,13 +99,6 @@ export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
 }
 
-export type EnumMatchResultFilter<$PrismaModel = never> = {
-  equals?: $Enums.MatchResult | Prisma.EnumMatchResultFieldRefInput<$PrismaModel>
-  in?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  notIn?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumMatchResultFilter<$PrismaModel> | $Enums.MatchResult
-}
-
 export type JsonFilter<$PrismaModel = never> =
 | Prisma.PatchUndefined<
     Prisma.Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
@@ -128,16 +121,6 @@ export type JsonFilterBase<$PrismaModel = never> = {
   gt?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   gte?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel>
   not?: runtime.InputJsonValue | Prisma.JsonFieldRefInput<$PrismaModel> | Prisma.JsonNullValueFilter
-}
-
-export type EnumMatchResultWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.MatchResult | Prisma.EnumMatchResultFieldRefInput<$PrismaModel>
-  in?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  notIn?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumMatchResultWithAggregatesFilter<$PrismaModel> | $Enums.MatchResult
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumMatchResultFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumMatchResultFilter<$PrismaModel>
 }
 
 export type JsonWithAggregatesFilter<$PrismaModel = never> =
@@ -297,23 +280,6 @@ export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedDateTimeFilter<$PrismaModel>
   _max?: Prisma.NestedDateTimeFilter<$PrismaModel>
-}
-
-export type NestedEnumMatchResultFilter<$PrismaModel = never> = {
-  equals?: $Enums.MatchResult | Prisma.EnumMatchResultFieldRefInput<$PrismaModel>
-  in?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  notIn?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumMatchResultFilter<$PrismaModel> | $Enums.MatchResult
-}
-
-export type NestedEnumMatchResultWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.MatchResult | Prisma.EnumMatchResultFieldRefInput<$PrismaModel>
-  in?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  notIn?: $Enums.MatchResult[] | Prisma.ListEnumMatchResultFieldRefInput<$PrismaModel>
-  not?: Prisma.NestedEnumMatchResultWithAggregatesFilter<$PrismaModel> | $Enums.MatchResult
-  _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumMatchResultFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumMatchResultFilter<$PrismaModel>
 }
 
 export type NestedJsonFilter<$PrismaModel = never> =

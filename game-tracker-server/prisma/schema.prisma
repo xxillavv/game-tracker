@@ -60,9 +60,6 @@ model Match {
   statsMatchId Int @map("stats_id")
   gameMatchId  Int @map("game_id")
 
-  result MatchResult @map("result")
-  score  String      @map("score")
-
   metadata Json // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
 
   stats GameStats @relation(fields: [statsMatchId], references: [statId], onDelete: Cascade)

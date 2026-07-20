@@ -42,24 +42,18 @@ export type MatchMinAggregateOutputType = {
   matchId: number | null
   statsMatchId: number | null
   gameMatchId: number | null
-  result: $Enums.MatchResult | null
-  score: string | null
 }
 
 export type MatchMaxAggregateOutputType = {
   matchId: number | null
   statsMatchId: number | null
   gameMatchId: number | null
-  result: $Enums.MatchResult | null
-  score: string | null
 }
 
 export type MatchCountAggregateOutputType = {
   matchId: number
   statsMatchId: number
   gameMatchId: number
-  result: number
-  score: number
   metadata: number
   _all: number
 }
@@ -81,24 +75,18 @@ export type MatchMinAggregateInputType = {
   matchId?: true
   statsMatchId?: true
   gameMatchId?: true
-  result?: true
-  score?: true
 }
 
 export type MatchMaxAggregateInputType = {
   matchId?: true
   statsMatchId?: true
   gameMatchId?: true
-  result?: true
-  score?: true
 }
 
 export type MatchCountAggregateInputType = {
   matchId?: true
   statsMatchId?: true
   gameMatchId?: true
-  result?: true
-  score?: true
   metadata?: true
   _all?: true
 }
@@ -193,8 +181,6 @@ export type MatchGroupByOutputType = {
   matchId: number
   statsMatchId: number
   gameMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: runtime.JsonValue
   _count: MatchCountAggregateOutputType | null
   _avg: MatchAvgAggregateOutputType | null
@@ -225,8 +211,6 @@ export type MatchWhereInput = {
   matchId?: Prisma.IntFilter<"Match"> | number
   statsMatchId?: Prisma.IntFilter<"Match"> | number
   gameMatchId?: Prisma.IntFilter<"Match"> | number
-  result?: Prisma.EnumMatchResultFilter<"Match"> | $Enums.MatchResult
-  score?: Prisma.StringFilter<"Match"> | string
   metadata?: Prisma.JsonFilter<"Match">
   stats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
@@ -236,8 +220,6 @@ export type MatchOrderByWithRelationInput = {
   matchId?: Prisma.SortOrder
   statsMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
-  result?: Prisma.SortOrder
-  score?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   stats?: Prisma.GameStatsOrderByWithRelationInput
   game?: Prisma.GameOrderByWithRelationInput
@@ -250,8 +232,6 @@ export type MatchWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.MatchWhereInput | Prisma.MatchWhereInput[]
   statsMatchId?: Prisma.IntFilter<"Match"> | number
   gameMatchId?: Prisma.IntFilter<"Match"> | number
-  result?: Prisma.EnumMatchResultFilter<"Match"> | $Enums.MatchResult
-  score?: Prisma.StringFilter<"Match"> | string
   metadata?: Prisma.JsonFilter<"Match">
   stats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
   game?: Prisma.XOR<Prisma.GameScalarRelationFilter, Prisma.GameWhereInput>
@@ -261,8 +241,6 @@ export type MatchOrderByWithAggregationInput = {
   matchId?: Prisma.SortOrder
   statsMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
-  result?: Prisma.SortOrder
-  score?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   _count?: Prisma.MatchCountOrderByAggregateInput
   _avg?: Prisma.MatchAvgOrderByAggregateInput
@@ -278,14 +256,10 @@ export type MatchScalarWhereWithAggregatesInput = {
   matchId?: Prisma.IntWithAggregatesFilter<"Match"> | number
   statsMatchId?: Prisma.IntWithAggregatesFilter<"Match"> | number
   gameMatchId?: Prisma.IntWithAggregatesFilter<"Match"> | number
-  result?: Prisma.EnumMatchResultWithAggregatesFilter<"Match"> | $Enums.MatchResult
-  score?: Prisma.StringWithAggregatesFilter<"Match"> | string
   metadata?: Prisma.JsonWithAggregatesFilter<"Match">
 }
 
 export type MatchCreateInput = {
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   stats: Prisma.GameStatsCreateNestedOneWithoutMatchesInput
   game: Prisma.GameCreateNestedOneWithoutMatchesInput
@@ -295,14 +269,10 @@ export type MatchUncheckedCreateInput = {
   matchId?: number
   statsMatchId: number
   gameMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUpdateInput = {
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   stats?: Prisma.GameStatsUpdateOneRequiredWithoutMatchesNestedInput
   game?: Prisma.GameUpdateOneRequiredWithoutMatchesNestedInput
@@ -312,8 +282,6 @@ export type MatchUncheckedUpdateInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -321,14 +289,10 @@ export type MatchCreateManyInput = {
   matchId?: number
   statsMatchId: number
   gameMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUpdateManyMutationInput = {
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -336,8 +300,6 @@ export type MatchUncheckedUpdateManyInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -355,8 +317,6 @@ export type MatchCountOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
   statsMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
-  result?: Prisma.SortOrder
-  score?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
 }
 
@@ -370,16 +330,12 @@ export type MatchMaxOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
   statsMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
-  result?: Prisma.SortOrder
-  score?: Prisma.SortOrder
 }
 
 export type MatchMinOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
   statsMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
-  result?: Prisma.SortOrder
-  score?: Prisma.SortOrder
 }
 
 export type MatchSumOrderByAggregateInput = {
@@ -430,10 +386,6 @@ export type MatchUncheckedUpdateManyWithoutGameNestedInput = {
   deleteMany?: Prisma.MatchScalarWhereInput | Prisma.MatchScalarWhereInput[]
 }
 
-export type EnumMatchResultFieldUpdateOperationsInput = {
-  set?: $Enums.MatchResult
-}
-
 export type MatchCreateNestedManyWithoutStatsInput = {
   create?: Prisma.XOR<Prisma.MatchCreateWithoutStatsInput, Prisma.MatchUncheckedCreateWithoutStatsInput> | Prisma.MatchCreateWithoutStatsInput[] | Prisma.MatchUncheckedCreateWithoutStatsInput[]
   connectOrCreate?: Prisma.MatchCreateOrConnectWithoutStatsInput | Prisma.MatchCreateOrConnectWithoutStatsInput[]
@@ -477,8 +429,6 @@ export type MatchUncheckedUpdateManyWithoutStatsNestedInput = {
 }
 
 export type MatchCreateWithoutGameInput = {
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   stats: Prisma.GameStatsCreateNestedOneWithoutMatchesInput
 }
@@ -486,8 +436,6 @@ export type MatchCreateWithoutGameInput = {
 export type MatchUncheckedCreateWithoutGameInput = {
   matchId?: number
   statsMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -524,14 +472,10 @@ export type MatchScalarWhereInput = {
   matchId?: Prisma.IntFilter<"Match"> | number
   statsMatchId?: Prisma.IntFilter<"Match"> | number
   gameMatchId?: Prisma.IntFilter<"Match"> | number
-  result?: Prisma.EnumMatchResultFilter<"Match"> | $Enums.MatchResult
-  score?: Prisma.StringFilter<"Match"> | string
   metadata?: Prisma.JsonFilter<"Match">
 }
 
 export type MatchCreateWithoutStatsInput = {
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
   game: Prisma.GameCreateNestedOneWithoutMatchesInput
 }
@@ -539,8 +483,6 @@ export type MatchCreateWithoutStatsInput = {
 export type MatchUncheckedCreateWithoutStatsInput = {
   matchId?: number
   gameMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -573,14 +515,10 @@ export type MatchUpdateManyWithWhereWithoutStatsInput = {
 export type MatchCreateManyGameInput = {
   matchId?: number
   statsMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUpdateWithoutGameInput = {
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   stats?: Prisma.GameStatsUpdateOneRequiredWithoutMatchesNestedInput
 }
@@ -588,30 +526,22 @@ export type MatchUpdateWithoutGameInput = {
 export type MatchUncheckedUpdateWithoutGameInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUncheckedUpdateManyWithoutGameInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchCreateManyStatsInput = {
   matchId?: number
   gameMatchId: number
-  result: $Enums.MatchResult
-  score: string
   metadata: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUpdateWithoutStatsInput = {
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   game?: Prisma.GameUpdateOneRequiredWithoutMatchesNestedInput
 }
@@ -619,16 +549,12 @@ export type MatchUpdateWithoutStatsInput = {
 export type MatchUncheckedUpdateWithoutStatsInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchUncheckedUpdateManyWithoutStatsInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
-  result?: Prisma.EnumMatchResultFieldUpdateOperationsInput | $Enums.MatchResult
-  score?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -638,8 +564,6 @@ export type MatchSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   matchId?: boolean
   statsMatchId?: boolean
   gameMatchId?: boolean
-  result?: boolean
-  score?: boolean
   metadata?: boolean
   stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
@@ -649,8 +573,6 @@ export type MatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matchId?: boolean
   statsMatchId?: boolean
   gameMatchId?: boolean
-  result?: boolean
-  score?: boolean
   metadata?: boolean
   stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
@@ -660,8 +582,6 @@ export type MatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   matchId?: boolean
   statsMatchId?: boolean
   gameMatchId?: boolean
-  result?: boolean
-  score?: boolean
   metadata?: boolean
   stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
@@ -671,12 +591,10 @@ export type MatchSelectScalar = {
   matchId?: boolean
   statsMatchId?: boolean
   gameMatchId?: boolean
-  result?: boolean
-  score?: boolean
   metadata?: boolean
 }
 
-export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matchId" | "statsMatchId" | "gameMatchId" | "result" | "score" | "metadata", ExtArgs["result"]["match"]>
+export type MatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matchId" | "statsMatchId" | "gameMatchId" | "metadata", ExtArgs["result"]["match"]>
 export type MatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GameDefaultArgs<ExtArgs>
@@ -700,8 +618,6 @@ export type $MatchPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     matchId: number
     statsMatchId: number
     gameMatchId: number
-    result: $Enums.MatchResult
-    score: string
     metadata: runtime.JsonValue
   }, ExtArgs["result"]["match"]>
   composites: {}
@@ -1131,8 +1047,6 @@ export interface MatchFieldRefs {
   readonly matchId: Prisma.FieldRef<"Match", 'Int'>
   readonly statsMatchId: Prisma.FieldRef<"Match", 'Int'>
   readonly gameMatchId: Prisma.FieldRef<"Match", 'Int'>
-  readonly result: Prisma.FieldRef<"Match", 'MatchResult'>
-  readonly score: Prisma.FieldRef<"Match", 'String'>
   readonly metadata: Prisma.FieldRef<"Match", 'Json'>
 }
     
