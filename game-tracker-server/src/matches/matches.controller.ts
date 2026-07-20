@@ -8,9 +8,14 @@ export class MatchesController {
   constructor(private readonly matchesService: MatchesService) { }
 
   @UseGuards(AuthGuard)
-  @Get()
+  @Get('dota')
   getDotaMatches(@Req() request: TRequestWithUser) {
     return this.matchesService.getDotaMatches(request.user.userId)
   }
 
+  @UseGuards(AuthGuard)
+  @Get('dota/sync')
+  syncDotaMatches(@Req() request: TRequestWithUser) {
+    return this.matchesService.syncDotaMatches(request.user.userId)
+  }
 }

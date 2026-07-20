@@ -9,10 +9,7 @@
 * 🟢 You can import this file directly.
 */
 
-export const MatchResult = {
-  WIN: 'WIN',
-  LOSS: 'LOSS',
-  DRAW: 'DRAW'
-} as const
 
-export type MatchResult = (typeof MatchResult)[keyof typeof MatchResult]
+
+// This file is empty because there are no enums in the schema.
+export {}

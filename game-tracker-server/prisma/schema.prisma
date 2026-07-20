@@ -48,12 +48,6 @@ model Game {
   @@map("games")
 }
 
-enum MatchResult {
-  WIN
-  LOSS
-  DRAW
-}
-
 // Таблиця з статистикою зібраних матчів користувача.
 model Match {
   matchId      Int @id @default(autoincrement()) @map("match_id")
