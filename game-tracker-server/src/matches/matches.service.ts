@@ -7,14 +7,14 @@ export class MatchesService {
   constructor(private readonly dotaProvider: DotaProvider) { }
 
   async getDotaMatches(userId) {
-    const dotaInfo = await prisma.game.findFirstOrThrow({
+    const dotaInfo = await prisma.games.findFirstOrThrow({
       where: { name: "DOTA" }
     })
 
     const statsInfo = await prisma.gameStats.findFirstOrThrow({
       where: {
-        platform: {
-          platformUserId: userId,
+        connections: {
+          connectinUserId: userId,
         }
       },
       select: {
@@ -22,7 +22,7 @@ export class MatchesService {
       }
     })
 
-    let matches = await prisma.match.findMany({
+    let matches = await prisma.matches.findMany({
       where: {
         statsMatchId: statsInfo.statId,
         gameMatchId: dotaInfo.gameId,
@@ -32,7 +32,7 @@ export class MatchesService {
     if (!matches.length) {
       await this.syncDotaMatches(userId)
 
-      matches = await prisma.match.findMany({
+      matches = await prisma.matches.findMany({
         where: {
           gameMatchId: dotaInfo.gameId,
           statsMatchId: statsInfo.statId
@@ -44,19 +44,19 @@ export class MatchesService {
   }
 
   async syncDotaMatches(userId) {
-    const dotaInfo = await prisma.game.findFirstOrThrow({
+    const dotaInfo = await prisma.games.findFirstOrThrow({
       where: { name: "DOTA" }
     })
 
     const statsInfo = await prisma.gameStats.findFirstOrThrow({
       where: {
-        platform: {
-          platformUserId: userId,
+        connections: {
+          connectinUserId: userId,
         }
       },
       select: {
         statId: true,
-        platform: {
+        connections: {
           select: {
             externalId: true
           }
@@ -64,11 +64,11 @@ export class MatchesService {
       }
     })
 
-    if (!statsInfo.platform.externalId) {
+    if (!statsInfo.connections.externalId) {
       throw new NotFoundException("Steam ID is not found.")
     }
 
-    const syncMatches = await this.dotaProvider.getMatches(statsInfo.platform.externalId)
+    const syncMatches = await this.dotaProvider.getMatches(statsInfo.connections.externalId)
 
     const dataToInsert = syncMatches.map((el) => {
       return {
@@ -90,14 +90,14 @@ export class MatchesService {
     })
 
     await prisma.$transaction([
-      prisma.match.deleteMany({
+      prisma.matches.deleteMany({
         where: {
           statsMatchId: statsInfo.statId,
           gameMatchId: dotaInfo.gameId,
         },
       }),
 
-      prisma.match.createMany({
+      prisma.matches.createMany({
         data: dataToInsert
       }),
     ]);

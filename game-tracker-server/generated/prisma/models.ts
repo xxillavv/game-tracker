@@ -8,12 +8,12 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/User.js'
-export type * from './models/Session.js'
-export type * from './models/Game.js'
-export type * from './models/Match.js'
+export type * from './models/Users.js'
+export type * from './models/Sessions.js'
+export type * from './models/Games.js'
+export type * from './models/Matches.js'
 export type * from './models/News.js'
-export type * from './models/PlatformInfo.js'
+export type * from './models/Connections.js'
 export type * from './models/GameStats.js'
-export type * from './models/RankHistory.js'
+export type * from './models/RatingHistory.js'
 export type * from './commonInputTypes.js'

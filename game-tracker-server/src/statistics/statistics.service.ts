@@ -8,7 +8,7 @@ export class StatisticsService {
 
   async getDotaProfile(userId: number) {
     const cachedStats = await prisma.gameStats.findFirst({
-      where: { platform: { platformUserId: userId } }
+      where: { connections: { connectinUserId: userId } }
     });
 
     if (!cachedStats) {
@@ -19,16 +19,16 @@ export class StatisticsService {
   }
 
   async syncDotaStats(userId: number) {
-    const userInfo = await prisma.platformInfo.findFirstOrThrow({
-      where: { platformUserId: userId },
-      select: { externalId: true, platformId: true }
+    const userInfo = await prisma.connections.findFirstOrThrow({
+      where: { connectinUserId: userId },
+      select: { externalId: true, connectionId: true }
     });
 
     const stats = await this.dotaProvider.getPlayerStats(userInfo.externalId);
     const winrate = await this.dotaProvider.getPlayerWinrate(userInfo.externalId);
 
     return await prisma.gameStats.upsert({
-      where: { platformId: userInfo.platformId },
+      where: { statsConnectionId: userInfo.connectionId },
       update: {
         metadata: {
           accountId: stats.profile.account_id,
@@ -40,7 +40,7 @@ export class StatisticsService {
         }
       },
       create: {
-        platformId: userInfo.platformId,
+        statsConnectionId: userInfo.connectionId,
         metadata: {
           accountId: stats.profile.account_id,
           name: stats.profile.personaname,
@@ -55,20 +55,20 @@ export class StatisticsService {
 
 
   async getDotaRatings(userId: number) {
-    const cachedRatings = await prisma.rankHistory.findMany({
+    const cachedRatings = await prisma.ratingHistory.findMany({
       where: {
-        gameStats: { platform: { platformUserId: userId } }
+        gameStats: { connections: { connectinUserId: userId } }
       },
-      orderBy: { achivedAt: 'desc' }
+      orderBy: { achievedAt: 'desc' }
     });
 
 
     if (cachedRatings.length === 0) {
       await this.syncDotaRatings(userId);
 
-      return await prisma.rankHistory.findMany({
-        where: { gameStats: { platform: { platformUserId: userId } } },
-        orderBy: { achivedAt: 'desc' }
+      return await prisma.ratingHistory.findMany({
+        where: { gameStats: { connections: { connectinUserId: userId } } },
+        orderBy: { achievedAt: 'desc' }
       });
     }
 
@@ -76,8 +76,8 @@ export class StatisticsService {
   }
 
   async syncDotaRatings(userId: number) {
-    const userInfo = await prisma.platformInfo.findFirstOrThrow({
-      where: { platformUserId: userId },
+    const userInfo = await prisma.connections.findFirstOrThrow({
+      where: { connectinUserId: userId },
       select: {
         externalId: true,
         gameStats: { select: { statId: true } }
@@ -89,17 +89,17 @@ export class StatisticsService {
     const ratingsList = await this.dotaProvider.getPlayerRatings(userInfo.externalId);
 
     const dataToInsert = ratingsList.map((r) => ({
-      statId: userInfo.gameStats!.statId,
-      achivedAt: new Date(r.time),
-      rankTier: r.rank_tier
+      ratingStatId: userInfo.gameStats!.statId,
+      achievedAt: new Date(r.time),
+      ratingTier: r.rank_tier
     }));
 
     await prisma.$transaction([
-      prisma.rankHistory.deleteMany({
-        where: { statId: userInfo.gameStats.statId }
+      prisma.ratingHistory.deleteMany({
+        where: { ratingStatId: userInfo.gameStats.statId }
       }),
 
-      prisma.rankHistory.createMany({
+      prisma.ratingHistory.createMany({
         data: dataToInsert
       })
     ]);
