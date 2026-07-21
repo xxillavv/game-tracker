@@ -3,8 +3,8 @@ import { PlatformNameEmun } from '../../generated/prisma/enums.js';
 import { prisma } from '../../lib/prisma.js';
 
 @Injectable()
-export class GameAccountService {
-  async getUserAccounts(userId: number) {
+export class ConnectionsService {
+  async getUserConnectios(userId: number) {
     const accounts = await prisma.connections.findMany({
       where: { connectinUserId: userId },
       select: {

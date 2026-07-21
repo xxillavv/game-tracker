@@ -20,13 +20,13 @@ export class StatisticsController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('dota/ratings')
+  @Get('dota/rating')
   getRatingsHistory(@Req() request: TRequestWithUser) {
     return this.statisticsService.getDotaRatings(request.user.userId)
   }
 
   @UseGuards(AuthGuard)
-  @Get('dota/ratings/sync')
+  @Get('dota/rating/sync')
   syncRatingsHistory(@Req() request: TRequestWithUser) {
     return this.statisticsService.syncDotaRatings(request.user.userId)
   }

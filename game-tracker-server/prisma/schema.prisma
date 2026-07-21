@@ -90,6 +90,7 @@ model Connections {
   accessToken  String?          @map("access_token")
 
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   users     Users      @relation(fields: [connectinUserId], references: [userId], onDelete: Cascade)
   gameStats GameStats?

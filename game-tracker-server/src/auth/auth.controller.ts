@@ -18,7 +18,7 @@ export class AuthController {
       secure: true
     })
 
-    return { user }
+    return user
   }
 
   @Post('login')
@@ -32,7 +32,7 @@ export class AuthController {
       secure: true
     })
 
-    return { user }
+    return user
   }
 
   @Get('refresh')

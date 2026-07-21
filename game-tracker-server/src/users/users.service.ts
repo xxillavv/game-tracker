@@ -21,7 +21,7 @@ export class UsersService {
       throw new NotFoundException("User not found.")
     }
 
-    return { user }
+    return user
   }
 
   async getByName(name: string) {
@@ -37,7 +37,7 @@ export class UsersService {
       throw new NotFoundException("User not found.")
     }
 
-    return { user }
+    return user
   }
 
   async editUser(id, password, email, username) {
@@ -69,6 +69,6 @@ export class UsersService {
       }
     })
 
-    return { newUser }
+    return newUser
   }
 }

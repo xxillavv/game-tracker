@@ -43,6 +43,7 @@ export type ConnectionsMinAggregateOutputType = {
   externalId: string | null
   accessToken: string | null
   updatedAt: Date | null
+  createdAt: Date | null
 }
 
 export type ConnectionsMaxAggregateOutputType = {
@@ -52,6 +53,7 @@ export type ConnectionsMaxAggregateOutputType = {
   externalId: string | null
   accessToken: string | null
   updatedAt: Date | null
+  createdAt: Date | null
 }
 
 export type ConnectionsCountAggregateOutputType = {
@@ -61,6 +63,7 @@ export type ConnectionsCountAggregateOutputType = {
   externalId: number
   accessToken: number
   updatedAt: number
+  createdAt: number
   _all: number
 }
 
@@ -82,6 +85,7 @@ export type ConnectionsMinAggregateInputType = {
   externalId?: true
   accessToken?: true
   updatedAt?: true
+  createdAt?: true
 }
 
 export type ConnectionsMaxAggregateInputType = {
@@ -91,6 +95,7 @@ export type ConnectionsMaxAggregateInputType = {
   externalId?: true
   accessToken?: true
   updatedAt?: true
+  createdAt?: true
 }
 
 export type ConnectionsCountAggregateInputType = {
@@ -100,6 +105,7 @@ export type ConnectionsCountAggregateInputType = {
   externalId?: true
   accessToken?: true
   updatedAt?: true
+  createdAt?: true
   _all?: true
 }
 
@@ -196,6 +202,7 @@ export type ConnectionsGroupByOutputType = {
   externalId: string
   accessToken: string | null
   updatedAt: Date
+  createdAt: Date
   _count: ConnectionsCountAggregateOutputType | null
   _avg: ConnectionsAvgAggregateOutputType | null
   _sum: ConnectionsSumAggregateOutputType | null
@@ -228,6 +235,7 @@ export type ConnectionsWhereInput = {
   externalId?: Prisma.StringFilter<"Connections"> | string
   accessToken?: Prisma.StringNullableFilter<"Connections"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   gameStats?: Prisma.XOR<Prisma.GameStatsNullableScalarRelationFilter, Prisma.GameStatsWhereInput> | null
 }
@@ -239,6 +247,7 @@ export type ConnectionsOrderByWithRelationInput = {
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   users?: Prisma.UsersOrderByWithRelationInput
   gameStats?: Prisma.GameStatsOrderByWithRelationInput
 }
@@ -253,6 +262,7 @@ export type ConnectionsWhereUniqueInput = Prisma.AtLeast<{
   externalId?: Prisma.StringFilter<"Connections"> | string
   accessToken?: Prisma.StringNullableFilter<"Connections"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   gameStats?: Prisma.XOR<Prisma.GameStatsNullableScalarRelationFilter, Prisma.GameStatsWhereInput> | null
 }, "connectionId">
@@ -264,6 +274,7 @@ export type ConnectionsOrderByWithAggregationInput = {
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   _count?: Prisma.ConnectionsCountOrderByAggregateInput
   _avg?: Prisma.ConnectionsAvgOrderByAggregateInput
   _max?: Prisma.ConnectionsMaxOrderByAggregateInput
@@ -281,6 +292,7 @@ export type ConnectionsScalarWhereWithAggregatesInput = {
   externalId?: Prisma.StringWithAggregatesFilter<"Connections"> | string
   accessToken?: Prisma.StringNullableWithAggregatesFilter<"Connections"> | string | null
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Connections"> | Date | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Connections"> | Date | string
 }
 
 export type ConnectionsCreateInput = {
@@ -288,6 +300,7 @@ export type ConnectionsCreateInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
   users: Prisma.UsersCreateNestedOneWithoutConnectionsInput
   gameStats?: Prisma.GameStatsCreateNestedOneWithoutConnectionsInput
 }
@@ -299,6 +312,7 @@ export type ConnectionsUncheckedCreateInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
   gameStats?: Prisma.GameStatsUncheckedCreateNestedOneWithoutConnectionsInput
 }
 
@@ -307,6 +321,7 @@ export type ConnectionsUpdateInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UsersUpdateOneRequiredWithoutConnectionsNestedInput
   gameStats?: Prisma.GameStatsUpdateOneWithoutConnectionsNestedInput
 }
@@ -318,6 +333,7 @@ export type ConnectionsUncheckedUpdateInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput
 }
 
@@ -328,6 +344,7 @@ export type ConnectionsCreateManyInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
 }
 
 export type ConnectionsUpdateManyMutationInput = {
@@ -335,6 +352,7 @@ export type ConnectionsUpdateManyMutationInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConnectionsUncheckedUpdateManyInput = {
@@ -344,6 +362,7 @@ export type ConnectionsUncheckedUpdateManyInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConnectionsListRelationFilter = {
@@ -363,6 +382,7 @@ export type ConnectionsCountOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ConnectionsAvgOrderByAggregateInput = {
@@ -377,6 +397,7 @@ export type ConnectionsMaxOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ConnectionsMinOrderByAggregateInput = {
@@ -386,6 +407,7 @@ export type ConnectionsMinOrderByAggregateInput = {
   externalId?: Prisma.SortOrder
   accessToken?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type ConnectionsSumOrderByAggregateInput = {
@@ -467,6 +489,7 @@ export type ConnectionsCreateWithoutUsersInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
   gameStats?: Prisma.GameStatsCreateNestedOneWithoutConnectionsInput
 }
 
@@ -476,6 +499,7 @@ export type ConnectionsUncheckedCreateWithoutUsersInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
   gameStats?: Prisma.GameStatsUncheckedCreateNestedOneWithoutConnectionsInput
 }
 
@@ -515,6 +539,7 @@ export type ConnectionsScalarWhereInput = {
   externalId?: Prisma.StringFilter<"Connections"> | string
   accessToken?: Prisma.StringNullableFilter<"Connections"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
+  createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
 }
 
 export type ConnectionsCreateWithoutGameStatsInput = {
@@ -522,6 +547,7 @@ export type ConnectionsCreateWithoutGameStatsInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
   users: Prisma.UsersCreateNestedOneWithoutConnectionsInput
 }
 
@@ -532,6 +558,7 @@ export type ConnectionsUncheckedCreateWithoutGameStatsInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
 }
 
 export type ConnectionsCreateOrConnectWithoutGameStatsInput = {
@@ -555,6 +582,7 @@ export type ConnectionsUpdateWithoutGameStatsInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UsersUpdateOneRequiredWithoutConnectionsNestedInput
 }
 
@@ -565,6 +593,7 @@ export type ConnectionsUncheckedUpdateWithoutGameStatsInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type ConnectionsCreateManyUsersInput = {
@@ -573,6 +602,7 @@ export type ConnectionsCreateManyUsersInput = {
   externalId: string
   accessToken?: string | null
   updatedAt?: Date | string
+  createdAt?: Date | string
 }
 
 export type ConnectionsUpdateWithoutUsersInput = {
@@ -580,6 +610,7 @@ export type ConnectionsUpdateWithoutUsersInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUpdateOneWithoutConnectionsNestedInput
 }
 
@@ -589,6 +620,7 @@ export type ConnectionsUncheckedUpdateWithoutUsersInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput
 }
 
@@ -598,6 +630,7 @@ export type ConnectionsUncheckedUpdateManyWithoutUsersInput = {
   externalId?: Prisma.StringFieldUpdateOperationsInput | string
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 
@@ -609,6 +642,7 @@ export type ConnectionsSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   externalId?: boolean
   accessToken?: boolean
   updatedAt?: boolean
+  createdAt?: boolean
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   gameStats?: boolean | Prisma.Connections$gameStatsArgs<ExtArgs>
 }, ExtArgs["result"]["connections"]>
@@ -620,6 +654,7 @@ export type ConnectionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   externalId?: boolean
   accessToken?: boolean
   updatedAt?: boolean
+  createdAt?: boolean
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["connections"]>
 
@@ -630,6 +665,7 @@ export type ConnectionsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   externalId?: boolean
   accessToken?: boolean
   updatedAt?: boolean
+  createdAt?: boolean
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["connections"]>
 
@@ -640,9 +676,10 @@ export type ConnectionsSelectScalar = {
   externalId?: boolean
   accessToken?: boolean
   updatedAt?: boolean
+  createdAt?: boolean
 }
 
-export type ConnectionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"connectionId" | "connectinUserId" | "platformName" | "externalId" | "accessToken" | "updatedAt", ExtArgs["result"]["connections"]>
+export type ConnectionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"connectionId" | "connectinUserId" | "platformName" | "externalId" | "accessToken" | "updatedAt" | "createdAt", ExtArgs["result"]["connections"]>
 export type ConnectionsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   gameStats?: boolean | Prisma.Connections$gameStatsArgs<ExtArgs>
@@ -667,6 +704,7 @@ export type $ConnectionsPayload<ExtArgs extends runtime.Types.Extensions.Interna
     externalId: string
     accessToken: string | null
     updatedAt: Date
+    createdAt: Date
   }, ExtArgs["result"]["connections"]>
   composites: {}
 }
@@ -1098,6 +1136,7 @@ export interface ConnectionsFieldRefs {
   readonly externalId: Prisma.FieldRef<"Connections", 'String'>
   readonly accessToken: Prisma.FieldRef<"Connections", 'String'>
   readonly updatedAt: Prisma.FieldRef<"Connections", 'DateTime'>
+  readonly createdAt: Prisma.FieldRef<"Connections", 'DateTime'>
 }
     
 

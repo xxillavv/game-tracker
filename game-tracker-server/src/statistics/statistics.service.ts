@@ -103,5 +103,10 @@ export class StatisticsService {
         data: dataToInsert
       })
     ]);
+
+    return await prisma.ratingHistory.findMany({
+      where: { gameStats: { connections: { connectinUserId: userId } } },
+      orderBy: { achievedAt: 'desc' }
+    });
   }
 }

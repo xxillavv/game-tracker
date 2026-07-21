@@ -135,7 +135,8 @@ export const ConnectionsScalarFieldEnum = {
   platformName: 'platformName',
   externalId: 'externalId',
   accessToken: 'accessToken',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
 } as const
 
 export type ConnectionsScalarFieldEnum = (typeof ConnectionsScalarFieldEnum)[keyof typeof ConnectionsScalarFieldEnum]
