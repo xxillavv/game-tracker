@@ -2,6 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MatchesController } from './matches.controller.js';
 import { MatchesService } from './matches.service.js';
 import { JwtService } from '@nestjs/jwt';
+import { AuthGuard } from '../guards/auth.guard.js';
 
 describe('MatchesController', () => {
   let controller: MatchesController;
@@ -11,18 +12,11 @@ describe('MatchesController', () => {
     syncDotaMatches: jest.fn()
   }
 
-  const mockJwtService = {
-    verifyAsync: jest.fn()
-  }
-
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [MatchesController],
-      providers: [MatchesService, {
-        provide: JwtService,
-        useValue: mockJwtService
-      }],
-    }).overrideProvider(MatchesService).useValue(mockMatchesService).compile();
+      providers: [MatchesService],
+    }).overrideProvider(MatchesService).useValue(mockMatchesService).overrideGuard(AuthGuard).useValue({ canActivate: () => true }).compile();
 
     controller = module.get<MatchesController>(MatchesController);
   });
