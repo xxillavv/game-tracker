@@ -18,8 +18,9 @@ model User {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   sessions      Session?
-  matches       Match[]
   platformInfos PlatformInfo[]
+
+  @@map("users")
 }
 
 model Session {
@@ -28,11 +29,13 @@ model Session {
   token String @unique @map("token")
 
   createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @default(now()) @map("updated_at")
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
   sessionUserId Int @unique @map("user_id")
 
   user User @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
+
+  @@map("sessions")
 }
 
 model Game {
@@ -41,6 +44,8 @@ model Game {
   name String @unique @map("name")
 
   matches Match[]
+
+  @@map("games")
 }
 
 enum MatchResult {
@@ -49,28 +54,37 @@ enum MatchResult {
   DRAW
 }
 
+// Таблиця з статистикою зібраних матчів користувача.
 model Match {
-  matchId     Int @id @default(autoincrement()) @map("match_id")
-  userMatchId Int @map("user_id")
-  gameMatchId Int @map("game_id")
+  matchId      Int @id @default(autoincrement()) @map("match_id")
+  statsMatchId Int @map("stats_id")
+  gameMatchId  Int @map("game_id")
 
   result MatchResult @map("result")
   score  String      @map("score")
 
   metadata Json // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
 
-  user User @relation(fields: [userMatchId], references: [userId], onDelete: Cascade)
-  game Game @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+  stats GameStats @relation(fields: [statsMatchId], references: [statId], onDelete: Cascade)
+  game  Game      @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+
+  @@map("matches")
 }
 
 model News {
   newsId Int @id @default(autoincrement()) @map("news_id")
 
-  title     String   @map("title")
-  content   String   @map("content")
+  title   String @map("title")
+  content String @map("content")
+
+  game String @map("game")
+
   createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("news")
 }
 
+// Таблиця з інформацією про підключені платформи користувача.
 model PlatformInfo {
   platformId     Int @id @default(autoincrement()) @map("platform_id")
   platformUserId Int @map("user_id")
@@ -79,5 +93,38 @@ model PlatformInfo {
   externalId   String // Тег, айдішка юзера на конкретній платформі
   accessToken  String? @map("access_token")
 
-  user User @relation(fields: [platformUserId], references: [userId], onDelete: Cascade)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+
+  user      User       @relation(fields: [platformUserId], references: [userId], onDelete: Cascade)
+  gameStats GameStats?
+
+  @@map("platform_info")
+}
+
+// Таблиця з ігровою статистикою користувача.
+model GameStats {
+  statId Int @id @default(autoincrement()) @map("stat_id")
+
+  platformId Int          @unique @map("platform_id")
+  platform   PlatformInfo @relation(fields: [platformId], references: [platformId], onDelete: Cascade)
+
+  metadata Json @default("{}")
+
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+  rankHistories RankHistory[]
+  matches       Match[]
+
+  @@map("game_stats")
+}
+
+model RankHistory {
+  rankId    Int      @id @default(autoincrement()) @map("rank_id")
+  rankTier  Int      @map("rank_tier")
+  achivedAt DateTime @default(now()) @map("achived_at")
+
+  statId    Int       @map("stat_id")
+  gameStats GameStats @relation(fields: [statId], references: [statId], onDelete: Cascade)
+
+  @@map("rank_history")
 }

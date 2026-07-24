@@ -8,14 +8,14 @@ export class AuthService {
   constructor(private readonly jwt: JwtService) { }
   private salt = 10
 
-  async registerUser(username: string, userEmail: string, password: string) {
+  async registerUser(username: string, userEmail: string, userPassword: string) {
     const isExist = await prisma.user.findFirst({
       where: { email: userEmail }
     })
 
     if (isExist) throw new ConflictException("User with this email already exists")
 
-    const hashPassword = await bcrypt.hash(password, this.salt)
+    const hashPassword = await bcrypt.hash(userPassword, this.salt)
 
     const user = await prisma.user.create({
       data: {
@@ -51,7 +51,9 @@ export class AuthService {
 
     const accessToken = await this.jwt.signAsync(accessPayload)
 
-    return { accessToken, user }
+    const { password, ...userWithoutPassword } = user
+
+    return { accessToken, user: userWithoutPassword }
   }
 
 
@@ -67,13 +69,13 @@ export class AuthService {
     })
 
     if (!user) {
-      throw new UnauthorizedException('Incorrect login or password.')
+      throw new UnauthorizedException('Incorrect email or password.')
     }
 
     const isPasswordExist = await bcrypt.compare(userPassword, user!.password)
 
     if (!isPasswordExist) {
-      throw new UnauthorizedException('Incorrect login or password.')
+      throw new UnauthorizedException('Incorrect email or password.')
     }
 
     const accessPayload = {

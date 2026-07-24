@@ -47,3 +47,13 @@ export type News = Prisma.NewsModel
  * 
  */
 export type PlatformInfo = Prisma.PlatformInfoModel
+/**
+ * Model GameStats
+ * 
+ */
+export type GameStats = Prisma.GameStatsModel
+/**
+ * Model RankHistory
+ * 
+ */
+export type RankHistory = Prisma.RankHistoryModel

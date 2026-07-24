@@ -13,7 +13,7 @@ import { AuthGuard } from '../guards/auth.guard.js';
     global: true,
     secret: process.env.SECRET_KEY,
     signOptions: {
-      expiresIn: '10m'
+      expiresIn: '10h'
     }
   })]
 })

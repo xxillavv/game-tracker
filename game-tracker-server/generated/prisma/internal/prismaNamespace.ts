@@ -389,7 +389,9 @@ export const ModelName = {
   Game: 'Game',
   Match: 'Match',
   News: 'News',
-  PlatformInfo: 'PlatformInfo'
+  PlatformInfo: 'PlatformInfo',
+  GameStats: 'GameStats',
+  RankHistory: 'RankHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -405,7 +407,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo"
+    modelProps: "user" | "session" | "game" | "match" | "news" | "platformInfo" | "gameStats" | "rankHistory"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -853,6 +855,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    GameStats: {
+      payload: Prisma.$GameStatsPayload<ExtArgs>
+      fields: Prisma.GameStatsFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.GameStatsFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.GameStatsFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        findFirst: {
+          args: Prisma.GameStatsFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.GameStatsFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        findMany: {
+          args: Prisma.GameStatsFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        create: {
+          args: Prisma.GameStatsCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        createMany: {
+          args: Prisma.GameStatsCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.GameStatsCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        delete: {
+          args: Prisma.GameStatsDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        update: {
+          args: Prisma.GameStatsUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        deleteMany: {
+          args: Prisma.GameStatsDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.GameStatsUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.GameStatsUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>[]
+        }
+        upsert: {
+          args: Prisma.GameStatsUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$GameStatsPayload>
+        }
+        aggregate: {
+          args: Prisma.GameStatsAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateGameStats>
+        }
+        groupBy: {
+          args: Prisma.GameStatsGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameStatsGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.GameStatsCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.GameStatsCountAggregateOutputType> | number
+        }
+      }
+    }
+    RankHistory: {
+      payload: Prisma.$RankHistoryPayload<ExtArgs>
+      fields: Prisma.RankHistoryFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.RankHistoryFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.RankHistoryFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        findFirst: {
+          args: Prisma.RankHistoryFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.RankHistoryFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        findMany: {
+          args: Prisma.RankHistoryFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        create: {
+          args: Prisma.RankHistoryCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        createMany: {
+          args: Prisma.RankHistoryCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.RankHistoryCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        delete: {
+          args: Prisma.RankHistoryDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        update: {
+          args: Prisma.RankHistoryUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        deleteMany: {
+          args: Prisma.RankHistoryDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.RankHistoryUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.RankHistoryUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>[]
+        }
+        upsert: {
+          args: Prisma.RankHistoryUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$RankHistoryPayload>
+        }
+        aggregate: {
+          args: Prisma.RankHistoryAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateRankHistory>
+        }
+        groupBy: {
+          args: Prisma.RankHistoryGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RankHistoryGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.RankHistoryCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.RankHistoryCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -925,7 +1075,7 @@ export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof Game
 
 export const MatchScalarFieldEnum = {
   matchId: 'matchId',
-  userMatchId: 'userMatchId',
+  statsMatchId: 'statsMatchId',
   gameMatchId: 'gameMatchId',
   result: 'result',
   score: 'score',
@@ -939,6 +1089,7 @@ export const NewsScalarFieldEnum = {
   newsId: 'newsId',
   title: 'title',
   content: 'content',
+  game: 'game',
   createdAt: 'createdAt'
 } as const
 
@@ -950,10 +1101,32 @@ export const PlatformInfoScalarFieldEnum = {
   platformUserId: 'platformUserId',
   platformName: 'platformName',
   externalId: 'externalId',
-  accessToken: 'accessToken'
+  accessToken: 'accessToken',
+  updatedAt: 'updatedAt'
 } as const
 
 export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[keyof typeof PlatformInfoScalarFieldEnum]
+
+
+export const GameStatsScalarFieldEnum = {
+  statId: 'statId',
+  platformId: 'platformId',
+  metadata: 'metadata',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
+
+
+export const RankHistoryScalarFieldEnum = {
+  rankId: 'rankId',
+  rankTier: 'rankTier',
+  achivedAt: 'achivedAt',
+  statId: 'statId'
+} as const
+
+export type RankHistoryScalarFieldEnum = (typeof RankHistoryScalarFieldEnum)[keyof typeof RankHistoryScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1186,6 +1359,8 @@ export type GlobalOmitConfig = {
   match?: Prisma.MatchOmit
   news?: Prisma.NewsOmit
   platformInfo?: Prisma.PlatformInfoOmit
+  gameStats?: Prisma.GameStatsOmit
+  rankHistory?: Prisma.RankHistoryOmit
 }
 
 /* Types for Logging */
