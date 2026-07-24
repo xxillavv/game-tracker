@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
+import { JwtService } from '@nestjs/jwt';
 
 describe('UsersController', () => {
   let controller: UsersController;
@@ -11,10 +12,17 @@ describe('UsersController', () => {
     editUser: jest.fn(),
   }
 
+  const mockJwtService = {
+    verifyAsync: jest.fn()
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
-      providers: [UsersService],
+      providers: [UsersService, {
+        provide: JwtService,
+        useValue: mockJwtService
+      }],
     }).overrideProvider(UsersService).useValue(mockUserService).compile();
 
     controller = module.get<UsersController>(UsersController);
