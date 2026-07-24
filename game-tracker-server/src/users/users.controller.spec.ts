@@ -5,11 +5,17 @@ import { UsersService } from './users.service.js';
 describe('UsersController', () => {
   let controller: UsersController;
 
+  const mockUserService = {
+    getById: jest.fn(),
+    getByName: jest.fn(),
+    editUser: jest.fn(),
+  }
+
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
-    }).compile();
+    }).overrideProvider(UsersService).useValue(mockUserService).compile();
 
     controller = module.get<UsersController>(UsersController);
   });
