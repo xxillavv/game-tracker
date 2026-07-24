@@ -1,15 +1,17 @@
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { prisma } from '../../lib/prisma.js';
 import * as bcrypt from 'bcrypt'
+import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly jwt: JwtService) { }
+  constructor(private readonly jwt: JwtService,
+    private readonly prisma: PrismaService
+  ) { }
   private salt = 10
 
   async registerUser(username: string, userEmail: string, userPassword: string) {
-    const isExist = await prisma.users.findFirst({
+    const isExist = await this.prisma.users.findFirst({
       where: { email: userEmail }
     })
 
@@ -17,7 +19,7 @@ export class AuthService {
 
     const hashPassword = await bcrypt.hash(userPassword, this.salt)
 
-    const user = await prisma.users.create({
+    const user = await this.prisma.users.create({
       data: {
         email: userEmail,
         username,
@@ -37,7 +39,7 @@ export class AuthService {
 
     const refreshToken = await this.jwt.signAsync(refreshPayload, { expiresIn: '7d' })
 
-    await prisma.sessions.create({
+    await this.prisma.sessions.create({
       data: {
         token: refreshToken,
         sessionUserId: user.userId
@@ -58,7 +60,7 @@ export class AuthService {
 
 
   async loginUser(userRmail: string, userPassword: string) {
-    const user = await prisma.users.findUnique({
+    const user = await this.prisma.users.findUnique({
       where: { email: userRmail },
       select: {
         userId: true,
@@ -90,7 +92,7 @@ export class AuthService {
     const accessToken = await this.jwt.signAsync(accessPayload)
     const refreshToken = await this.jwt.signAsync(refreshPayload, { expiresIn: '7d' })
 
-    await prisma.sessions.upsert({
+    await this.prisma.sessions.upsert({
       where: { sessionUserId: user.userId },
       update: {
         token: refreshToken
@@ -115,7 +117,7 @@ export class AuthService {
       throw new UnauthorizedException("Invalid token.")
     }
 
-    const userData = await prisma.users.findUnique({
+    const userData = await this.prisma.users.findUnique({
       where: { userId },
       select: {
         email: true,
@@ -139,7 +141,7 @@ export class AuthService {
 
     const newRefreshToken = await this.jwt.signAsync(refreshPayload)
 
-    await prisma.sessions.upsert({
+    await this.prisma.sessions.upsert({
       where: { sessionUserId: userId },
       update: {
         token: newRefreshToken

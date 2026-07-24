@@ -1,7 +1,5 @@
 import { HttpService } from "@nestjs/axios";
-import { BadRequestException, Injectable, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
-import { prisma } from "../../lib/prisma.js";
-import { ConfigService } from "@nestjs/config";
+import { Injectable, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
 import { AxiosError } from "axios";
 import { IDotaMatches, IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate } from "../../utils/types/providers.types.js";
 import { firstValueFrom } from "rxjs";

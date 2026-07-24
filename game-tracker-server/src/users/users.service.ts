@@ -1,14 +1,16 @@
 import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import { prisma } from '../../lib/prisma.js';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class UsersService {
+  constructor(private readonly prisma: PrismaService) {}
+
   async getById(id: number) {
 
     console.log(id)
 
-    const user = await prisma.users.findUnique({
+    const user = await this.prisma.users.findUnique({
       where: { userId: id },
       select: {
         userId: true,
@@ -25,7 +27,7 @@ export class UsersService {
   }
 
   async getByName(name: string) {
-    const user = await prisma.users.findFirst({
+    const user = await this.prisma.users.findFirst({
       where: { username: name },
       select: {
         userId: true,
@@ -41,7 +43,7 @@ export class UsersService {
   }
 
   async editUser(id, password, email, username) {
-    const user = await prisma.users.findUnique({
+    const user = await this.prisma.users.findUnique({
       where: { userId: id }
     })
 
@@ -55,7 +57,7 @@ export class UsersService {
       throw new UnauthorizedException("Incorrect password.")
     }
 
-    const newUser = await prisma.users.update({
+    const newUser = await this.prisma.users.update({
       where: { userId: id },
       data: {
         email,

@@ -1,17 +1,19 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { DotaProvider } from '../providers/dota-api.service.js';
-import { prisma } from '../../lib/prisma.js';
+import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class MatchesService {
-  constructor(private readonly dotaProvider: DotaProvider) { }
+  constructor(private readonly dotaProvider: DotaProvider,
+    private readonly prisma: PrismaService
+  ) { }
 
   async getDotaMatches(userId) {
-    const dotaInfo = await prisma.games.findFirstOrThrow({
+    const dotaInfo = await this.prisma.games.findFirstOrThrow({
       where: { name: "DOTA" }
     })
 
-    const statsInfo = await prisma.gameStats.findFirstOrThrow({
+    const statsInfo = await this.prisma.gameStats.findFirstOrThrow({
       where: {
         connections: {
           connectinUserId: userId,
@@ -22,7 +24,7 @@ export class MatchesService {
       }
     })
 
-    let matches = await prisma.matches.findMany({
+    let matches = await this.prisma.matches.findMany({
       where: {
         statsMatchId: statsInfo.statId,
         gameMatchId: dotaInfo.gameId,
@@ -32,7 +34,7 @@ export class MatchesService {
     if (!matches.length) {
       await this.syncDotaMatches(userId)
 
-      matches = await prisma.matches.findMany({
+      matches = await this.prisma.matches.findMany({
         where: {
           gameMatchId: dotaInfo.gameId,
           statsMatchId: statsInfo.statId
@@ -44,11 +46,11 @@ export class MatchesService {
   }
 
   async syncDotaMatches(userId) {
-    const dotaInfo = await prisma.games.findFirstOrThrow({
+    const dotaInfo = await this.prisma.games.findFirstOrThrow({
       where: { name: "DOTA" }
     })
 
-    const statsInfo = await prisma.gameStats.findFirstOrThrow({
+    const statsInfo = await this.prisma.gameStats.findFirstOrThrow({
       where: {
         connections: {
           connectinUserId: userId,
@@ -89,15 +91,15 @@ export class MatchesService {
       }
     })
 
-    await prisma.$transaction([
-      prisma.matches.deleteMany({
+    await this.prisma.$transaction([
+      this.prisma.matches.deleteMany({
         where: {
           statsMatchId: statsInfo.statId,
           gameMatchId: dotaInfo.gameId,
         },
       }),
 
-      prisma.matches.createMany({
+      this.prisma.matches.createMany({
         data: dataToInsert
       }),
     ]);

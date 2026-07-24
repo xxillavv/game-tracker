@@ -6,9 +6,10 @@ import { HttpModule } from '@nestjs/axios'
 import { StatisticsModule } from './statistics/statistics.module.js';
 import { MatchesModule } from './matches/matches.module.js';
 import { ConnectionsModule } from './connections/connections.module.js';
+import { PrismaModule } from './lib/prisma.module.js';
 
 @Module({
-  imports: [UsersModule, AuthModule, ConfigModule.forRoot({
+  imports: [PrismaModule, UsersModule, AuthModule, ConfigModule.forRoot({
     isGlobal: true,
     envFilePath: '.env'
   }),
