@@ -9,10 +9,10 @@
 * 🟢 You can import this file directly.
 */
 
-export const MatchResult = {
-  WIN: 'WIN',
-  LOSS: 'LOSS',
-  DRAW: 'DRAW'
+export const PlatformNameEmun = {
+  STEAM: 'STEAM',
+  RIOT: 'RIOT',
+  SUPERCELL: 'SUPERCELL'
 } as const
 
-export type MatchResult = (typeof MatchResult)[keyof typeof MatchResult]
+export type PlatformNameEmun = (typeof PlatformNameEmun)[keyof typeof PlatformNameEmun]

@@ -8,7 +8,7 @@ export class UsersService {
 
     console.log(id)
 
-    const user = await prisma.user.findUnique({
+    const user = await prisma.users.findUnique({
       where: { userId: id },
       select: {
         userId: true,
@@ -21,11 +21,11 @@ export class UsersService {
       throw new NotFoundException("User not found.")
     }
 
-    return { user }
+    return user
   }
 
   async getByName(name: string) {
-    const user = await prisma.user.findFirst({
+    const user = await prisma.users.findFirst({
       where: { username: name },
       select: {
         userId: true,
@@ -37,11 +37,11 @@ export class UsersService {
       throw new NotFoundException("User not found.")
     }
 
-    return { user }
+    return user
   }
 
   async editUser(id, password, email, username) {
-    const user = await prisma.user.findUnique({
+    const user = await prisma.users.findUnique({
       where: { userId: id }
     })
 
@@ -55,7 +55,7 @@ export class UsersService {
       throw new UnauthorizedException("Incorrect password.")
     }
 
-    const newUser = await prisma.user.update({
+    const newUser = await prisma.users.update({
       where: { userId: id },
       data: {
         email,
@@ -69,6 +69,6 @@ export class UsersService {
       }
     })
 
-    return { newUser }
+    return newUser
   }
 }

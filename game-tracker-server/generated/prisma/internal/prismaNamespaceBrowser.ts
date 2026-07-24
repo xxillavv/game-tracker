@@ -51,14 +51,14 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User',
-  Session: 'Session',
-  Game: 'Game',
-  Match: 'Match',
+  Users: 'Users',
+  Sessions: 'Sessions',
+  Games: 'Games',
+  Matches: 'Matches',
   News: 'News',
-  PlatformInfo: 'PlatformInfo',
+  Connections: 'Connections',
   GameStats: 'GameStats',
-  RankHistory: 'RankHistory'
+  RatingHistory: 'RatingHistory'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -77,7 +77,7 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
+export const UsersScalarFieldEnum = {
   userId: 'userId',
   email: 'email',
   password: 'password',
@@ -86,38 +86,36 @@ export const UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 } as const
 
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
-export const SessionScalarFieldEnum = {
+export const SessionsScalarFieldEnum = {
   sessionId: 'sessionId',
+  sessionUserId: 'sessionUserId',
   token: 'token',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  sessionUserId: 'sessionUserId'
+  updatedAt: 'updatedAt'
 } as const
 
-export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+export type SessionsScalarFieldEnum = (typeof SessionsScalarFieldEnum)[keyof typeof SessionsScalarFieldEnum]
 
 
-export const GameScalarFieldEnum = {
+export const GamesScalarFieldEnum = {
   gameId: 'gameId',
   name: 'name'
 } as const
 
-export type GameScalarFieldEnum = (typeof GameScalarFieldEnum)[keyof typeof GameScalarFieldEnum]
+export type GamesScalarFieldEnum = (typeof GamesScalarFieldEnum)[keyof typeof GamesScalarFieldEnum]
 
 
-export const MatchScalarFieldEnum = {
+export const MatchesScalarFieldEnum = {
   matchId: 'matchId',
   statsMatchId: 'statsMatchId',
   gameMatchId: 'gameMatchId',
-  result: 'result',
-  score: 'score',
   metadata: 'metadata'
 } as const
 
-export type MatchScalarFieldEnum = (typeof MatchScalarFieldEnum)[keyof typeof MatchScalarFieldEnum]
+export type MatchesScalarFieldEnum = (typeof MatchesScalarFieldEnum)[keyof typeof MatchesScalarFieldEnum]
 
 
 export const NewsScalarFieldEnum = {
@@ -131,21 +129,22 @@ export const NewsScalarFieldEnum = {
 export type NewsScalarFieldEnum = (typeof NewsScalarFieldEnum)[keyof typeof NewsScalarFieldEnum]
 
 
-export const PlatformInfoScalarFieldEnum = {
-  platformId: 'platformId',
-  platformUserId: 'platformUserId',
+export const ConnectionsScalarFieldEnum = {
+  connectionId: 'connectionId',
+  connectinUserId: 'connectinUserId',
   platformName: 'platformName',
   externalId: 'externalId',
   accessToken: 'accessToken',
-  updatedAt: 'updatedAt'
+  updatedAt: 'updatedAt',
+  createdAt: 'createdAt'
 } as const
 
-export type PlatformInfoScalarFieldEnum = (typeof PlatformInfoScalarFieldEnum)[keyof typeof PlatformInfoScalarFieldEnum]
+export type ConnectionsScalarFieldEnum = (typeof ConnectionsScalarFieldEnum)[keyof typeof ConnectionsScalarFieldEnum]
 
 
 export const GameStatsScalarFieldEnum = {
   statId: 'statId',
-  platformId: 'platformId',
+  statsConnectionId: 'statsConnectionId',
   metadata: 'metadata',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -154,14 +153,14 @@ export const GameStatsScalarFieldEnum = {
 export type GameStatsScalarFieldEnum = (typeof GameStatsScalarFieldEnum)[keyof typeof GameStatsScalarFieldEnum]
 
 
-export const RankHistoryScalarFieldEnum = {
-  rankId: 'rankId',
-  rankTier: 'rankTier',
-  achivedAt: 'achivedAt',
-  statId: 'statId'
+export const RatingHistoryScalarFieldEnum = {
+  ratingId: 'ratingId',
+  ratingStatId: 'ratingStatId',
+  ratingTier: 'ratingTier',
+  achievedAt: 'achievedAt'
 } as const
 
-export type RankHistoryScalarFieldEnum = (typeof RankHistoryScalarFieldEnum)[keyof typeof RankHistoryScalarFieldEnum]
+export type RatingHistoryScalarFieldEnum = (typeof RatingHistoryScalarFieldEnum)[keyof typeof RatingHistoryScalarFieldEnum]
 
 
 export const SortOrder = {

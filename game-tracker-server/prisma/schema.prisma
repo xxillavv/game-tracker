@@ -7,7 +7,7 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
+model Users {
   userId Int @id @default(autoincrement()) @map("user_id")
 
   email    String @unique @map("email")
@@ -17,56 +17,46 @@ model User {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  sessions      Session?
-  platformInfos PlatformInfo[]
+  sessions    Sessions?
+  connections Connections[]
 
   @@map("users")
 }
 
-model Session {
-  sessionId Int @id @default(autoincrement()) @map("session_id")
+model Sessions {
+  sessionId     Int @id @default(autoincrement()) @map("session_id")
+  sessionUserId Int @unique @map("user_id")
 
   token String @unique @map("token")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
 
-  sessionUserId Int @unique @map("user_id")
-
-  user User @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
+  user Users @relation(fields: [sessionUserId], references: [userId], onDelete: Cascade)
 
   @@map("sessions")
 }
 
-model Game {
+model Games {
   gameId Int @id @default(autoincrement()) @map("game_id")
 
   name String @unique @map("name")
 
-  matches Match[]
+  matches Matches[]
 
   @@map("games")
 }
 
-enum MatchResult {
-  WIN
-  LOSS
-  DRAW
-}
-
 // Таблиця з статистикою зібраних матчів користувача.
-model Match {
+model Matches {
   matchId      Int @id @default(autoincrement()) @map("match_id")
   statsMatchId Int @map("stats_id")
   gameMatchId  Int @map("game_id")
 
-  result MatchResult @map("result")
-  score  String      @map("score")
-
-  metadata Json // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
+  metadata Json @default("{}") // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
 
   stats GameStats @relation(fields: [statsMatchId], references: [statId], onDelete: Cascade)
-  game  Game      @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+  game  Games     @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
 
   @@map("matches")
 }
@@ -84,47 +74,56 @@ model News {
   @@map("news")
 }
 
-// Таблиця з інформацією про підключені платформи користувача.
-model PlatformInfo {
-  platformId     Int @id @default(autoincrement()) @map("platform_id")
-  platformUserId Int @map("user_id")
+enum PlatformNameEmun {
+  STEAM
+  RIOT
+  SUPERCELL
+}
 
-  platformName String  @unique @map("name")
-  externalId   String // Тег, айдішка юзера на конкретній платформі
-  accessToken  String? @map("access_token")
+// Таблиця з інформацією про підключені платформи користувача.
+model Connections {
+  connectionId    Int @id @default(autoincrement()) @map("connection_id")
+  connectinUserId Int @map("user_id")
+
+  platformName PlatformNameEmun @map("platform_name")
+  externalId   String           @map("external_id") // Тег, айдішка юзера на конкретній платформі
+  accessToken  String?          @map("access_token")
 
   updatedAt DateTime @default(now()) @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  user      User       @relation(fields: [platformUserId], references: [userId], onDelete: Cascade)
+  users     Users      @relation(fields: [connectinUserId], references: [userId], onDelete: Cascade)
   gameStats GameStats?
 
-  @@map("platform_info")
+  @@map("connections")
 }
 
 // Таблиця з ігровою статистикою користувача.
 model GameStats {
   statId Int @id @default(autoincrement()) @map("stat_id")
 
-  platformId Int          @unique @map("platform_id")
-  platform   PlatformInfo @relation(fields: [platformId], references: [platformId], onDelete: Cascade)
+  statsConnectionId Int @unique @map("platform_id")
 
   metadata Json @default("{}")
 
-  createdAt     DateTime      @default(now()) @map("created_at")
-  updatedAt     DateTime      @updatedAt @map("updated_at")
-  rankHistories RankHistory[]
-  matches       Match[]
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
+  rankHistories RatingHistory[]
+  matches       Matches[]
+
+  connections Connections @relation(fields: [statsConnectionId], references: [connectionId], onDelete: Cascade)
 
   @@map("game_stats")
 }
 
-model RankHistory {
-  rankId    Int      @id @default(autoincrement()) @map("rank_id")
-  rankTier  Int      @map("rank_tier")
-  achivedAt DateTime @default(now()) @map("achived_at")
+model RatingHistory {
+  ratingId     Int @id @default(autoincrement()) @map("rating_id")
+  ratingStatId Int @map("stat_id")
 
-  statId    Int       @map("stat_id")
-  gameStats GameStats @relation(fields: [statId], references: [statId], onDelete: Cascade)
+  ratingTier Int      @map("rating_tier")
+  achievedAt DateTime @default(now()) @map("achieved_at")
 
-  @@map("rank_history")
+  gameStats GameStats @relation(fields: [ratingStatId], references: [statId], onDelete: Cascade)
+
+  @@map("rating_history")
 }

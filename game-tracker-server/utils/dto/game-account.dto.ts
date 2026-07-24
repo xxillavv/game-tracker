@@ -1,13 +1,14 @@
-import { IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { IsEnum, IsNotEmpty, IsOptional, IsString } from "class-validator";
+import { PlatformNameEmun } from "../../generated/prisma/enums.js";
 
 export class CreateConnectionDto {
   @IsString()
   @IsOptional()
   accessToken?: string
   
-  @IsString()
+  @IsEnum(PlatformNameEmun)
   @IsNotEmpty()
-  platformName!: string
+  platformName!: PlatformNameEmun
 
   @IsString()
   @IsNotEmpty()

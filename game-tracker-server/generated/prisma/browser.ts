@@ -18,42 +18,42 @@ export { Prisma }
 export * as $Enums from './enums.js'
 export * from './enums.js';
 /**
- * Model User
+ * Model Users
  * 
  */
-export type User = Prisma.UserModel
+export type Users = Prisma.UsersModel
 /**
- * Model Session
+ * Model Sessions
  * 
  */
-export type Session = Prisma.SessionModel
+export type Sessions = Prisma.SessionsModel
 /**
- * Model Game
+ * Model Games
  * 
  */
-export type Game = Prisma.GameModel
+export type Games = Prisma.GamesModel
 /**
- * Model Match
+ * Model Matches
  * 
  */
-export type Match = Prisma.MatchModel
+export type Matches = Prisma.MatchesModel
 /**
  * Model News
  * 
  */
 export type News = Prisma.NewsModel
 /**
- * Model PlatformInfo
+ * Model Connections
  * 
  */
-export type PlatformInfo = Prisma.PlatformInfoModel
+export type Connections = Prisma.ConnectionsModel
 /**
  * Model GameStats
  * 
  */
 export type GameStats = Prisma.GameStatsModel
 /**
- * Model RankHistory
+ * Model RatingHistory
  * 
  */
-export type RankHistory = Prisma.RankHistoryModel
+export type RatingHistory = Prisma.RatingHistoryModel

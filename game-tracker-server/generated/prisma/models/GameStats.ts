@@ -28,31 +28,31 @@ export type AggregateGameStats = {
 
 export type GameStatsAvgAggregateOutputType = {
   statId: number | null
-  platformId: number | null
+  statsConnectionId: number | null
 }
 
 export type GameStatsSumAggregateOutputType = {
   statId: number | null
-  platformId: number | null
+  statsConnectionId: number | null
 }
 
 export type GameStatsMinAggregateOutputType = {
   statId: number | null
-  platformId: number | null
+  statsConnectionId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type GameStatsMaxAggregateOutputType = {
   statId: number | null
-  platformId: number | null
+  statsConnectionId: number | null
   createdAt: Date | null
   updatedAt: Date | null
 }
 
 export type GameStatsCountAggregateOutputType = {
   statId: number
-  platformId: number
+  statsConnectionId: number
   metadata: number
   createdAt: number
   updatedAt: number
@@ -62,31 +62,31 @@ export type GameStatsCountAggregateOutputType = {
 
 export type GameStatsAvgAggregateInputType = {
   statId?: true
-  platformId?: true
+  statsConnectionId?: true
 }
 
 export type GameStatsSumAggregateInputType = {
   statId?: true
-  platformId?: true
+  statsConnectionId?: true
 }
 
 export type GameStatsMinAggregateInputType = {
   statId?: true
-  platformId?: true
+  statsConnectionId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type GameStatsMaxAggregateInputType = {
   statId?: true
-  platformId?: true
+  statsConnectionId?: true
   createdAt?: true
   updatedAt?: true
 }
 
 export type GameStatsCountAggregateInputType = {
   statId?: true
-  platformId?: true
+  statsConnectionId?: true
   metadata?: true
   createdAt?: true
   updatedAt?: true
@@ -181,7 +181,7 @@ export type GameStatsGroupByArgs<ExtArgs extends runtime.Types.Extensions.Intern
 
 export type GameStatsGroupByOutputType = {
   statId: number
-  platformId: number
+  statsConnectionId: number
   metadata: runtime.JsonValue
   createdAt: Date
   updatedAt: Date
@@ -212,43 +212,43 @@ export type GameStatsWhereInput = {
   OR?: Prisma.GameStatsWhereInput[]
   NOT?: Prisma.GameStatsWhereInput | Prisma.GameStatsWhereInput[]
   statId?: Prisma.IntFilter<"GameStats"> | number
-  platformId?: Prisma.IntFilter<"GameStats"> | number
+  statsConnectionId?: Prisma.IntFilter<"GameStats"> | number
   metadata?: Prisma.JsonFilter<"GameStats">
   createdAt?: Prisma.DateTimeFilter<"GameStats"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GameStats"> | Date | string
-  platform?: Prisma.XOR<Prisma.PlatformInfoScalarRelationFilter, Prisma.PlatformInfoWhereInput>
-  rankHistories?: Prisma.RankHistoryListRelationFilter
-  matches?: Prisma.MatchListRelationFilter
+  rankHistories?: Prisma.RatingHistoryListRelationFilter
+  matches?: Prisma.MatchesListRelationFilter
+  connections?: Prisma.XOR<Prisma.ConnectionsScalarRelationFilter, Prisma.ConnectionsWhereInput>
 }
 
 export type GameStatsOrderByWithRelationInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  platform?: Prisma.PlatformInfoOrderByWithRelationInput
-  rankHistories?: Prisma.RankHistoryOrderByRelationAggregateInput
-  matches?: Prisma.MatchOrderByRelationAggregateInput
+  rankHistories?: Prisma.RatingHistoryOrderByRelationAggregateInput
+  matches?: Prisma.MatchesOrderByRelationAggregateInput
+  connections?: Prisma.ConnectionsOrderByWithRelationInput
 }
 
 export type GameStatsWhereUniqueInput = Prisma.AtLeast<{
   statId?: number
-  platformId?: number
+  statsConnectionId?: number
   AND?: Prisma.GameStatsWhereInput | Prisma.GameStatsWhereInput[]
   OR?: Prisma.GameStatsWhereInput[]
   NOT?: Prisma.GameStatsWhereInput | Prisma.GameStatsWhereInput[]
   metadata?: Prisma.JsonFilter<"GameStats">
   createdAt?: Prisma.DateTimeFilter<"GameStats"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"GameStats"> | Date | string
-  platform?: Prisma.XOR<Prisma.PlatformInfoScalarRelationFilter, Prisma.PlatformInfoWhereInput>
-  rankHistories?: Prisma.RankHistoryListRelationFilter
-  matches?: Prisma.MatchListRelationFilter
-}, "statId" | "platformId">
+  rankHistories?: Prisma.RatingHistoryListRelationFilter
+  matches?: Prisma.MatchesListRelationFilter
+  connections?: Prisma.XOR<Prisma.ConnectionsScalarRelationFilter, Prisma.ConnectionsWhereInput>
+}, "statId" | "statsConnectionId">
 
 export type GameStatsOrderByWithAggregationInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -264,7 +264,7 @@ export type GameStatsScalarWhereWithAggregatesInput = {
   OR?: Prisma.GameStatsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.GameStatsScalarWhereWithAggregatesInput | Prisma.GameStatsScalarWhereWithAggregatesInput[]
   statId?: Prisma.IntWithAggregatesFilter<"GameStats"> | number
-  platformId?: Prisma.IntWithAggregatesFilter<"GameStats"> | number
+  statsConnectionId?: Prisma.IntWithAggregatesFilter<"GameStats"> | number
   metadata?: Prisma.JsonWithAggregatesFilter<"GameStats">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"GameStats"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"GameStats"> | Date | string
@@ -274,43 +274,43 @@ export type GameStatsCreateInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  platform: Prisma.PlatformInfoCreateNestedOneWithoutGameStatsInput
-  rankHistories?: Prisma.RankHistoryCreateNestedManyWithoutGameStatsInput
-  matches?: Prisma.MatchCreateNestedManyWithoutStatsInput
+  rankHistories?: Prisma.RatingHistoryCreateNestedManyWithoutGameStatsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutStatsInput
+  connections: Prisma.ConnectionsCreateNestedOneWithoutGameStatsInput
 }
 
 export type GameStatsUncheckedCreateInput = {
   statId?: number
-  platformId: number
+  statsConnectionId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedCreateNestedManyWithoutGameStatsInput
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutStatsInput
+  rankHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutGameStatsInput
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutStatsInput
 }
 
 export type GameStatsUpdateInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  platform?: Prisma.PlatformInfoUpdateOneRequiredWithoutGameStatsNestedInput
-  rankHistories?: Prisma.RankHistoryUpdateManyWithoutGameStatsNestedInput
-  matches?: Prisma.MatchUpdateManyWithoutStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUpdateManyWithoutGameStatsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutStatsNestedInput
+  connections?: Prisma.ConnectionsUpdateOneRequiredWithoutGameStatsNestedInput
 }
 
 export type GameStatsUncheckedUpdateInput = {
   statId?: Prisma.IntFieldUpdateOperationsInput | number
-  platformId?: Prisma.IntFieldUpdateOperationsInput | number
+  statsConnectionId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutStatsNestedInput
 }
 
 export type GameStatsCreateManyInput = {
   statId?: number
-  platformId: number
+  statsConnectionId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -324,7 +324,7 @@ export type GameStatsUpdateManyMutationInput = {
 
 export type GameStatsUncheckedUpdateManyInput = {
   statId?: Prisma.IntFieldUpdateOperationsInput | number
-  platformId?: Prisma.IntFieldUpdateOperationsInput | number
+  statsConnectionId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -342,7 +342,7 @@ export type GameStatsNullableScalarRelationFilter = {
 
 export type GameStatsCountOrderByAggregateInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -350,26 +350,26 @@ export type GameStatsCountOrderByAggregateInput = {
 
 export type GameStatsAvgOrderByAggregateInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
 }
 
 export type GameStatsMaxOrderByAggregateInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type GameStatsMinOrderByAggregateInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type GameStatsSumOrderByAggregateInput = {
   statId?: Prisma.SortOrder
-  platformId?: Prisma.SortOrder
+  statsConnectionId?: Prisma.SortOrder
 }
 
 export type GameStatsCreateNestedOneWithoutMatchesInput = {
@@ -386,36 +386,36 @@ export type GameStatsUpdateOneRequiredWithoutMatchesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.GameStatsUpdateToOneWithWhereWithoutMatchesInput, Prisma.GameStatsUpdateWithoutMatchesInput>, Prisma.GameStatsUncheckedUpdateWithoutMatchesInput>
 }
 
-export type GameStatsCreateNestedOneWithoutPlatformInput = {
-  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
-  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutPlatformInput
+export type GameStatsCreateNestedOneWithoutConnectionsInput = {
+  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
+  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutConnectionsInput
   connect?: Prisma.GameStatsWhereUniqueInput
 }
 
-export type GameStatsUncheckedCreateNestedOneWithoutPlatformInput = {
-  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
-  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutPlatformInput
+export type GameStatsUncheckedCreateNestedOneWithoutConnectionsInput = {
+  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
+  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutConnectionsInput
   connect?: Prisma.GameStatsWhereUniqueInput
 }
 
-export type GameStatsUpdateOneWithoutPlatformNestedInput = {
-  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
-  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutPlatformInput
-  upsert?: Prisma.GameStatsUpsertWithoutPlatformInput
+export type GameStatsUpdateOneWithoutConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
+  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutConnectionsInput
+  upsert?: Prisma.GameStatsUpsertWithoutConnectionsInput
   disconnect?: Prisma.GameStatsWhereInput | boolean
   delete?: Prisma.GameStatsWhereInput | boolean
   connect?: Prisma.GameStatsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GameStatsUpdateToOneWithWhereWithoutPlatformInput, Prisma.GameStatsUpdateWithoutPlatformInput>, Prisma.GameStatsUncheckedUpdateWithoutPlatformInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GameStatsUpdateToOneWithWhereWithoutConnectionsInput, Prisma.GameStatsUpdateWithoutConnectionsInput>, Prisma.GameStatsUncheckedUpdateWithoutConnectionsInput>
 }
 
-export type GameStatsUncheckedUpdateOneWithoutPlatformNestedInput = {
-  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
-  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutPlatformInput
-  upsert?: Prisma.GameStatsUpsertWithoutPlatformInput
+export type GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
+  connectOrCreate?: Prisma.GameStatsCreateOrConnectWithoutConnectionsInput
+  upsert?: Prisma.GameStatsUpsertWithoutConnectionsInput
   disconnect?: Prisma.GameStatsWhereInput | boolean
   delete?: Prisma.GameStatsWhereInput | boolean
   connect?: Prisma.GameStatsWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.GameStatsUpdateToOneWithWhereWithoutPlatformInput, Prisma.GameStatsUpdateWithoutPlatformInput>, Prisma.GameStatsUncheckedUpdateWithoutPlatformInput>
+  update?: Prisma.XOR<Prisma.XOR<Prisma.GameStatsUpdateToOneWithWhereWithoutConnectionsInput, Prisma.GameStatsUpdateWithoutConnectionsInput>, Prisma.GameStatsUncheckedUpdateWithoutConnectionsInput>
 }
 
 export type GameStatsCreateNestedOneWithoutRankHistoriesInput = {
@@ -436,17 +436,17 @@ export type GameStatsCreateWithoutMatchesInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  platform: Prisma.PlatformInfoCreateNestedOneWithoutGameStatsInput
-  rankHistories?: Prisma.RankHistoryCreateNestedManyWithoutGameStatsInput
+  rankHistories?: Prisma.RatingHistoryCreateNestedManyWithoutGameStatsInput
+  connections: Prisma.ConnectionsCreateNestedOneWithoutGameStatsInput
 }
 
 export type GameStatsUncheckedCreateWithoutMatchesInput = {
   statId?: number
-  platformId: number
+  statsConnectionId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedCreateNestedManyWithoutGameStatsInput
+  rankHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutGameStatsInput
 }
 
 export type GameStatsCreateOrConnectWithoutMatchesInput = {
@@ -469,84 +469,84 @@ export type GameStatsUpdateWithoutMatchesInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  platform?: Prisma.PlatformInfoUpdateOneRequiredWithoutGameStatsNestedInput
-  rankHistories?: Prisma.RankHistoryUpdateManyWithoutGameStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUpdateManyWithoutGameStatsNestedInput
+  connections?: Prisma.ConnectionsUpdateOneRequiredWithoutGameStatsNestedInput
 }
 
 export type GameStatsUncheckedUpdateWithoutMatchesInput = {
   statId?: Prisma.IntFieldUpdateOperationsInput | number
-  platformId?: Prisma.IntFieldUpdateOperationsInput | number
+  statsConnectionId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
 }
 
-export type GameStatsCreateWithoutPlatformInput = {
+export type GameStatsCreateWithoutConnectionsInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  rankHistories?: Prisma.RankHistoryCreateNestedManyWithoutGameStatsInput
-  matches?: Prisma.MatchCreateNestedManyWithoutStatsInput
+  rankHistories?: Prisma.RatingHistoryCreateNestedManyWithoutGameStatsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutStatsInput
 }
 
-export type GameStatsUncheckedCreateWithoutPlatformInput = {
+export type GameStatsUncheckedCreateWithoutConnectionsInput = {
   statId?: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedCreateNestedManyWithoutGameStatsInput
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutStatsInput
+  rankHistories?: Prisma.RatingHistoryUncheckedCreateNestedManyWithoutGameStatsInput
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutStatsInput
 }
 
-export type GameStatsCreateOrConnectWithoutPlatformInput = {
+export type GameStatsCreateOrConnectWithoutConnectionsInput = {
   where: Prisma.GameStatsWhereUniqueInput
-  create: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
+  create: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
 }
 
-export type GameStatsUpsertWithoutPlatformInput = {
-  update: Prisma.XOR<Prisma.GameStatsUpdateWithoutPlatformInput, Prisma.GameStatsUncheckedUpdateWithoutPlatformInput>
-  create: Prisma.XOR<Prisma.GameStatsCreateWithoutPlatformInput, Prisma.GameStatsUncheckedCreateWithoutPlatformInput>
+export type GameStatsUpsertWithoutConnectionsInput = {
+  update: Prisma.XOR<Prisma.GameStatsUpdateWithoutConnectionsInput, Prisma.GameStatsUncheckedUpdateWithoutConnectionsInput>
+  create: Prisma.XOR<Prisma.GameStatsCreateWithoutConnectionsInput, Prisma.GameStatsUncheckedCreateWithoutConnectionsInput>
   where?: Prisma.GameStatsWhereInput
 }
 
-export type GameStatsUpdateToOneWithWhereWithoutPlatformInput = {
+export type GameStatsUpdateToOneWithWhereWithoutConnectionsInput = {
   where?: Prisma.GameStatsWhereInput
-  data: Prisma.XOR<Prisma.GameStatsUpdateWithoutPlatformInput, Prisma.GameStatsUncheckedUpdateWithoutPlatformInput>
+  data: Prisma.XOR<Prisma.GameStatsUpdateWithoutConnectionsInput, Prisma.GameStatsUncheckedUpdateWithoutConnectionsInput>
 }
 
-export type GameStatsUpdateWithoutPlatformInput = {
+export type GameStatsUpdateWithoutConnectionsInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rankHistories?: Prisma.RankHistoryUpdateManyWithoutGameStatsNestedInput
-  matches?: Prisma.MatchUpdateManyWithoutStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUpdateManyWithoutGameStatsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutStatsNestedInput
 }
 
-export type GameStatsUncheckedUpdateWithoutPlatformInput = {
+export type GameStatsUncheckedUpdateWithoutConnectionsInput = {
   statId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  rankHistories?: Prisma.RankHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutStatsNestedInput
+  rankHistories?: Prisma.RatingHistoryUncheckedUpdateManyWithoutGameStatsNestedInput
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutStatsNestedInput
 }
 
 export type GameStatsCreateWithoutRankHistoriesInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  platform: Prisma.PlatformInfoCreateNestedOneWithoutGameStatsInput
-  matches?: Prisma.MatchCreateNestedManyWithoutStatsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutStatsInput
+  connections: Prisma.ConnectionsCreateNestedOneWithoutGameStatsInput
 }
 
 export type GameStatsUncheckedCreateWithoutRankHistoriesInput = {
   statId?: number
-  platformId: number
+  statsConnectionId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Date | string
   updatedAt?: Date | string
-  matches?: Prisma.MatchUncheckedCreateNestedManyWithoutStatsInput
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutStatsInput
 }
 
 export type GameStatsCreateOrConnectWithoutRankHistoriesInput = {
@@ -569,17 +569,17 @@ export type GameStatsUpdateWithoutRankHistoriesInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  platform?: Prisma.PlatformInfoUpdateOneRequiredWithoutGameStatsNestedInput
-  matches?: Prisma.MatchUpdateManyWithoutStatsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutStatsNestedInput
+  connections?: Prisma.ConnectionsUpdateOneRequiredWithoutGameStatsNestedInput
 }
 
 export type GameStatsUncheckedUpdateWithoutRankHistoriesInput = {
   statId?: Prisma.IntFieldUpdateOperationsInput | number
-  platformId?: Prisma.IntFieldUpdateOperationsInput | number
+  statsConnectionId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  matches?: Prisma.MatchUncheckedUpdateManyWithoutStatsNestedInput
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutStatsNestedInput
 }
 
 
@@ -611,79 +611,79 @@ export type GameStatsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ex
  * GameStatsCountOutputType without action
  */
 export type GameStatsCountOutputTypeCountRankHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.RankHistoryWhereInput
+  where?: Prisma.RatingHistoryWhereInput
 }
 
 /**
  * GameStatsCountOutputType without action
  */
 export type GameStatsCountOutputTypeCountMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MatchWhereInput
+  where?: Prisma.MatchesWhereInput
 }
 
 
 export type GameStatsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   statId?: boolean
-  platformId?: boolean
+  statsConnectionId?: boolean
   metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
   rankHistories?: boolean | Prisma.GameStats$rankHistoriesArgs<ExtArgs>
   matches?: boolean | Prisma.GameStats$matchesArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.GameStatsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameStats"]>
 
 export type GameStatsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   statId?: boolean
-  platformId?: boolean
+  statsConnectionId?: boolean
   metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameStats"]>
 
 export type GameStatsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   statId?: boolean
-  platformId?: boolean
+  statsConnectionId?: boolean
   metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["gameStats"]>
 
 export type GameStatsSelectScalar = {
   statId?: boolean
-  platformId?: boolean
+  statsConnectionId?: boolean
   metadata?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type GameStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"statId" | "platformId" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["gameStats"]>
+export type GameStatsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"statId" | "statsConnectionId" | "metadata" | "createdAt" | "updatedAt", ExtArgs["result"]["gameStats"]>
 export type GameStatsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
   rankHistories?: boolean | Prisma.GameStats$rankHistoriesArgs<ExtArgs>
   matches?: boolean | Prisma.GameStats$matchesArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   _count?: boolean | Prisma.GameStatsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type GameStatsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
 }
 export type GameStatsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  platform?: boolean | Prisma.PlatformInfoDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
 }
 
 export type $GameStatsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "GameStats"
   objects: {
-    platform: Prisma.$PlatformInfoPayload<ExtArgs>
-    rankHistories: Prisma.$RankHistoryPayload<ExtArgs>[]
-    matches: Prisma.$MatchPayload<ExtArgs>[]
+    rankHistories: Prisma.$RatingHistoryPayload<ExtArgs>[]
+    matches: Prisma.$MatchesPayload<ExtArgs>[]
+    connections: Prisma.$ConnectionsPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     statId: number
-    platformId: number
+    statsConnectionId: number
     metadata: runtime.JsonValue
     createdAt: Date
     updatedAt: Date
@@ -1081,9 +1081,9 @@ readonly fields: GameStatsFieldRefs;
  */
 export interface Prisma__GameStatsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  platform<T extends Prisma.PlatformInfoDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.PlatformInfoDefaultArgs<ExtArgs>>): Prisma.Prisma__PlatformInfoClient<runtime.Types.Result.GetResult<Prisma.$PlatformInfoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  rankHistories<T extends Prisma.GameStats$rankHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameStats$rankHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RankHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  matches<T extends Prisma.GameStats$matchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameStats$matchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  rankHistories<T extends Prisma.GameStats$rankHistoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameStats$rankHistoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RatingHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  matches<T extends Prisma.GameStats$matchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameStats$matchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  connections<T extends Prisma.ConnectionsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConnectionsDefaultArgs<ExtArgs>>): Prisma.Prisma__ConnectionsClient<runtime.Types.Result.GetResult<Prisma.$ConnectionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1114,7 +1114,7 @@ export interface Prisma__GameStatsClient<T, Null = never, ExtArgs extends runtim
  */
 export interface GameStatsFieldRefs {
   readonly statId: Prisma.FieldRef<"GameStats", 'Int'>
-  readonly platformId: Prisma.FieldRef<"GameStats", 'Int'>
+  readonly statsConnectionId: Prisma.FieldRef<"GameStats", 'Int'>
   readonly metadata: Prisma.FieldRef<"GameStats", 'Json'>
   readonly createdAt: Prisma.FieldRef<"GameStats", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"GameStats", 'DateTime'>
@@ -1523,23 +1523,23 @@ export type GameStatsDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
  */
 export type GameStats$rankHistoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the RankHistory
+   * Select specific fields to fetch from the RatingHistory
    */
-  select?: Prisma.RankHistorySelect<ExtArgs> | null
+  select?: Prisma.RatingHistorySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the RankHistory
+   * Omit specific fields from the RatingHistory
    */
-  omit?: Prisma.RankHistoryOmit<ExtArgs> | null
+  omit?: Prisma.RatingHistoryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.RankHistoryInclude<ExtArgs> | null
-  where?: Prisma.RankHistoryWhereInput
-  orderBy?: Prisma.RankHistoryOrderByWithRelationInput | Prisma.RankHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.RankHistoryWhereUniqueInput
+  include?: Prisma.RatingHistoryInclude<ExtArgs> | null
+  where?: Prisma.RatingHistoryWhereInput
+  orderBy?: Prisma.RatingHistoryOrderByWithRelationInput | Prisma.RatingHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.RatingHistoryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.RankHistoryScalarFieldEnum | Prisma.RankHistoryScalarFieldEnum[]
+  distinct?: Prisma.RatingHistoryScalarFieldEnum | Prisma.RatingHistoryScalarFieldEnum[]
 }
 
 /**
@@ -1547,23 +1547,23 @@ export type GameStats$rankHistoriesArgs<ExtArgs extends runtime.Types.Extensions
  */
 export type GameStats$matchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Match
+   * Select specific fields to fetch from the Matches
    */
-  select?: Prisma.MatchSelect<ExtArgs> | null
+  select?: Prisma.MatchesSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Match
+   * Omit specific fields from the Matches
    */
-  omit?: Prisma.MatchOmit<ExtArgs> | null
+  omit?: Prisma.MatchesOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MatchInclude<ExtArgs> | null
-  where?: Prisma.MatchWhereInput
-  orderBy?: Prisma.MatchOrderByWithRelationInput | Prisma.MatchOrderByWithRelationInput[]
-  cursor?: Prisma.MatchWhereUniqueInput
+  include?: Prisma.MatchesInclude<ExtArgs> | null
+  where?: Prisma.MatchesWhereInput
+  orderBy?: Prisma.MatchesOrderByWithRelationInput | Prisma.MatchesOrderByWithRelationInput[]
+  cursor?: Prisma.MatchesWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MatchScalarFieldEnum | Prisma.MatchScalarFieldEnum[]
+  distinct?: Prisma.MatchesScalarFieldEnum | Prisma.MatchesScalarFieldEnum[]
 }
 
 /**
