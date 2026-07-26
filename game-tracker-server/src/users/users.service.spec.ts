@@ -35,90 +35,97 @@ describe('UsersService', () => {
     expect(service).toBeDefined();
   });
 
-  it('should throw NotFoundException if user is not exist', async () => {
-    mockPrismaService.users.findUnique.mockResolvedValue(null)
 
-    await expect(service.getById(1)).rejects.toThrow(NotFoundException)
-  })
+  describe('getById', () => {
+    it('should throw NotFoundException if user is not exist', async () => {
+      mockPrismaService.users.findUnique.mockResolvedValue(null)
 
-  it('should return user by id', async () => {
-    const testUser = {
-      userId: 1,
-      email: "test@test.test",
-      username: "test",
-    }
+      await expect(service.getById(1)).rejects.toThrow(NotFoundException)
+    })
 
-    mockPrismaService.users.findUnique.mockResolvedValue(testUser)
+    it('should return user by id', async () => {
+      const testUser = {
+        userId: 1,
+        email: "test@test.test",
+        username: "test",
+      }
 
-    await expect(service.getById(1)).resolves.toEqual(testUser)
-  })
+      mockPrismaService.users.findUnique.mockResolvedValue(testUser)
 
-
-  it('should throw NotFoundException if user is not exist', async () => {
-    mockPrismaService.users.findFirst.mockResolvedValue(null)
-
-    await expect(service.getByName("Test")).rejects.toThrow(NotFoundException)
-  })
-
-  it('should return user by username', async () => {
-    const testUser = {
-      userId: 1,
-      username: "test",
-    }
-
-    mockPrismaService.users.findFirst.mockResolvedValue(testUser)
-
-    await expect(service.getByName("test")).resolves.toEqual(testUser)
+      await expect(service.getById(1)).resolves.toEqual(testUser)
+    })
   })
 
 
-  it('should throw NotFoundException if user is not exist', async () => {
-    mockPrismaService.users.findUnique.mockResolvedValue(null)
+  describe('getByName', () => {
+    it('should throw NotFoundException if user is not exist', async () => {
+      mockPrismaService.users.findFirst.mockResolvedValue(null)
 
-    await expect(service.editUser(1, "Test12341234", "test@test.test", "test")).rejects.toThrow(NotFoundException)
+      await expect(service.getByName("Test")).rejects.toThrow(NotFoundException)
+    })
+
+    it('should return user by username', async () => {
+      const testUser = {
+        userId: 1,
+        username: "test",
+      }
+
+      mockPrismaService.users.findFirst.mockResolvedValue(testUser)
+
+      await expect(service.getByName("test")).resolves.toEqual(testUser)
+    })
   })
 
-  it('should throw UnauthorizedException if user password is not valid', async () => {
-    const testUser = {
-      userId: 1,
-      email: "test@example.com",
-      username: "testuser",
-      password: "$2b$10$hashedpasswordexample123456789",
-      createdAt: new Date("2026-01-01T12:00:00.000Z"),
-      updatedAt: new Date("2026-07-25T15:00:00.000Z"),
-    };
 
-    mockPrismaService.users.findUnique.mockResolvedValue(testUser);
+  describe('editUser', () => {
+    it('should throw NotFoundException if user is not exist', async () => {
+      mockPrismaService.users.findUnique.mockResolvedValue(null)
 
-    (bcrypt.compare as jest.Mock).mockResolvedValue(false);
+      await expect(service.editUser(1, "Test12341234", "test@test.test", "test")).rejects.toThrow(NotFoundException)
+    })
 
-    await expect(service.editUser(1, "Test12341234", "test@test.test", "test")).rejects.toThrow(UnauthorizedException)
-  })
+    it('should throw UnauthorizedException if user password is not valid', async () => {
+      const testUser = {
+        userId: 1,
+        email: "test@example.com",
+        username: "testuser",
+        password: "$2b$10$hashedpasswordexample123456789",
+        createdAt: new Date("2026-01-01T12:00:00.000Z"),
+        updatedAt: new Date("2026-07-25T15:00:00.000Z"),
+      };
 
-  it('should edit user email and username', async () => {
-    const testUser = {
-      userId: 1,
-      email: "test@example.com",
-      username: "testuser",
-      password: "$2b$10$hashedpasswordexample123456789",
-      createdAt: new Date("2026-01-01T12:00:00.000Z"),
-      updatedAt: new Date("2026-07-25T15:00:00.000Z"),
-    };
+      mockPrismaService.users.findUnique.mockResolvedValue(testUser);
 
-    mockPrismaService.users.findUnique.mockResolvedValue(testUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(false);
 
-    (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+      await expect(service.editUser(1, "Test12341234", "test@test.test", "test")).rejects.toThrow(UnauthorizedException)
+    })
 
-    const newTestUser = {
-      userId: 1,
-      email: "testtest@example.com",
-      username: "test123",
-    };
+    it('should edit user email and username', async () => {
+      const testUser = {
+        userId: 1,
+        email: "test@example.com",
+        username: "testuser",
+        password: "$2b$10$hashedpasswordexample123456789",
+        createdAt: new Date("2026-01-01T12:00:00.000Z"),
+        updatedAt: new Date("2026-07-25T15:00:00.000Z"),
+      };
 
-    mockPrismaService.users.update.mockResolvedValue(newTestUser);
+      mockPrismaService.users.findUnique.mockResolvedValue(testUser);
 
-    await expect(
-      service.editUser(1, "Test12341234", "testtest@example.com", "test123")
-    ).resolves.toEqual(newTestUser);
+      (bcrypt.compare as jest.Mock).mockResolvedValue(true);
+
+      const newTestUser = {
+        userId: 1,
+        email: "testtest@example.com",
+        username: "test123",
+      };
+
+      mockPrismaService.users.update.mockResolvedValue(newTestUser);
+
+      await expect(
+        service.editUser(1, "Test12341234", "testtest@example.com", "test123")
+      ).resolves.toEqual(newTestUser);
+    })
   })
 });
