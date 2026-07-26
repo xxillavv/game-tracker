@@ -4,12 +4,9 @@ import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async getById(id: number) {
-
-    console.log(id)
-
     const user = await this.prisma.users.findUnique({
       where: { userId: id },
       select: {
@@ -51,7 +48,7 @@ export class UsersService {
       throw new NotFoundException("User not found.")
     }
 
-    const isValidPassword = bcrypt.compare(user.password, password)
+    const isValidPassword = await bcrypt.compare(password, user.password)
 
     if (!isValidPassword) {
       throw new UnauthorizedException("Incorrect password.")
@@ -67,7 +64,6 @@ export class UsersService {
         userId: true,
         email: true,
         username: true
-
       }
     })
 

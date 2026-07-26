@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { StatisticsService } from './statistics.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
