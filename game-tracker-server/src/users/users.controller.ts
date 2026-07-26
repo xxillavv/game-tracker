@@ -16,7 +16,6 @@ export class UsersController {
 
   @Get()
   getByName(@Query('search') query: string) {
-    console.log(query)
     return this.usersService.getByName(query)
   }
 
