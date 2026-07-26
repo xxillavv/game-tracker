@@ -1,9 +1,9 @@
-import { Zap } from "lucide-react";
+import { Header } from "../components/Header";
 
 export default function Home() {
   return (
-    <h1 className="font-mono">
-      <Zap />
-    </h1>
+    <>
+      <Header />
+    </>
   );
 }
