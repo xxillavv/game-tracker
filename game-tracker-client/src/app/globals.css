@@ -133,3 +133,14 @@
     @apply font-sans;
   }
 }
+
+@keyframes draw {
+  from {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+  }
+  to {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 0;
+  }
+}
