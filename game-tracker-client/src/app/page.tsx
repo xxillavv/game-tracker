@@ -1,9 +1,15 @@
-import { Zap } from "lucide-react";
+import { Hero } from "@/components/Hero";
+import { Header } from "../components/Header";
+import { Leaders } from "@/components/Leaders";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   return (
-    <h1 className="font-mono">
-      <Zap />
-    </h1>
+    <>
+      <Header />
+      <Hero />
+      <Leaders />
+      <Footer />
+    </>
   );
 }
