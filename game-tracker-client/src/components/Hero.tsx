@@ -40,7 +40,7 @@ export function Hero() {
           Аналізуй статистику матчів, порівнюй результати з друзями та піднімайся
           в рейтингу. Все в одному місці.
         </p>
-
+ 
         <div className="mt-10 flex items-center gap-4">
           <Link href="/dashboard">
             <Button className="h-12 cursor-pointer rounded-xl bg-turquoise px-8 text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]">

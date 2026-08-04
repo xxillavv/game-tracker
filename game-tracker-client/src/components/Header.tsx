@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Activity, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 import Link from "next/link";
 
 export const Header = () => {
