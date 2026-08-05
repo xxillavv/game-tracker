@@ -5,7 +5,10 @@ import axios from "axios"
 const loginUser = async (body: ILoginUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
     'http://localhost:3001/api/auth/login',
-    body
+    body,
+    {
+      withCredentials: true
+    }
   );
 
   return data;
@@ -14,7 +17,10 @@ const loginUser = async (body: ILoginUser) => {
 const registerUser = async (body: IRegisterUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
     'http://localhost:3001/api/auth/register',
-    body
+    body,
+    {
+      withCredentials: true
+    }
   );
 
   return data;
