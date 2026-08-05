@@ -1,15 +1,41 @@
 "use client";
 
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Zap, LogIn, UserPlus, Mail, Lock, User } from "lucide-react";
 import Link from "next/link";
+import { IFormInputs } from "@/types/auth.types";
+import { useAuth } from "@/hooks/useAuth";
 
 type TAuthStatus = "login" | "register";
 
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<TAuthStatus>("login");
+  const [formInfo, setFormInfo] = useState<IFormInputs>({
+    email: "",
+    username: "",
+    password: "",
+  });
+
+  const { login, register } = useAuth();
+
+  const handleFormSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    if (activeTab === "login") {
+      login.mutate({
+        email: formInfo.email,
+        password: formInfo.password,
+      });
+    } else if (activeTab === "register") {
+      register.mutate({
+        email: formInfo.email,
+        password: formInfo.password,
+        username: formInfo.username,
+      });
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background font-mono">
@@ -57,7 +83,10 @@ export default function LoginPage() {
               ? "Увійди щоб продовжити трекінг"
               : "Приєднуйся до спільноти гравців"}
           </p>
-          <form className="flex flex-col gap-4">
+          <form
+            onSubmit={(e) => handleFormSubmit(e)}
+            className="flex flex-col gap-4"
+          >
             {activeTab === "register" && (
               <div className="flex flex-col gap-1.5">
                 <label
@@ -74,6 +103,10 @@ export default function LoginPage() {
                     placeholder="your_nickname"
                     autoComplete="username"
                     required
+                    value={formInfo.username}
+                    onChange={(e) =>
+                      setFormInfo({ ...formInfo, username: e.target.value })
+                    }
                     className="h-11 rounded-xl border-none bg-background/60 pl-10 ring-1 ring-white/5 text-input-text placeholder:text-white/30 transition-all focus:ring-turquoise/30"
                   />
                 </div>
@@ -95,6 +128,10 @@ export default function LoginPage() {
                   placeholder="player@nexus.gg"
                   autoComplete="email"
                   required
+                  value={formInfo.email}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, email: e.target.value })
+                  }
                   className="h-11 rounded-xl border-none bg-background/60 pl-10 ring-1 ring-white/5 text-input-text placeholder:text-white/30 transition-all focus:ring-turquoise/30"
                 />
               </div>
@@ -117,26 +154,32 @@ export default function LoginPage() {
                     activeTab === "login" ? "current-password" : "new-password"
                   }
                   required
+                  value={formInfo.password}
+                  onChange={(e) =>
+                    setFormInfo({ ...formInfo, password: e.target.value })
+                  }
                   className="h-11 rounded-xl border-none bg-background/60 pl-10 ring-1 ring-white/5 text-input-text placeholder:text-white/30 transition-all focus:ring-turquoise/30"
                 />
               </div>
             </div>
-            <Button
-              type="submit"
-              className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
-            >
-              {activeTab === "login" ? (
-                <>
-                  <LogIn className="mr-1.5 size-5" />
-                  Увійти
-                </>
-              ) : (
-                <>
-                  <UserPlus className="mr-1.5 size-5" />
-                  Зареєструватися
-                </>
-              )}
-            </Button>
+
+            {activeTab === "login" ? (
+              <Button
+                type="submit"
+                className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
+              >
+                <LogIn className="mr-1.5 size-5" />
+                Увійти
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
+              >
+                <UserPlus className="mr-1.5 size-5" />
+                Зареєструватися
+              </Button>
+            )}
           </form>
           <p className="mt-6 text-center text-sm text-white/40">
             {activeTab === "login" ? (

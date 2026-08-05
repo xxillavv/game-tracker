@@ -3,28 +3,30 @@ import { Header } from "@/components/Header";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
-const cookie = await cookies();
+const page = async () => {
+  const cookieStore = await cookies();
+  
+  const isUserExist = async () => {
+    const response = await fetch("http://localhost:3001/api/users/me", {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
 
-const isUserExist = async () => {
-  const response = await fetch("http://localhost:3001/api/users/me", {
-    headers: {
-      Cookie: cookie.toString()
+    if (response.status === 401) {
+      redirect("/login");
     }
-  });
 
-  if (response.status === 401) {
-    redirect("/login");
-  }
+    return response.json();
+  };
 
-  return response.json()
-};
+  const user = await isUserExist()
 
-const page = () => {
   return (
     <>
       <Header />
 
-      {isUserExist()}
+      {user.username}
 
       <Footer />
     </>
