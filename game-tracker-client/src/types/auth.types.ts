@@ -12,3 +12,9 @@ export interface IAuthUserResponse {
   username: string
   userId: number
 }
+
+export interface IFormInputs {
+  email: string
+  username: string
+  password: string
+}
