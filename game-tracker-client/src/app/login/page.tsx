@@ -18,7 +18,7 @@ export default function LoginPage() {
     password: "",
   });
 
-  const { loginMutate, registerMutate } = useAuth();
+  const { login, register } = useAuth();
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background font-mono">
@@ -147,7 +147,7 @@ export default function LoginPage() {
               <Button
                 type="button"
                 onClick={() =>
-                  loginMutate({
+                  login.mutate({
                     email: formInfo.email,
                     password: formInfo.password,
                   })
@@ -161,7 +161,7 @@ export default function LoginPage() {
               <Button
               type="button"
                 onClick={() =>
-                  registerMutate({
+                  register.mutate({
                     email: formInfo.email,
                     password: formInfo.password,
                     username: formInfo.username

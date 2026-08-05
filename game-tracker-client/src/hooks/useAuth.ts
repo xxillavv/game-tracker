@@ -21,16 +21,19 @@ const registerUser = async (body: IRegisterUser) => {
 }
 
 export const useAuth = () => {
-  const { mutate: loginMutate } = useMutation({
+  const loginMutation = useMutation({
     mutationKey: ['login'],
     mutationFn: (body: ILoginUser) => loginUser(body)
   })
 
-  const { mutate: registerMutate } = useMutation({
+  const registerMutation = useMutation({
     mutationKey: ['register'],
     mutationFn: (body: IRegisterUser) => registerUser(body),
   })
 
 
-  return { loginMutate, registerMutate }
+  return {
+    login: loginMutation,
+    register: registerMutation
+  }
 }
