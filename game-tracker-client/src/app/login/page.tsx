@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SyntheticEvent, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Zap, LogIn, UserPlus, Mail, Lock, User } from "lucide-react";
@@ -19,6 +19,23 @@ export default function LoginPage() {
   });
 
   const { login, register } = useAuth();
+
+  const handleFormSubmit = (e: SyntheticEvent) => {
+    e.preventDefault();
+
+    if (activeTab === "login") {
+      login.mutate({
+        email: formInfo.email,
+        password: formInfo.password,
+      });
+    } else if (activeTab === "register") {
+      register.mutate({
+        email: formInfo.email,
+        password: formInfo.password,
+        username: formInfo.username,
+      });
+    }
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background font-mono">
@@ -66,7 +83,10 @@ export default function LoginPage() {
               ? "Увійди щоб продовжити трекінг"
               : "Приєднуйся до спільноти гравців"}
           </p>
-          <form className="flex flex-col gap-4">
+          <form
+            onSubmit={(e) => handleFormSubmit(e)}
+            className="flex flex-col gap-4"
+          >
             {activeTab === "register" && (
               <div className="flex flex-col gap-1.5">
                 <label
@@ -145,13 +165,7 @@ export default function LoginPage() {
 
             {activeTab === "login" ? (
               <Button
-                type="button"
-                onClick={() =>
-                  login.mutate({
-                    email: formInfo.email,
-                    password: formInfo.password,
-                  })
-                }
+                type="submit"
                 className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
               >
                 <LogIn className="mr-1.5 size-5" />
@@ -159,14 +173,7 @@ export default function LoginPage() {
               </Button>
             ) : (
               <Button
-              type="button"
-                onClick={() =>
-                  register.mutate({
-                    email: formInfo.email,
-                    password: formInfo.password,
-                    username: formInfo.username
-                  })
-                }
+                type="submit"
                 className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
               >
                 <UserPlus className="mr-1.5 size-5" />
