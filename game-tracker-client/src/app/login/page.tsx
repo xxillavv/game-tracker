@@ -7,6 +7,7 @@ import { Zap, LogIn, UserPlus, Mail, Lock, User } from "lucide-react";
 import Link from "next/link";
 import { IFormInputs } from "@/types/auth.types";
 import { useAuth } from "@/hooks/useAuth";
+import { cn } from "@/lib/utils";
 
 type TAuthStatus = "login" | "register";
 
@@ -162,7 +163,17 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-
+            {login.isError ? (
+              <p className="text-red-600 text-sm">
+                {login.error.response?.data.message}
+              </p>
+            ) : (
+              register.isError && (
+                <p className="text-red-600 text-sm">
+                  {register.error.response?.data.message}
+                </p>
+              )
+            )}
             {activeTab === "login" ? (
               <Button
                 type="submit"

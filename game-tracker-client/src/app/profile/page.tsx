@@ -27,6 +27,7 @@ const page = async () => {
       <Header />
 
       {user.username}
+    
 
       <Footer />
     </>
