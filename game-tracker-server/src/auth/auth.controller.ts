@@ -1,7 +1,9 @@
-import { Body, Controller, Post, Res, Get, Req } from '@nestjs/common';
+import { Body, Controller, Post, Res, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service.js';
 import { CreateUserDto, LoginUserDto } from '../../utils/dto/users.dto.js';
 import type { Request, Response } from 'express';
+import { AuthGuard } from '../guards/auth.guard.js';
+import type { TRequestWithUser } from '../../utils/types/request.types.js';
 
 @Controller('auth')
 export class AuthController {
@@ -45,5 +47,17 @@ export class AuthController {
       expires: new Date(Date.now() + 10 * 60 * 1000),
       secure: true
     })
+  }
+
+  @UseGuards(AuthGuard)
+  @Get("logout")
+  async logoutUser(@Res({ passthrough: true }) response: Response, @Req() request: TRequestWithUser) {
+    response.clearCookie('accessToken', {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+    })
+
+    return this.authService.logoutUser(request.user.userId)
   }
 }
