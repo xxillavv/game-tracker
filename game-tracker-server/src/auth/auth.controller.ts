@@ -50,7 +50,7 @@ export class AuthController {
   }
 
   @UseGuards(AuthGuard)
-  @Get("logout")
+  @Post("logout")
   async logoutUser(@Res({ passthrough: true }) response: Response, @Req() request: TRequestWithUser) {
     response.clearCookie('accessToken', {
       httpOnly: true,
