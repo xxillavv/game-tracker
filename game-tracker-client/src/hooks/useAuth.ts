@@ -1,7 +1,7 @@
 import { IAuthUserResponse, ILoginUser, IRegisterUser } from "@/types/auth.types"
 import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
-import { redirect } from "next/navigation";
+import { useRouter } from "next/router"
 
 const loginUser = async (body: ILoginUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
@@ -27,6 +27,17 @@ const registerUser = async (body: IRegisterUser) => {
   return data;
 }
 
+const logoutUser = async () => {
+  const { data } = await axios.post(
+    'http://localhost:3001/api/auth/logout',
+    {
+      withCredentials: true
+    }
+  )
+
+  return data
+}
+
 
 export interface IAxiosResponseError {
   statusCode: number;
@@ -35,11 +46,13 @@ export interface IAxiosResponseError {
 }
 
 export const useAuth = () => {
+  const router = useRouter()
+
   const loginMutation = useMutation<IAuthUserResponse, AxiosError<IAxiosResponseError>, ILoginUser>({
     mutationKey: ['login'],
     mutationFn: (body) => loginUser(body),
     onSuccess: () => {
-      redirect('/profile')
+      router.push('/profile')
     }
   })
 
@@ -47,13 +60,22 @@ export const useAuth = () => {
     mutationKey: ['register'],
     mutationFn: (body) => registerUser(body),
     onSuccess: () => {
-      redirect('/profile')
+      router.push('/profile')
+    }
+  })
+
+  const logoutMutation = useMutation<{ message: string }>({
+    mutationKey: ['logout'],
+    mutationFn: logoutUser,
+    onSuccess: () => {
+      router.push('/')
     }
   })
 
 
   return {
     login: loginMutation,
-    register: registerMutation
+    register: registerMutation,
+    logout: logoutMutation
   }
 }

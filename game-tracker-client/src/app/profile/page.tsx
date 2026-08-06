@@ -1,5 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
+import { LogoutButton } from "@/components/LogoutButton";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -28,7 +29,7 @@ const page = async () => {
 
       {user.username}
     
-
+      <LogoutButton>LogOut</LogoutButton>
       <Footer />
     </>
   );
