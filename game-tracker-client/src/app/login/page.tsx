@@ -7,7 +7,6 @@ import { Zap, LogIn, UserPlus, Mail, Lock, User } from "lucide-react";
 import Link from "next/link";
 import { IFormInputs } from "@/types/auth.types";
 import { useAuth } from "@/hooks/useAuth";
-import { cn } from "@/lib/utils";
 
 type TAuthStatus = "login" | "register";
 

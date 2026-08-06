@@ -1,7 +1,7 @@
 import { IAuthUserResponse, ILoginUser, IRegisterUser } from "@/types/auth.types"
 import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosError } from "axios"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 const loginUser = async (body: ILoginUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
