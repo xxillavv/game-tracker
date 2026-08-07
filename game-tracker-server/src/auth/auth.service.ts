@@ -156,4 +156,12 @@ export class AuthService {
 
     return { newAccessToken }
   }
+
+  async logoutUser(userId: number) {
+    await this.prisma.sessions.deleteMany({
+      where: { sessionUserId: userId }
+    })
+
+    return { message: "Logged out successfully!" }
+  }
 }

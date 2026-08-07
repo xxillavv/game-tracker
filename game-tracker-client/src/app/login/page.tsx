@@ -162,7 +162,17 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-
+            {login.isError ? (
+              <p className="text-red-600 text-sm">
+                {login.error.response?.data.message}
+              </p>
+            ) : (
+              register.isError && (
+                <p className="text-red-600 text-sm">
+                  {register.error.response?.data.message}
+                </p>
+              )
+            )}
             {activeTab === "login" ? (
               <Button
                 type="submit"
