@@ -30,6 +30,7 @@ const registerUser = async (body: IRegisterUser) => {
 const logoutUser = async () => {
   const { data } = await axios.post(
     'http://localhost:3001/api/auth/logout',
+    null,
     {
       withCredentials: true
     }
@@ -67,7 +68,9 @@ export const useAuth = () => {
   const logoutMutation = useMutation<{ message: string }>({
     mutationKey: ['logout'],
     mutationFn: logoutUser,
-    onSuccess: () => {
+    onSuccess: async () => {
+      await new Promise((resolve) => setTimeout(resolve, 400))
+
       router.push('/')
     }
   })
@@ -76,6 +79,6 @@ export const useAuth = () => {
   return {
     login: loginMutation,
     register: registerMutation,
-    logout: logoutMutation
+    logout: logoutMutation,
   }
 }
