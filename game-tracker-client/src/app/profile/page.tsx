@@ -1,13 +1,14 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { LogoutButton } from "@/components/LogoutButton";
+import { ProfileCard } from "@/components/ProfileCard";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { IUser } from "@/types/user.types";
 
 const page = async () => {
   const cookieStore = await cookies();
-  
-  const isUserExist = async () => {
+
+  const isUserExist = async (): Promise<IUser> => {
     const response = await fetch("http://localhost:3001/api/users/me", {
       headers: {
         Cookie: cookieStore.toString(),
@@ -21,15 +22,12 @@ const page = async () => {
     return response.json();
   };
 
-  const user = await isUserExist()
+  const user = await isUserExist();
 
   return (
     <>
       <Header />
-
-      {user.username}
-    
-      <LogoutButton>LogOut</LogoutButton>
+      <ProfileCard user={user} />
       <Footer />
     </>
   );

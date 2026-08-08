@@ -68,6 +68,7 @@ export const useAuth = () => {
   const logoutMutation = useMutation<{ message: string }>({
     mutationKey: ['logout'],
     mutationFn: logoutUser,
+
     onSuccess: async () => {
       await new Promise((resolve) => setTimeout(resolve, 400))
 
