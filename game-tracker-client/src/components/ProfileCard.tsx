@@ -1,8 +1,6 @@
-import { useAuth } from "@/hooks/useAuth";
 import { IUser } from "@/types/user.types";
-import { Camera, User } from "lucide-react";
+import { User } from "lucide-react";
 import Image from "next/image";
-import Loading from "@/app/loading";
 import { LogoutButton } from "./LogoutButton";
 import ProfileEditButton from "./ProfileEditButton";
 import EditAvatarButton from "./EditAvatarButton";
@@ -18,10 +16,11 @@ export const ProfileCard = ({ user }: IProfileCardProps) => {
         <div className="flex flex-col items-center gap-6">
           <div className="group relative">
             <div className="size-24 overflow-hidden rounded-full ring-2 ring-turquoise/30">
-              {user.avatarUrl ? (
+              {user.avatar ? (
                 <Image
-                  src={user.avatarUrl}
-                  alt={user.username}
+                  src={user.avatar}
+                  alt="avatar"
+                  loading="eager"
                   width={96}
                   height={96}
                   className="size-full object-cover"

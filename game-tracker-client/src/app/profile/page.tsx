@@ -10,6 +10,7 @@ const page = async () => {
 
   const isUserExist = async (): Promise<IUser> => {
     const response = await fetch("http://localhost:3001/api/users/me", {
+      cache: "no-store",
       headers: {
         Cookie: cookieStore.toString(),
       },
