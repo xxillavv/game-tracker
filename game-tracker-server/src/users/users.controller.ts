@@ -4,11 +4,13 @@ import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
 import { EditUserDto } from '../../utils/dto/users.dto.js';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
+  @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get('me')
   getMe(@Req() request: TRequestWithUser) {
