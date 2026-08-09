@@ -11,12 +11,13 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService,
     private readonly configService: ConfigService
   ) {
-    this.s3Client = new S3Client({ region: this.configService.getOrThrow("AWS_S3_REGION"),
+    this.s3Client = new S3Client({
+      region: this.configService.getOrThrow("AWS_S3_REGION"),
       credentials: {
         accessKeyId: this.configService.getOrThrow("AWS_ACCESS_KEY"),
         secretAccessKey: this.configService.getOrThrow("AWS_SECRET_KEY")
       }
-     });
+    });
   }
 
   async getById(id: number) {
@@ -84,13 +85,21 @@ export class UsersService {
   }
 
 
-  async uploadAvatar(fileName: string, file: Buffer) {
+  async uploadAvatar(fileName: string, file: Buffer, fileMimetype: string, userId: number) {
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: 'game-tracker-avatars',
-        Key: `${fileName}_${Date.now()}`,
-        Body: file
+        Key: `${Date.now()}_${fileName}`,
+        Body: file,
+        ContentType: fileMimetype
       })
     )
+
+    const avatarUrl = `https://game-tracker-avatars.s3.eu-north-1.amazonaws.com/${Date.now()}_${fileName}`
+
+    await this.prisma.users.update({
+      where: { userId: userId },
+      data: { avatar: avatarUrl }
+    })
   }
 }

@@ -30,9 +30,10 @@ export class UsersController {
     return this.usersService.editUser(id, body.password, body.email, body.username)
   }
 
+  @UseGuards(AuthGuard)
   @Post("avatar")
   @UseInterceptors(FileInterceptor('file'))
-  uploadAvatar(@UploadedFile(
+  uploadAvatar(@Req() request: TRequestWithUser, @UploadedFile(
     new ParseFilePipe({
       validators: [
         new MaxFileSizeValidator({ maxSize: 5 * 1024 * 1024 }),
@@ -40,6 +41,6 @@ export class UsersController {
       ]
     })
   ) file: Express.Multer.File) {
-    return this.usersService.uploadAvatar(file.originalname, file.buffer)
+    return this.usersService.uploadAvatar(file.originalname, file.buffer, file.mimetype, request.user.userId)
   }
 }
