@@ -1,9 +1,11 @@
 import { ExternalLink, Lock } from "lucide-react";
 import GameAccountsForm from "./GameAccountsInputsButton";
+import { TPlatformTypes } from "@/types/connections.types";
 
 interface IGameEntry {
   id: string;
   name: string;
+  platform: TPlatformTypes;
   placeholder: string;
   hint: string;
   hintLink?: string;
@@ -15,6 +17,7 @@ const GAMES: IGameEntry[] = [
   {
     id: "dota2",
     name: "Dota 2",
+    platform: "STEAM",
     placeholder: "Введіть ваш Dota 2 ID",
     hint: "Відкрийте Steam → профіль → URL містить ваш ID, або знайдіть Friend ID у клієнті Dota 2.",
     hintLink: "https://steamcommunity.com",
@@ -24,6 +27,7 @@ const GAMES: IGameEntry[] = [
   {
     id: "brawlstars",
     name: "Brawl Stars",
+    platform: "SUPERCELL",
     placeholder: "Введіть ваш тег (#XXXXXXXX)",
     hint: "Відкрийте Brawl Stars → натисніть на профіль → тег під ніком.",
     comingSoon: true,
@@ -32,6 +36,7 @@ const GAMES: IGameEntry[] = [
   {
     id: "valorant",
     name: "Valorant",
+    platform: "RIOT",
     placeholder: "Введіть Riot ID (Name#Tag)",
     hint: "Відкрийте Valorant → Riot ID у верхньому правому куті лобі.",
     comingSoon: true,
@@ -67,6 +72,7 @@ const GameAccountBlockInputs = () => {
               inputParams={{
                 placeholder: info.placeholder,
                 comingSoon: info.comingSoon,
+                platformName: info.platform
               }}
             />
 

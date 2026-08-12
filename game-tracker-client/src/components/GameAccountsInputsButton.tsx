@@ -4,10 +4,13 @@ import { Save } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { useState } from "react";
+import { useConnections } from "@/hooks/useConnections";
+import { TPlatformTypes } from "@/types/connections.types";
 
 type TInputParamsProps = {
   placeholder: string;
   comingSoon: boolean;
+  platformName: TPlatformTypes;
 };
 
 const GameAccountsForm = ({
@@ -16,6 +19,8 @@ const GameAccountsForm = ({
   inputParams: TInputParamsProps;
 }) => {
   const [value, setValue] = useState<string>("");
+
+  const { createConnection } = useConnections();
 
   return (
     <>
@@ -30,7 +35,12 @@ const GameAccountsForm = ({
         <Button
           type="button"
           className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-turquoise/10 text-turquoise ring-1 ring-turquoise/20 transition-all hover:bg-turquoise/20 disabled:opacity-30 disabled:cursor-not-allowed"
-          onClick={}
+          onClick={() =>
+            createConnection.mutate({
+              platformName: inputParams.platformName,
+              externalId: value,
+            })
+          }
         >
           <Save className="size-4" />
         </Button>
