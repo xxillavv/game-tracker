@@ -1,5 +1,5 @@
 import { IUser } from "@/types/user.types";
-import { User } from "lucide-react";
+import { User, Mail, Shield, CalendarDays, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { LogoutButton } from "./LogoutButton";
 import ProfileEditButton from "./ProfileEditButton";
@@ -11,11 +11,11 @@ interface IProfileCardProps {
 
 export const ProfileCard = ({ user }: IProfileCardProps) => {
   return (
-    <section className="container mx-auto flex justify-center font-mono">
-      <div className="w-full max-w-md rounded-2xl bg-dark-blue/60 p-8 ring-1 ring-white/5">
-        <div className="flex flex-col items-center gap-6">
-          <div className="group relative">
-            <div className="size-24 overflow-hidden rounded-full ring-2 ring-turquoise/30">
+    <div className="rounded-2xl bg-dark-blue/60 ring-1 ring-white/5 h-full flex flex-col overflow-hidden max-w-100">
+      <div className="px-8 py-8 flex flex-col flex-1">
+        <div className="flex items-center gap-5">
+          <div className="group relative shrink-0">
+            <div className="size-24 overflow-hidden rounded-2xl ring-[3px] ring-dark-blue/80 shadow-lg shadow-black/30">
               {user.avatar ? (
                 <Image
                   src={user.avatar}
@@ -34,17 +34,62 @@ export const ProfileCard = ({ user }: IProfileCardProps) => {
             <EditAvatarButton />
           </div>
 
-          <div className="flex flex-col items-center gap-1">
-            <h2 className="text-xl font-bold text-white">{user.username}</h2>
-            <span className="text-sm text-white/40">{user.email}</span>
-          </div>
-
-          <div className="flex w-full flex-col gap-3">
-            <ProfileEditButton />
-            <LogoutButton />
+          <div className="pb-1">
+            <h2 className="text-xl font-bold text-white z-50">
+              {user.username}
+            </h2>
+            <div className="mt-1 flex items-center gap-1.5 text-sm text-white/40">
+              <Mail className="size-3.5" />
+              <span>{user.email}</span>
+            </div>
           </div>
         </div>
+
+        <div className="mt-5 flex items-center gap-2">
+          <span className="flex items-center gap-1.5 rounded-full bg-turquoise/10 px-3 py-1 text-xs font-medium text-turquoise ring-1 ring-turquoise/20">
+            <Shield className="size-3" />
+            Активний
+          </span>
+          <span className="flex items-center gap-1.5 rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-white/40 ring-1 ring-white/5">
+            <CalendarDays className="size-3" />
+            Учасник
+          </span>
+        </div>
+
+        <div className="mt-5 rounded-xl bg-background/40 p-4 ring-1 ring-white/5">
+          <div className="flex items-center gap-2 mb-2">
+            <Sparkles className="size-3.5 text-turquoise/60" />
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/30">
+              Активність
+            </span>
+          </div>
+          <div className="flex gap-3">
+            <div className="flex-1 text-center">
+              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-[10px] uppercase tracking-wider text-white/30">
+                Матчів
+              </p>
+            </div>
+            <div className="flex-1 text-center">
+              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-[10px] uppercase tracking-wider text-white/30">
+                Перемог
+              </p>
+            </div>
+            <div className="flex-1 text-center">
+              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-[10px] uppercase tracking-wider text-white/30">
+                Годин
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-auto flex flex-col gap-5">
+          <ProfileEditButton />
+          <LogoutButton />
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
