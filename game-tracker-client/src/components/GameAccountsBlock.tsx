@@ -1,7 +1,23 @@
 import { Gamepad2 } from "lucide-react";
 import GameAccountBlockInputs from "./GameAccountBlockInputs";
+import { cookies } from "next/headers";
 
-const GameAccountsBlock = () => {
+const GameAccountsBlock = async () => {
+  const cookieStore = await cookies()
+  const getUserConnections = async () => {
+    let cookieString = cookieStore.toString();
+
+    let response = await fetch("http://localhost:3001/api/connection", {
+      headers: {
+        Cookie: cookieString,
+      },
+    });
+
+    return response.json();
+  };
+  
+  const userConnections = await getUserConnections()
+
   return (
     <div className="rounded-2xl bg-dark-blue/60 p-8 ring-1 ring-white/5 h-full">
       <div className="flex items-center gap-3 mb-5">
@@ -17,7 +33,7 @@ const GameAccountsBlock = () => {
       </div>
 
       <div className="flex flex-col gap-3">
-        <GameAccountBlockInputs />
+        <GameAccountBlockInputs connections={userConnections}/>
       </div>
     </div>
   );

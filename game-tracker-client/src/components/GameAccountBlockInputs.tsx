@@ -44,7 +44,11 @@ const GAMES: IGameEntry[] = [
   },
 ];
 
-const GameAccountBlockInputs = () => {
+const GameAccountBlockInputs = ({
+  hasConnections,
+}: {
+  hasConnections: boolean;
+}) => {
   return (
     <>
       {GAMES.map((info) => {
@@ -68,13 +72,18 @@ const GameAccountBlockInputs = () => {
               )}
             </div>
 
+            { !hasConnections ? (
             <GameAccountsForm
               inputParams={{
                 placeholder: info.placeholder,
                 comingSoon: info.comingSoon,
-                platformName: info.platform
+                platformName: info.platform,
               }}
             />
+            ) : (
+              <div></div>
+            ) }
+
 
             <p className="mt-1.5 text-[11px] leading-relaxed text-white/30">
               {info.hint}
