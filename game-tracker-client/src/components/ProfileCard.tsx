@@ -1,15 +1,18 @@
-import { IUser } from "@/types/user.types";
 import { User, Mail, Shield, CalendarDays, Sparkles } from "lucide-react";
 import Image from "next/image";
 import { LogoutButton } from "./LogoutButton";
 import ProfileEditButton from "./ProfileEditButton";
 import EditAvatarButton from "./EditAvatarButton";
+import { getCurrentUser, getUserDotaStats } from "@/app/profile/queries";
+import { averageDotaGameTime } from "@/app/profile/constants";
 
-interface IProfileCardProps {
-  user: IUser;
-}
+export const ProfileCard = async () => {
+  const user = await getCurrentUser();
+  const userGameStats = await getUserDotaStats();
 
-export const ProfileCard = ({ user }: IProfileCardProps) => {
+  const metadata =
+    typeof userGameStats === "number" ? null : userGameStats.metadata;
+
   return (
     <div className="rounded-2xl bg-dark-blue/60 ring-1 ring-white/5 h-full flex flex-col overflow-hidden max-w-100">
       <div className="px-8 py-8 flex flex-col flex-1">
@@ -65,21 +68,29 @@ export const ProfileCard = ({ user }: IProfileCardProps) => {
           </div>
           <div className="flex gap-3">
             <div className="flex-1 text-center">
-              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-lg font-bold tabular-nums text-white">
+                {metadata ? metadata.matchesLose : "—"}
+              </p>
               <p className="text-[10px] uppercase tracking-wider text-white/30">
-                Матчів
+                Програшів
               </p>
             </div>
             <div className="flex-1 text-center">
-              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-lg font-bold tabular-nums text-white">
+                {metadata ? metadata.matchesWin : "—"}
+              </p>
               <p className="text-[10px] uppercase tracking-wider text-white/30">
                 Перемог
               </p>
             </div>
             <div className="flex-1 text-center">
-              <p className="text-lg font-bold tabular-nums text-white">—</p>
+              <p className="text-lg font-bold tabular-nums text-white">
+                {metadata
+                  ? `~ ${Math.floor((metadata.matchesLose + metadata.matchesWin) * averageDotaGameTime)}`
+                  : "—"}
+              </p>
               <p className="text-[10px] uppercase tracking-wider text-white/30">
-                Годин
+                Годин в іграх
               </p>
             </div>
           </div>

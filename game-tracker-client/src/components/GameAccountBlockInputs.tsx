@@ -1,6 +1,10 @@
-import { ExternalLink, Lock } from "lucide-react";
+import { CircleCheck, ExternalLink, Lock, Unplug } from "lucide-react";
 import GameAccountsForm from "./GameAccountsInputsButton";
-import { TPlatformTypes } from "@/types/connections.types";
+import {
+  ICreateConnectionResponse,
+  TPlatformTypes,
+} from "@/types/connections.types";
+import DeleteConnectionButton from "./DeleteConnectionButton";
 
 interface IGameEntry {
   id: string;
@@ -45,13 +49,21 @@ const GAMES: IGameEntry[] = [
 ];
 
 const GameAccountBlockInputs = ({
-  hasConnections,
+  connections,
 }: {
-  hasConnections: boolean;
+  connections: ICreateConnectionResponse[];
 }) => {
   return (
     <>
       {GAMES.map((info) => {
+        let currentConnection;
+
+        if (connections?.length) {
+          currentConnection = connections.find(
+            (el) => el.platformName === info.platform,
+          );
+        }
+
         return (
           <div
             key={info.id}
@@ -72,18 +84,30 @@ const GameAccountBlockInputs = ({
               )}
             </div>
 
-            { !hasConnections ? (
-            <GameAccountsForm
-              inputParams={{
-                placeholder: info.placeholder,
-                comingSoon: info.comingSoon,
-                platformName: info.platform,
-              }}
-            />
+            {currentConnection ? (
+              <div className="flex gap-2">
+                <div className="flex h-9 flex-1 items-center gap-2 rounded-lg bg-dark-blue/80 px-3 ring-1 ring-turquoise/20">
+                  <CircleCheck className="size-3.5 shrink-0 text-turquoise" />
+                  <span className="truncate text-sm text-white/80">
+                    {currentConnection.externalId}
+                  </span>
+                  <span className="ml-auto shrink-0 rounded-full bg-turquoise/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-turquoise">
+                    Підключено
+                  </span>
+                </div>
+                <DeleteConnectionButton
+                  connectionId={currentConnection.connectionId}
+                />
+              </div>
             ) : (
-              <div></div>
-            ) }
-
+              <GameAccountsForm
+                inputParams={{
+                  placeholder: info.placeholder,
+                  comingSoon: info.comingSoon,
+                  platformName: info.platform,
+                }}
+              />
+            )}
 
             <p className="mt-1.5 text-[11px] leading-relaxed text-white/30">
               {info.hint}

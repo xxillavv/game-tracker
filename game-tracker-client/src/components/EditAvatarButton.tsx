@@ -11,12 +11,9 @@ const EditAvatarButton = () => {
         type="file"
         accept="image/jpeg, image/png, image/webp, image/heic"
         className="sr-only"
-        onChange={(e) => {
-          const file = e.target.files?.[0];
-          if (file) {
-            uploadAvatar.mutate(file);
-          }
-        }}
+        onChange={(e) =>
+          e.target.files?.[0] && uploadAvatar.mutate(e.target.files?.[0])
+        }
       />
 
       <Camera className="size-4 pointer-events-none" />

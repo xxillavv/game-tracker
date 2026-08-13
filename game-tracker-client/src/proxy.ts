@@ -12,7 +12,6 @@ export async function proxy(request: NextRequest) {
   })
 
   if (response.status === 401 || !response.ok) {
-    console.log(cookieHeader)
     const refreshResponse = await fetch("http://localhost:3001/api/auth/refresh", {
       headers: {
         Cookie: cookieHeader
