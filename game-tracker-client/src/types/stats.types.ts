@@ -1,3 +1,5 @@
+import { AxiosResponse } from "axios";
+
 export interface IDotaStatsMetadata {
   name: string;
   rank: number;
