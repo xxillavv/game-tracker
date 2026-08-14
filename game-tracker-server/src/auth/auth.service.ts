@@ -139,7 +139,9 @@ export class AuthService {
       throw new UnauthorizedException("Refresh token is expired.")
     }
 
-    const newRefreshToken = await this.jwt.signAsync(refreshPayload)
+    const { exp, iat, ...cleanPayload } = refreshPayload;
+
+    const newRefreshToken = await this.jwt.signAsync(cleanPayload, { expiresIn: '7d' })
 
     await this.prisma.sessions.upsert({
       where: { sessionUserId: userId },

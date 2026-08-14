@@ -3,11 +3,13 @@ import { ConnectionsService } from './connections.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
 import { CreateConnectionDto } from '../../utils/dto/game-account.dto.js';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('connection')
 export class ConnectionsController {
   constructor(private readonly connectionsService: ConnectionsService) { }
 
+  @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get()
   getUserConnectios(@Req() request: TRequestWithUser) {

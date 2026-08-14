@@ -466,10 +466,6 @@ export type EnumPlatformNameEmunFieldUpdateOperationsInput = {
   set?: $Enums.PlatformNameEmun
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type ConnectionsCreateNestedOneWithoutGameStatsInput = {
   create?: Prisma.XOR<Prisma.ConnectionsCreateWithoutGameStatsInput, Prisma.ConnectionsUncheckedCreateWithoutGameStatsInput>
   connectOrCreate?: Prisma.ConnectionsCreateOrConnectWithoutGameStatsInput

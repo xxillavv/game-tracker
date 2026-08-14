@@ -1,12 +1,14 @@
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { StatisticsService } from './statistics.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('stats')
 export class StatisticsController {
   constructor(private readonly statisticsService: StatisticsService) { }
 
+  @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get('dota')
   getDotaStats(@Req() request: TRequestWithUser) {
@@ -14,7 +16,7 @@ export class StatisticsController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('dota/sync')
+  @Post('dota/sync')
   syncDotaStats(@Req() request: TRequestWithUser) {
     return this.statisticsService.syncDotaStats(request.user.userId)
   }
@@ -26,7 +28,7 @@ export class StatisticsController {
   }
 
   @UseGuards(AuthGuard)
-  @Get('dota/rating/sync')
+  @Post('dota/rating/sync')
   syncRatingsHistory(@Req() request: TRequestWithUser) {
     return this.statisticsService.syncDotaRatings(request.user.userId)
   }
