@@ -1,3 +1,4 @@
+import { IEditUserBody } from "@/types/user.types"
 import { useMutation } from "@tanstack/react-query"
 import axios, { AxiosError, AxiosResponse } from "axios"
 import { useRouter } from "next/navigation"
@@ -14,10 +15,16 @@ const uploadFunc = async (file: File) => {
   })
 }
 
+const editUserProfile = async (body: IEditUserBody) => {
+  return axios.patch("http://localhost:3001/api/users", body, {
+    withCredentials: true
+  })
+}
+
 export const useUsers = () => {
   const router = useRouter()
 
-  const uploadAvatar = useMutation<AxiosResponse, AxiosError, File>({
+  const uploadAvatarMutation = useMutation<AxiosResponse, AxiosError, File>({
     mutationKey: ["upload-avatar"],
     mutationFn: (file) => uploadFunc(file),
     onSuccess: () => {
@@ -25,7 +32,16 @@ export const useUsers = () => {
     }
   })
 
+  const editUserProfileMutation = useMutation({
+    mutationKey: ['edit-user-profile'],
+    mutationFn: (body: IEditUserBody) => editUserProfile(body),
+    onSuccess: () => {
+      router.refresh()
+    }
+  })
+
   return {
-    uploadAvatar
+    uploadAvatar: uploadAvatarMutation,
+    editUserProfile: editUserProfileMutation
   }
 }
