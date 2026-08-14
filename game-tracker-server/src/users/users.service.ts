@@ -54,35 +54,16 @@ export class UsersService {
     return user
   }
 
-  async editUser(id, password, email, username) {
-    const user = await this.prisma.users.findUnique({
-      where: { userId: id }
-    })
-
-    if (!user) {
-      throw new NotFoundException("User not found.")
-    }
-
-    const isValidPassword = await bcrypt.compare(password, user.password)
-
-    if (!isValidPassword) {
-      throw new UnauthorizedException("Incorrect password.")
-    }
-
-    const newUser = await this.prisma.users.update({
+  async editUser(id, email, username) {
+      await this.prisma.users.update({
       where: { userId: id },
       data: {
         email,
         username
       },
-      select: {
-        userId: true,
-        email: true,
-        username: true
-      }
     })
 
-    return newUser
+    return
   }
 
 

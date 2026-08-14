@@ -27,9 +27,10 @@ export class UsersController {
     return this.usersService.getById(id)
   }
 
-  @Patch(":id")
-  editUser(@Param('id', ParseIntPipe) id: number, @Body() body: EditUserDto) {
-    return this.usersService.editUser(id, body.password, body.email, body.username)
+  @UseGuards(AuthGuard)
+  @Patch()
+  editUser(@Body() body: EditUserDto, @Req() request: TRequestWithUser) {
+    return this.usersService.editUser(request.user.userId, body.email, body.username)
   }
 
   @UseGuards(AuthGuard)
