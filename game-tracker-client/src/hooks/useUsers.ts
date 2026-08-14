@@ -15,7 +15,7 @@ const uploadFunc = async (file: File) => {
   })
 }
 
-const editUserProfile = async (body: IEditUserBody) => {
+const editUserProfile = async (body: IEditUserBody | undefined) => {
   return axios.patch("http://localhost:3001/api/users", body, {
     withCredentials: true
   })

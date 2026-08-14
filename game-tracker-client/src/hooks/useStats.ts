@@ -14,6 +14,7 @@ const syncStats = async () => {
   return response.data
 }
 
+
 export const useStats = () => {
   const router = useRouter()
 
