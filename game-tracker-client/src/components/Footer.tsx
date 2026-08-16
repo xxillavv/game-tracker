@@ -1,48 +1,12 @@
-import { Gamepad2, FolderGit2, MessageCircle, MessageSquare, Zap } from "lucide-react";
+import { footerNavigationSections, footerSocials } from "@/app/constants";
+import { Gamepad2, Zap } from "lucide-react";
 import Link from "next/link";
-
-const NAV_SECTIONS = [
-  {
-    title: "Платформа",
-    links: [
-      { label: "Дашборд", href: "/dashboard" },
-      { label: "Лідери", href: "/leaders" },
-      { label: "Матчі", href: "/matches" },
-      { label: "Статистика", href: "/stats" },
-    ],
-  },
-  {
-    title: "Ресурси",
-    links: [
-      { label: "Документація", href: "/docs" },
-      { label: "API", href: "/api" },
-      { label: "Блог", href: "/blog" },
-      { label: "Changelog", href: "/changelog" },
-    ],
-  },
-  {
-    title: "Підтримка",
-    links: [
-      { label: "FAQ", href: "/faq" },
-      { label: "Зворотній зв'язок", href: "/feedback" },
-      { label: "Правила", href: "/terms" },
-      { label: "Конфіденційність", href: "/privacy" },
-    ],
-  },
-];
-
-const SOCIALS = [
-  { icon: FolderGit2, href: "https://github.com", label: "GitHub" },
-  { icon: MessageSquare, href: "https://twitter.com", label: "Twitter" },
-  { icon: MessageCircle, href: "https://discord.com", label: "Discord" },
-];
 
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-white/5 font-mono">
       <div className="container mx-auto px-6 py-14">
         <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-12">
-          {/* Brand column */}
           <div className="flex flex-col gap-5">
             <Link
               href="/"
@@ -53,13 +17,10 @@ export function Footer() {
               </span>
               NEXUS<span className="text-turquoise">.gg</span>
             </Link>
-
             <p className="max-w-xs text-sm leading-relaxed text-white/40">
               Відстежуй свій прогрес, аналізуй матчі та змагайся з найкращими
               гравцями. Твій шлях до вершини починається тут.
             </p>
-
-            {/* Game badge */}
             <div className="flex w-fit items-center gap-2 rounded-xl bg-dark-blue/60 px-3.5 py-2 ring-1 ring-white/5">
               <Gamepad2 className="size-4 text-turquoise" />
               <span className="text-xs text-white/50">
@@ -67,9 +28,8 @@ export function Footer() {
               </span>
             </div>
 
-            {/* Social links */}
             <div className="mt-1 flex items-center gap-2">
-              {SOCIALS.map((social) => (
+              {footerSocials.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
@@ -84,8 +44,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Nav columns */}
-          {NAV_SECTIONS.map((section) => (
+          {footerNavigationSections.map((section) => (
             <div key={section.title} className="flex flex-col gap-4">
               <h3 className="text-xs font-semibold uppercase tracking-wider text-white/30">
                 {section.title}
@@ -106,8 +65,6 @@ export function Footer() {
           ))}
         </div>
       </div>
-
-      {/* Bottom bar */}
       <div className="border-t border-white/5">
         <div className="container mx-auto flex items-center justify-between px-6 py-5">
           <p className="text-xs text-white/25">
