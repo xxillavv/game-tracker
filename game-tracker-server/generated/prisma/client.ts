@@ -81,3 +81,8 @@ export type GameStats = Prisma.GameStatsModel
  * 
  */
 export type RatingHistory = Prisma.RatingHistoryModel
+/**
+ * Model Leaderboard
+ * 
+ */
+export type Leaderboard = Prisma.LeaderboardModel

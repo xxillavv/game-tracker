@@ -404,7 +404,8 @@ export const ModelName = {
   News: 'News',
   Connections: 'Connections',
   GameStats: 'GameStats',
-  RatingHistory: 'RatingHistory'
+  RatingHistory: 'RatingHistory',
+  Leaderboard: 'Leaderboard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -420,7 +421,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "users" | "sessions" | "games" | "matches" | "news" | "connections" | "gameStats" | "ratingHistory"
+    modelProps: "users" | "sessions" | "games" | "matches" | "news" | "connections" | "gameStats" | "ratingHistory" | "leaderboard"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1016,6 +1017,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Leaderboard: {
+      payload: Prisma.$LeaderboardPayload<ExtArgs>
+      fields: Prisma.LeaderboardFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LeaderboardFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LeaderboardFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        findFirst: {
+          args: Prisma.LeaderboardFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LeaderboardFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        findMany: {
+          args: Prisma.LeaderboardFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>[]
+        }
+        create: {
+          args: Prisma.LeaderboardCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        createMany: {
+          args: Prisma.LeaderboardCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LeaderboardCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>[]
+        }
+        delete: {
+          args: Prisma.LeaderboardDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        update: {
+          args: Prisma.LeaderboardUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        deleteMany: {
+          args: Prisma.LeaderboardDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LeaderboardUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LeaderboardUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>[]
+        }
+        upsert: {
+          args: Prisma.LeaderboardUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LeaderboardPayload>
+        }
+        aggregate: {
+          args: Prisma.LeaderboardAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLeaderboard>
+        }
+        groupBy: {
+          args: Prisma.LeaderboardGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeaderboardGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LeaderboardCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LeaderboardCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1140,6 +1215,17 @@ export const RatingHistoryScalarFieldEnum = {
 } as const
 
 export type RatingHistoryScalarFieldEnum = (typeof RatingHistoryScalarFieldEnum)[keyof typeof RatingHistoryScalarFieldEnum]
+
+
+export const LeaderboardScalarFieldEnum = {
+  leaderboardId: 'leaderboardId',
+  playerRank: 'playerRank',
+  username: 'username',
+  teamName: 'teamName',
+  teamId: 'teamId'
+} as const
+
+export type LeaderboardScalarFieldEnum = (typeof LeaderboardScalarFieldEnum)[keyof typeof LeaderboardScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1430,6 +1516,7 @@ export type GlobalOmitConfig = {
   connections?: Prisma.ConnectionsOmit
   gameStats?: Prisma.GameStatsOmit
   ratingHistory?: Prisma.RatingHistoryOmit
+  leaderboard?: Prisma.LeaderboardOmit
 }
 
 /* Types for Logging */

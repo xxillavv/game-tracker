@@ -58,7 +58,8 @@ export const ModelName = {
   News: 'News',
   Connections: 'Connections',
   GameStats: 'GameStats',
-  RatingHistory: 'RatingHistory'
+  RatingHistory: 'RatingHistory',
+  Leaderboard: 'Leaderboard'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -162,6 +163,17 @@ export const RatingHistoryScalarFieldEnum = {
 } as const
 
 export type RatingHistoryScalarFieldEnum = (typeof RatingHistoryScalarFieldEnum)[keyof typeof RatingHistoryScalarFieldEnum]
+
+
+export const LeaderboardScalarFieldEnum = {
+  leaderboardId: 'leaderboardId',
+  playerRank: 'playerRank',
+  username: 'username',
+  teamName: 'teamName',
+  teamId: 'teamId'
+} as const
+
+export type LeaderboardScalarFieldEnum = (typeof LeaderboardScalarFieldEnum)[keyof typeof LeaderboardScalarFieldEnum]
 
 
 export const SortOrder = {
