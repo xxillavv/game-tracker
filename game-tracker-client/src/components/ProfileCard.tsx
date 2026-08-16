@@ -36,7 +36,6 @@ export const ProfileCard = async () => {
             </div>
             <EditAvatarButton />
           </div>
-
           <div className="pb-1">
             <h2 className="text-xl font-bold text-white z-50">
               {user.username}
@@ -47,7 +46,6 @@ export const ProfileCard = async () => {
             </div>
           </div>
         </div>
-
         <div className="mt-5 flex items-center gap-2">
           <span className="flex items-center gap-1.5 rounded-full bg-turquoise/10 px-3 py-1 text-xs font-medium text-turquoise ring-1 ring-turquoise/20">
             <Shield className="size-3" />
@@ -58,7 +56,6 @@ export const ProfileCard = async () => {
             Учасник
           </span>
         </div>
-
         <div className="mt-5 rounded-xl bg-background/40 p-4 ring-1 ring-white/5">
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="size-3.5 text-turquoise/60" />
@@ -95,7 +92,6 @@ export const ProfileCard = async () => {
             </div>
           </div>
         </div>
-
         <div className="mt-auto flex flex-col gap-5">
           <ProfileEditButton />
           <LogoutButton />

@@ -1,27 +1,8 @@
 import { Gamepad2 } from "lucide-react";
 import GameAccountBlockInputs from "./GameAccountBlockInputs";
-import { cookies } from "next/headers";
-import { ICreateConnectionResponse } from "@/types/connections.types";
+import { getUserConnections } from "@/app/profile/queries";
 
 const GameAccountsBlock = async () => {
-  const cookieStore = await cookies();
-  const getUserConnections = async (): Promise<ICreateConnectionResponse[]> => {
-    let cookieString = cookieStore.toString();
-
-    let response = await fetch("http://localhost:3001/api/connection", {
-      headers: {
-        Cookie: cookieString,
-      },
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      return [];
-    }
-
-    return response.json();
-  };
-
   const userConnections = await getUserConnections();
 
   return (
@@ -33,7 +14,7 @@ const GameAccountsBlock = async () => {
         <div>
           <h3 className="text-lg font-bold text-white">Ігрові акаунти</h3>
           <p className="text-xs text-white/40">
-            Прив'яжіть свої ігрові профілі
+            {"Прив'яжіть"} свої ігрові профілі
           </p>
         </div>
       </div>

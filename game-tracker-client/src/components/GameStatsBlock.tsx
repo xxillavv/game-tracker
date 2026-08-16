@@ -61,7 +61,6 @@ const GameStatsBlock = async () => {
         </div>
         <StatsSyncButton /> 
       </div>
-
       {metadata ? (
         <>
           <div className="mt-5 flex items-center gap-3 rounded-xl bg-background/40 px-5 py-3.5 ring-1 ring-white/5">
@@ -82,7 +81,6 @@ const GameStatsBlock = async () => {
               </span>
             )}
           </div>
-
           <div className="mt-4 flex flex-wrap gap-4">
             <div className="flex-1 basis-[calc(50%-0.5rem)] lg:basis-0 rounded-xl bg-background/40 p-5 ring-1 ring-white/5 transition-all hover:ring-white/10">
               <div className="mb-3 flex items-center gap-2">
@@ -95,7 +93,6 @@ const GameStatsBlock = async () => {
               </div>
               <p className="text-2xl font-bold text-white">{rankDisplay}</p>
             </div>
-
             <div className="flex-1 basis-[calc(50%-0.5rem)] lg:basis-0 rounded-xl bg-background/40 p-5 ring-1 ring-white/5 transition-all hover:ring-white/10">
               <div className="mb-3 flex items-center gap-2">
                 <div className="rounded-lg bg-turquoise/10 p-2">
@@ -110,7 +107,6 @@ const GameStatsBlock = async () => {
                 <span className="text-base font-medium text-white/40">%</span>
               </p>
             </div>
-
             <div className="flex-1 basis-[calc(50%-0.5rem)] lg:basis-0 rounded-xl bg-background/40 p-5 ring-1 ring-white/5 transition-all hover:ring-white/10">
               <div className="mb-3 flex items-center gap-2">
                 <div className="rounded-lg bg-turquoise/10 p-2">
@@ -124,7 +120,6 @@ const GameStatsBlock = async () => {
                 {totalMatches.toLocaleString("uk-UA")}
               </p>
             </div>
-
             <div className="flex-1 basis-[calc(50%-0.5rem)] lg:basis-0 rounded-xl bg-background/40 p-5 ring-1 ring-white/5 transition-all hover:ring-white/10">
               <div className="mb-3 flex items-center gap-2">
                 <div className="rounded-lg bg-emerald-500/10 p-2">
@@ -138,7 +133,6 @@ const GameStatsBlock = async () => {
                 {metadata.matchesWin.toLocaleString("uk-UA")}
               </p>
             </div>
-
             <div className="flex-1 basis-[calc(50%-0.5rem)] lg:basis-0 rounded-xl bg-background/40 p-5 ring-1 ring-white/5 transition-all hover:ring-white/10">
               <div className="mb-3 flex items-center gap-2">
                 <div className="rounded-lg bg-red-500/10 p-2">
@@ -169,7 +163,7 @@ const GameStatsBlock = async () => {
         <div className="mt-6 flex items-center justify-center gap-3 rounded-xl bg-background/40 p-6 ring-1 ring-white/5">
           <BarChart3 className="size-5 text-white/20" />
           <p className="text-sm text-white/30">
-            Прив'яжіть Dota 2 акаунт, щоб побачити вашу статистику
+            {"Прив'яжіть"} Dota 2 акаунт, щоб побачити вашу статистику
           </p>
         </div>
       )}

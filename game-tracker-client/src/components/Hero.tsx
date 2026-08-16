@@ -13,7 +13,6 @@ export function Hero() {
           </span>
           Платформа активна
         </div>
-
         <h1 className="max-w-3xl text-5xl font-bold leading-tight tracking-tight text-white md:text-6xl">
           Відстежуй свій{" "}
           <span className="relative text-turquoise">
@@ -32,15 +31,13 @@ export function Hero() {
                 className="animate-[draw_1s_ease-in-out_forwards]"
               />
             </svg>
-          </span>{" "}
+          </span>
           у іграх
         </h1>
-
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/60">
           Аналізуй статистику матчів, порівнюй результати з друзями та піднімайся
           в рейтингу. Все в одному місці.
         </p>
- 
         <div className="mt-10 flex items-center gap-4">
           <Link href="/dashboard">
             <Button className="h-12 cursor-pointer rounded-xl bg-turquoise px-8 text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]">
@@ -57,7 +54,6 @@ export function Hero() {
             </Button>
           </Link>
         </div>
-
         <div className="mt-16 grid w-full max-w-2xl grid-cols-3 gap-6">
           <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
@@ -68,7 +64,6 @@ export function Hero() {
             <p className="text-2xl font-bold text-white">12K+</p>
             <p className="mt-1 text-sm text-white/40">Гравців</p>
           </div>
-
           <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
               <div className="rounded-xl bg-turquoise/10 p-2.5">
@@ -78,7 +73,6 @@ export function Hero() {
             <p className="text-2xl font-bold text-white">58K+</p>
             <p className="mt-1 text-sm text-white/40">Матчів</p>
           </div>
-
           <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
               <div className="rounded-xl bg-turquoise/10 p-2.5">

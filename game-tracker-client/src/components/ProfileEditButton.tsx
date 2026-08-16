@@ -31,12 +31,10 @@ const ProfileEditButton = () => {
             }
             className="h-9 w-full rounded-lg border-none bg-dark-blue/80 px-3 text-sm ring-1 ring-white/5 text-input-text placeholder:text-white/25 transition-all focus:ring-turquoise/30"
           />
-
           <Button
             type="button"
             onClick={() => {
               setIsOpen(false)
-
               return inputValues && editUserProfile.mutate(inputValues) 
             }}
             className="mt-1 flex w-full items-center justify-center gap-2 rounded-lg bg-turquoise/10 px-4 py-2 text-sm font-medium text-turquoise ring-1 ring-turquoise/20 transition-all hover:bg-turquoise/20"
@@ -46,7 +44,6 @@ const ProfileEditButton = () => {
           </Button>
         </div>
       )}
-
       <Button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}

@@ -15,7 +15,7 @@ const GameAccountBlockInputs = ({
   return (
     <>
       {games.map((info) => {
-        let currentConnection = connections?.find(
+        const currentConnection = connections?.find(
           (el) => el.platformName === info.platform,
         );
 
