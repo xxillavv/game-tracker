@@ -1,52 +1,11 @@
-import { CircleCheck, ExternalLink, Lock, Unplug } from "lucide-react";
+import { CircleCheck, ExternalLink, Lock } from "lucide-react";
 import GameAccountsForm from "./GameAccountsInputsButton";
 import {
   ICreateConnectionResponse,
   TPlatformTypes,
 } from "@/types/connections.types";
 import DeleteConnectionButton from "./DeleteConnectionButton";
-
-interface IGameEntry {
-  id: string;
-  name: string;
-  platform: TPlatformTypes;
-  placeholder: string;
-  hint: string;
-  hintLink?: string;
-  comingSoon: boolean;
-  icon: string;
-}
-
-const GAMES: IGameEntry[] = [
-  {
-    id: "dota2",
-    name: "Dota 2",
-    platform: "STEAM",
-    placeholder: "Введіть ваш Dota 2 ID",
-    hint: "Відкрийте Steam → профіль → URL містить ваш ID, або знайдіть Friend ID у клієнті Dota 2.",
-    hintLink: "https://steamcommunity.com",
-    comingSoon: false,
-    icon: "🎮",
-  },
-  {
-    id: "brawlstars",
-    name: "Brawl Stars",
-    platform: "SUPERCELL",
-    placeholder: "Введіть ваш тег (#XXXXXXXX)",
-    hint: "Відкрийте Brawl Stars → натисніть на профіль → тег під ніком.",
-    comingSoon: true,
-    icon: "⭐",
-  },
-  {
-    id: "valorant",
-    name: "Valorant",
-    platform: "RIOT",
-    placeholder: "Введіть Riot ID (Name#Tag)",
-    hint: "Відкрийте Valorant → Riot ID у верхньому правому куті лобі.",
-    comingSoon: true,
-    icon: "🎯",
-  },
-];
+import { games } from "@/app/profile/constants";
 
 const GameAccountBlockInputs = ({
   connections,
@@ -55,14 +14,10 @@ const GameAccountBlockInputs = ({
 }) => {
   return (
     <>
-      {GAMES.map((info) => {
-        let currentConnection;
-
-        if (connections?.length) {
-          currentConnection = connections.find(
-            (el) => el.platformName === info.platform,
-          );
-        }
+      {games.map((info) => {
+        let currentConnection = connections?.find(
+          (el) => el.platformName === info.platform,
+        );
 
         return (
           <div
@@ -83,7 +38,6 @@ const GameAccountBlockInputs = ({
                 </span>
               )}
             </div>
-
             {currentConnection ? (
               <div className="flex gap-2">
                 <div className="flex h-9 flex-1 items-center gap-2 rounded-lg bg-dark-blue/80 px-3 ring-1 ring-turquoise/20">
@@ -104,11 +58,10 @@ const GameAccountBlockInputs = ({
                 inputParams={{
                   placeholder: info.placeholder,
                   comingSoon: info.comingSoon,
-                  platformName: info.platform,
+                  platformName: info.platform as TPlatformTypes,
                 }}
               />
             )}
-
             <p className="mt-1.5 text-[11px] leading-relaxed text-white/30">
               {info.hint}
             </p>
