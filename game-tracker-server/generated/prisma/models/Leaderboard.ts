@@ -191,8 +191,8 @@ export type LeaderboardGroupByOutputType = {
   leaderboardId: number
   playerRank: number
   username: string
-  teamName: string
-  teamId: number
+  teamName: string | null
+  teamId: number | null
   _count: LeaderboardCountAggregateOutputType | null
   _avg: LeaderboardAvgAggregateOutputType | null
   _sum: LeaderboardSumAggregateOutputType | null
@@ -222,16 +222,16 @@ export type LeaderboardWhereInput = {
   leaderboardId?: Prisma.IntFilter<"Leaderboard"> | number
   playerRank?: Prisma.IntFilter<"Leaderboard"> | number
   username?: Prisma.StringFilter<"Leaderboard"> | string
-  teamName?: Prisma.StringFilter<"Leaderboard"> | string
-  teamId?: Prisma.IntFilter<"Leaderboard"> | number
+  teamName?: Prisma.StringNullableFilter<"Leaderboard"> | string | null
+  teamId?: Prisma.IntNullableFilter<"Leaderboard"> | number | null
 }
 
 export type LeaderboardOrderByWithRelationInput = {
   leaderboardId?: Prisma.SortOrder
   playerRank?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  teamName?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
+  teamName?: Prisma.SortOrderInput | Prisma.SortOrder
+  teamId?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type LeaderboardWhereUniqueInput = Prisma.AtLeast<{
@@ -241,16 +241,16 @@ export type LeaderboardWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.LeaderboardWhereInput | Prisma.LeaderboardWhereInput[]
   playerRank?: Prisma.IntFilter<"Leaderboard"> | number
   username?: Prisma.StringFilter<"Leaderboard"> | string
-  teamName?: Prisma.StringFilter<"Leaderboard"> | string
-  teamId?: Prisma.IntFilter<"Leaderboard"> | number
+  teamName?: Prisma.StringNullableFilter<"Leaderboard"> | string | null
+  teamId?: Prisma.IntNullableFilter<"Leaderboard"> | number | null
 }, "leaderboardId">
 
 export type LeaderboardOrderByWithAggregationInput = {
   leaderboardId?: Prisma.SortOrder
   playerRank?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  teamName?: Prisma.SortOrder
-  teamId?: Prisma.SortOrder
+  teamName?: Prisma.SortOrderInput | Prisma.SortOrder
+  teamId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.LeaderboardCountOrderByAggregateInput
   _avg?: Prisma.LeaderboardAvgOrderByAggregateInput
   _max?: Prisma.LeaderboardMaxOrderByAggregateInput
@@ -265,61 +265,61 @@ export type LeaderboardScalarWhereWithAggregatesInput = {
   leaderboardId?: Prisma.IntWithAggregatesFilter<"Leaderboard"> | number
   playerRank?: Prisma.IntWithAggregatesFilter<"Leaderboard"> | number
   username?: Prisma.StringWithAggregatesFilter<"Leaderboard"> | string
-  teamName?: Prisma.StringWithAggregatesFilter<"Leaderboard"> | string
-  teamId?: Prisma.IntWithAggregatesFilter<"Leaderboard"> | number
+  teamName?: Prisma.StringNullableWithAggregatesFilter<"Leaderboard"> | string | null
+  teamId?: Prisma.IntNullableWithAggregatesFilter<"Leaderboard"> | number | null
 }
 
 export type LeaderboardCreateInput = {
   playerRank: number
   username: string
-  teamName: string
-  teamId: number
+  teamName?: string | null
+  teamId?: number | null
 }
 
 export type LeaderboardUncheckedCreateInput = {
   leaderboardId?: number
   playerRank: number
   username: string
-  teamName: string
-  teamId: number
+  teamName?: string | null
+  teamId?: number | null
 }
 
 export type LeaderboardUpdateInput = {
   playerRank?: Prisma.IntFieldUpdateOperationsInput | number
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  teamName?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  teamName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeaderboardUncheckedUpdateInput = {
   leaderboardId?: Prisma.IntFieldUpdateOperationsInput | number
   playerRank?: Prisma.IntFieldUpdateOperationsInput | number
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  teamName?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  teamName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeaderboardCreateManyInput = {
   leaderboardId?: number
   playerRank: number
   username: string
-  teamName: string
-  teamId: number
+  teamName?: string | null
+  teamId?: number | null
 }
 
 export type LeaderboardUpdateManyMutationInput = {
   playerRank?: Prisma.IntFieldUpdateOperationsInput | number
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  teamName?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  teamName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeaderboardUncheckedUpdateManyInput = {
   leaderboardId?: Prisma.IntFieldUpdateOperationsInput | number
   playerRank?: Prisma.IntFieldUpdateOperationsInput | number
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  teamName?: Prisma.StringFieldUpdateOperationsInput | string
-  teamId?: Prisma.IntFieldUpdateOperationsInput | number
+  teamName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  teamId?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
 }
 
 export type LeaderboardCountOrderByAggregateInput = {
@@ -356,6 +356,14 @@ export type LeaderboardSumOrderByAggregateInput = {
   leaderboardId?: Prisma.SortOrder
   playerRank?: Prisma.SortOrder
   teamId?: Prisma.SortOrder
+}
+
+export type NullableIntFieldUpdateOperationsInput = {
+  set?: number | null
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 
@@ -401,8 +409,8 @@ export type $LeaderboardPayload<ExtArgs extends runtime.Types.Extensions.Interna
     leaderboardId: number
     playerRank: number
     username: string
-    teamName: string
-    teamId: number
+    teamName: string | null
+    teamId: number | null
   }, ExtArgs["result"]["leaderboard"]>
   composites: {}
 }

@@ -73,3 +73,18 @@ export interface IDotaMatches {
   party_size: number | null;
   hero_variant: number;
 }
+
+
+interface ILeaderboardPlayer {
+  rank: number
+  name: string
+  team_id: number
+  team_tag: string
+}
+
+export interface ILeaderboardResponse {
+  time_posted: number
+  next_scheduled_post_time: number
+  server_time: number
+  leaderboard: ILeaderboardPlayer[]
+}

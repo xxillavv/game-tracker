@@ -135,8 +135,8 @@ model Leaderboard {
 
   playerRank Int @map("player_rank")
   username String @map("username")
-  teamName String @map("team_name")
-  teamId   Int    @map("team_id")
+  teamName String? @map("team_name")
+  teamId   Int?    @map("team_id")
 
   @@map("leaderboard")
 }
