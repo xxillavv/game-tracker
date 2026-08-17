@@ -8,10 +8,8 @@ import Link from "next/link";
 import { IFormInputs } from "@/types/auth.types";
 import { useAuth } from "@/hooks/useAuth";
 
-type TAuthStatus = "login" | "register";
-
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<TAuthStatus>("login");
+  const [activeTab, setActiveTab] = useState<"login" | "register">("login");
   const [formInfo, setFormInfo] = useState<IFormInputs>({
     email: "",
     username: "",

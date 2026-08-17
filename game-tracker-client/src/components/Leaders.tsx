@@ -1,3 +1,4 @@
+import { getLeaderboardData } from "@/app/queries";
 import {
   Crown,
   Flame,
@@ -10,6 +11,7 @@ import {
   Trophy,
   Zap,
 } from "lucide-react";
+
 
 const POSITIONS: Record<string, { label: string; icon: typeof Shield }> = {
   carry: { label: "Carry", icon: Swords },
@@ -142,11 +144,15 @@ function RankBadge({ rank }: { rank: number }) {
   );
 }
 
-export function Leaders() {
+export async function Leaders() {
+  const leaderboard = await getLeaderboardData(10)
+
+  console.log(leaderboard)
+
+
   return (
     <section className="container mx-auto font-mono mb-60">
       <div className="flex flex-col items-center">
-        {/* Section header */}
         <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-turquoise/10 px-4 py-1.5 text-sm text-turquoise ring-1 ring-turquoise/20">
           <Trophy className="size-3.5" />
           Топ рейтинг
