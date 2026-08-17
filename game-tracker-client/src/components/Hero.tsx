@@ -32,7 +32,7 @@ export function Hero() {
               />
             </svg>
           </span>
-          у іграх
+          <br/> у іграх
         </h1>
         <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/60">
           Аналізуй статистику матчів, порівнюй результати з друзями та піднімайся
