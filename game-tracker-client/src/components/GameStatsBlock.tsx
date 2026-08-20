@@ -59,7 +59,7 @@ const GameStatsBlock = async () => {
             Valorant
           </button>
         </div>
-        <StatsSyncButton /> 
+        {metadata && <StatsSyncButton />}
       </div>
       {metadata ? (
         <>

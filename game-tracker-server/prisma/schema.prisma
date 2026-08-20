@@ -129,3 +129,14 @@ model RatingHistory {
 
   @@map("rating_history")
 }
+
+model Leaderboard {
+  leaderboardId Int @id @default(autoincrement()) @map("leaderboard_id")
+
+  playerRank Int @map("player_rank")
+  username String @map("username")
+  teamName String? @map("team_name")
+  teamId   Int?    @map("team_id")
+
+  @@map("leaderboard")
+}

@@ -7,11 +7,10 @@ import { Zap, LogIn, UserPlus, Mail, Lock, User } from "lucide-react";
 import Link from "next/link";
 import { IFormInputs } from "@/types/auth.types";
 import { useAuth } from "@/hooks/useAuth";
-
-type TAuthStatus = "login" | "register";
+import Loading from "../loading";
 
 export default function LoginPage() {
-  const [activeTab, setActiveTab] = useState<TAuthStatus>("login");
+  const [activeTab, setActiveTab] = useState<"login" | "register">("login");
   const [formInfo, setFormInfo] = useState<IFormInputs>({
     email: "",
     username: "",
@@ -19,6 +18,8 @@ export default function LoginPage() {
   });
 
   const { login, register } = useAuth();
+
+  if (login.isPending || register.isPending) return <Loading />;
 
   const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

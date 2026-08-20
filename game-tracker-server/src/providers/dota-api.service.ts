@@ -1,7 +1,7 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
 import { AxiosError } from "axios";
-import { IDotaMatches, IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate } from "../../utils/types/providers.types.js";
+import { IDotaMatches, IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate, ILeaderboardResponse } from "../../utils/types/providers.types.js";
 import { firstValueFrom } from "rxjs";
 
 @Injectable()
@@ -79,6 +79,18 @@ export class DotaProvider {
       }
 
       throw new ServiceUnavailableException("Issues with the statistics server. Please try again later.")
+    }
+  }
+
+  async getLeaderboard() {
+    try {
+      const observable = await this.httpService.get<ILeaderboardResponse>('https://www.dota2.com/webapi/ILeaderboard/GetDivisionLeaderboard/v0001?division=europe&leaderboard=0')
+
+      const response = await firstValueFrom(observable)
+
+      return response.data
+    } catch {
+      throw new ServiceUnavailableException("Issues with the leaderboard server. Please try again later.")
     }
   }
 }

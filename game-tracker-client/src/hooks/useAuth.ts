@@ -52,7 +52,7 @@ export const useAuth = () => {
   const loginMutation = useMutation<IAuthUserResponse, AxiosError<IAxiosResponseError>, ILoginUser>({
     mutationKey: ['login'],
     mutationFn: (body) => loginUser(body),
-    onSuccess: () => {
+    onSuccess: async () => {
       router.push('/profile')
     }
   })
@@ -60,7 +60,7 @@ export const useAuth = () => {
   const registerMutation = useMutation<IAuthUserResponse, AxiosError<IAxiosResponseError>, IRegisterUser>({
     mutationKey: ['register'],
     mutationFn: (body) => registerUser(body),
-    onSuccess: () => {
+    onSuccess: async () => {
       router.push('/profile')
     }
   })
@@ -71,7 +71,6 @@ export const useAuth = () => {
 
     onSuccess: async () => {
       await new Promise((resolve) => setTimeout(resolve, 400))
-
       router.push('/')
     }
   })

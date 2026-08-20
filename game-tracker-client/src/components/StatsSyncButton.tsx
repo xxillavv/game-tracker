@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 import { useStats } from "@/hooks/useStats";
 import { Spinner } from "./ui/spinner";
 
-const StatsSyncButton = ({}) => {
+const StatsSyncButton = () => {
   const { syncStats } = useStats();
   return (
     <div className="flex items-center gap-4">

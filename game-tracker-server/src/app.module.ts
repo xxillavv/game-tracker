@@ -7,6 +7,7 @@ import { StatisticsModule } from './statistics/statistics.module.js';
 import { MatchesModule } from './matches/matches.module.js';
 import { ConnectionsModule } from './connections/connections.module.js';
 import { PrismaModule } from './lib/prisma.module.js';
+import { LeaderboardModule } from './leaderboard/leaderboard.module.js';
 
 @Module({
   imports: [PrismaModule, UsersModule, AuthModule, ConfigModule.forRoot({
@@ -16,7 +17,8 @@ import { PrismaModule } from './lib/prisma.module.js';
     HttpModule,
     StatisticsModule,
     MatchesModule,
-    ConnectionsModule
+    ConnectionsModule,
+    LeaderboardModule
   ],
   controllers: [],
   providers: [],
