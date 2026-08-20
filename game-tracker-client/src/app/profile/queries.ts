@@ -3,9 +3,9 @@ import { IDotaStatsResponse } from "@/types/stats.types";
 import { IUser } from "@/types/user.types";
 import { cookies } from "next/headers";
 
-const cookieStore = await cookies()
-
 export const getUserDotaStats = async (): Promise<IDotaStatsResponse | number> => {
+  const cookieStore = await cookies()
+
   const response = await fetch("http://localhost:3001/api/stats/dota", {
     headers: {
       Cookie: cookieStore.toString(),
@@ -21,6 +21,8 @@ export const getUserDotaStats = async (): Promise<IDotaStatsResponse | number> =
 
 
 export const getCurrentUser = async (): Promise<IUser> => {
+  const cookieStore = await cookies()
+
   const response = await fetch("http://localhost:3001/api/users/me", {
     cache: "no-store",
     headers: {
@@ -31,6 +33,8 @@ export const getCurrentUser = async (): Promise<IUser> => {
 };
 
 export const getUserConnections = async (): Promise<ICreateConnectionResponse[]> => {
+  const cookieStore = await cookies()
+
   const response = await fetch("http://localhost:3001/api/connection", {
     headers: {
       Cookie: cookieStore.toString(),
