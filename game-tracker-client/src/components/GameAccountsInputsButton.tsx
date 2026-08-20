@@ -37,12 +37,15 @@ const GameAccountsForm = ({
           type="button"
           disabled={inputParams.comingSoon}
           className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-turquoise/10 text-turquoise ring-1 ring-turquoise/20 transition-all hover:bg-turquoise/20 disabled:opacity-30 disabled:cursor-not-allowed"
-          onClick={() =>
-            createConnection.mutate({
-              platformName: inputParams.platformName,
-              externalId: value,
-            })
-          }
+          onClick={() => {
+            return (
+              value &&
+              createConnection.mutate({
+                platformName: inputParams.platformName,
+                externalId: value,
+              })
+            );
+          }}
         >
           {createConnection.isPending ? (
             <Spinner />
