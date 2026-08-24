@@ -13,6 +13,7 @@ export class UsersController {
   @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get('me')
+
   getMe(@Req() request: TRequestWithUser) {
     return this.usersService.getById(request.user.userId)
   }
