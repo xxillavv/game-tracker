@@ -31,9 +31,7 @@ function RankBadge({ rank }: { rank: number }) {
 }
 
 export async function Leaders() {
-  const leaderboard = await getLeaderboardData(10, 1);
-
-  console.log(leaderboard.data)
+  const leaderboard = await getLeaderboardData(1);
 
   const uniqueTeams = new Set(
     leaderboard.data.map((el) => el.teamName).filter(Boolean),
