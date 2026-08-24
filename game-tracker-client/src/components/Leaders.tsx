@@ -1,6 +1,5 @@
 import { getLeaderboardData } from "@/app/queries";
 import { Crown, Gamepad2, Medal, Trophy, Users } from "lucide-react";
-import { ILeaderboardResponse } from "@/types/leaderboard.types";
 
 function RankBadge({ rank }: { rank: number }) {
   if (rank === 1) {
@@ -32,10 +31,12 @@ function RankBadge({ rank }: { rank: number }) {
 }
 
 export async function Leaders() {
-  const leaderboard = await getLeaderboardData(10);
+  const leaderboard = await getLeaderboardData(10, 1);
+
+  console.log(leaderboard.data)
 
   const uniqueTeams = new Set(
-    leaderboard.map((el) => el.teamName).filter(Boolean),
+    leaderboard.data.map((el) => el.teamName).filter(Boolean),
   );
 
   return (
@@ -62,7 +63,7 @@ export async function Leaders() {
           </div>
 
           <div className="flex flex-col gap-2">
-            {leaderboard.map((player) => (
+            {leaderboard.data.map((player) => (
               <div
                 key={player.leaderboardId}
                 className="group grid grid-cols-[3rem_1fr_1fr] items-center gap-4 rounded-2xl bg-dark-blue/60 px-6 py-4 ring-1 ring-white/5 transition-all hover:bg-dark-blue/80 hover:ring-turquoise/20"
@@ -99,7 +100,7 @@ export async function Leaders() {
               </span>
             </div>
             <p className="text-2xl font-bold tabular-nums text-white">
-              {leaderboard.length}
+              {leaderboard.data.length}
             </p>
           </div>
 

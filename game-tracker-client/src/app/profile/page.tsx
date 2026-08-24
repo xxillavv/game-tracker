@@ -1,8 +1,8 @@
-import { Footer } from "@/components/Footer";
-import { Header } from "@/components/Header";
 import { ProfileCard } from "@/components/ProfileCard";
 import GameAccountsBlock from "@/components/GameAccountsBlock";
 import GameStatsBlock from "@/components/GameStatsBlock";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 const page = async () => {
   return (
