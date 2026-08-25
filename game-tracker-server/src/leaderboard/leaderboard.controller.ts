@@ -1,4 +1,4 @@
-import { Controller, Get, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Controller, DefaultValuePipe, Get, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { LeaderboardService } from './leaderboard.service.js';
 import { SkipThrottle } from '@nestjs/throttler';
 
@@ -14,7 +14,7 @@ export class LeaderboardController {
 
   @SkipThrottle()
   @Get("dota")
-  getLeaderboard(@Query('limit', new ParseIntPipe({ optional: true })) limit?: number) {
-    return this.leaderboardService.getLeaderboard(limit)
+  getLeaderboard(@Query('limit', new ParseIntPipe()) limit: number, @Query("page", new ParseIntPipe()) page: number) {
+    return this.leaderboardService.getLeaderboard(limit, page)
   }
 }

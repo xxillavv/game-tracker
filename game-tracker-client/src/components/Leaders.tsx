@@ -1,6 +1,5 @@
 import { getLeaderboardData } from "@/app/queries";
 import { Crown, Gamepad2, Medal, Trophy, Users } from "lucide-react";
-import { ILeaderboardResponse } from "@/types/leaderboard.types";
 
 function RankBadge({ rank }: { rank: number }) {
   if (rank === 1) {
@@ -32,10 +31,10 @@ function RankBadge({ rank }: { rank: number }) {
 }
 
 export async function Leaders() {
-  const leaderboard = await getLeaderboardData(10);
+  const leaderboard = await getLeaderboardData(1);
 
   const uniqueTeams = new Set(
-    leaderboard.map((el) => el.teamName).filter(Boolean),
+    leaderboard.data.map((el) => el.teamName).filter(Boolean),
   );
 
   return (
@@ -55,27 +54,29 @@ export async function Leaders() {
         </p>
 
         <div className="mt-12 w-full max-w-4xl">
-          <div className="mb-3 grid grid-cols-[3rem_1fr_1fr] items-center gap-4 px-6 text-xs font-semibold uppercase tracking-wider text-white/30">
-            <span>#</span>
-            <span>Гравець</span>
-            <span>Команда</span>
+          <div className="mb-3 flex items-center gap-4 px-6 text-xs font-semibold uppercase tracking-wider text-white/30">
+            <span className="w-12 shrink-0">#</span>
+            <span className="flex-1">Гравець</span>
+            <span className="flex-1">Команда</span>
           </div>
 
           <div className="flex flex-col gap-2">
-            {leaderboard.map((player) => (
+            {leaderboard.data.map((player) => (
               <div
                 key={player.leaderboardId}
-                className="group grid grid-cols-[3rem_1fr_1fr] items-center gap-4 rounded-2xl bg-dark-blue/60 px-6 py-4 ring-1 ring-white/5 transition-all hover:bg-dark-blue/80 hover:ring-turquoise/20"
+                className="group flex items-center gap-4 rounded-2xl bg-dark-blue/60 px-6 py-4 ring-1 ring-white/5 transition-all hover:bg-dark-blue/80 hover:ring-turquoise/20"
               >
-                <RankBadge rank={player.playerRank} />
+                <div className="w-12 shrink-0">
+                  <RankBadge rank={player.playerRank} />
+                </div>
 
-                <div className="flex flex-col">
+                <div className="flex flex-1 flex-col">
                   <span className="text-base font-semibold text-white transition-colors group-hover:text-turquoise">
                     {player.username}
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2">
+                <div className="flex flex-1 items-center gap-2">
                   <div className="rounded-lg bg-turquoise/10 p-1.5">
                     <Users className="size-3.5 text-turquoise" />
                   </div>
@@ -88,8 +89,8 @@ export async function Leaders() {
           </div>
         </div>
 
-        <div className="mt-10 grid w-full max-w-4xl grid-cols-2 gap-4">
-          <div className="rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+        <div className="mt-10 flex w-full max-w-4xl flex-col gap-4 sm:flex-row">
+          <div className="flex-1 rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-2 flex items-center gap-2">
               <div className="rounded-lg bg-turquoise/10 p-2">
                 <Gamepad2 className="size-4 text-turquoise" />
@@ -99,11 +100,11 @@ export async function Leaders() {
               </span>
             </div>
             <p className="text-2xl font-bold tabular-nums text-white">
-              {leaderboard.length}
+              {leaderboard.data.length}
             </p>
           </div>
 
-          <div className="rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+          <div className="flex-1 rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-2 flex items-center gap-2">
               <div className="rounded-lg bg-turquoise/10 p-2">
                 <Users className="size-4 text-turquoise" />

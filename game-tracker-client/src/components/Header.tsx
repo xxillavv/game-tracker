@@ -1,6 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Zap } from "lucide-react";
 import Link from "next/link";
+import { HeaderNavigation } from "./HeaderNavigation";
 
 export const Header = () => {
   return (
@@ -12,21 +13,11 @@ export const Header = () => {
             className="flex items-center text-xl font-semibold tracking-wide text-white transition-opacity hover:opacity-80"
           >
             <span className="mr-2 rounded-xl bg-turquoise p-1.5">
-              <Zap color="black" />
+              <Zap className="text-black size-5" />
             </span>
             NEXUS<span className="text-turquoise">.gg</span>
           </Link>
-          <ul className="flex items-center gap-2">
-            <li className="rounded-xl bg-dark-blue/60 px-5 py-2.5 ring-1 ring-turquoise/20 text-turquoise text-sm transition-all">
-              <Link href="/dashboard">Дашборд</Link>
-            </li>
-            <li className="rounded-xl px-5 py-2.5 text-sm text-white/60 transition-all hover:bg-dark-blue/40 hover:text-white">
-              <Link href="/leaders">Лідери</Link>
-            </li>
-            <li className="rounded-xl px-5 py-2.5 text-sm text-white/60 transition-all hover:bg-dark-blue/40 hover:text-white">
-              <Link href="/matches">Матчі</Link>
-            </li>
-          </ul>
+          <HeaderNavigation />
         </div>
         <div className="flex items-center gap-4">
           <Input

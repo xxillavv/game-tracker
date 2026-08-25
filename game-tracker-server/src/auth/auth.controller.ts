@@ -4,11 +4,13 @@ import { CreateUserDto, LoginUserDto } from '../../utils/dto/users.dto.js';
 import type { Request, Response } from 'express';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
+import { SkipThrottle } from '@nestjs/throttler'
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) { }
 
+  @SkipThrottle()
   @Post('register')
   async registerUser(@Body() body: CreateUserDto, @Res({ passthrough: true }) response: Response) {
     const { accessToken, user } = await this.authService.registerUser(body.username, body.email, body.password)
@@ -23,6 +25,7 @@ export class AuthController {
     return user
   }
 
+  @SkipThrottle()
   @Post('login')
   async loginUser(@Body() body: LoginUserDto, @Res({ passthrough: true }) response: Response) {
     const { accessToken, user } = await this.authService.loginUser(body.email, body.password)

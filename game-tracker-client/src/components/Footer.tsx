@@ -6,14 +6,14 @@ export function Footer() {
   return (
     <footer className="mt-auto border-t border-white/5 font-mono">
       <div className="container mx-auto px-6 py-14">
-        <div className="grid grid-cols-[1.4fr_1fr_1fr_1fr] gap-12">
-          <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
+          <div className="flex flex-col gap-5 lg:max-w-xs">
             <Link
               href="/"
               className="flex w-fit items-center text-xl font-semibold tracking-wide text-white transition-opacity hover:opacity-80"
             >
               <span className="mr-2 rounded-xl bg-turquoise p-1.5">
-                <Zap color="black" />
+                <Zap className="size-5 text-black" />
               </span>
               NEXUS<span className="text-turquoise">.gg</span>
             </Link>
@@ -44,25 +44,27 @@ export function Footer() {
             </div>
           </div>
 
-          {footerNavigationSections.map((section) => (
-            <div key={section.title} className="flex flex-col gap-4">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-white/30">
-                {section.title}
-              </h3>
-              <ul className="flex flex-col gap-2.5">
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-white/50 transition-colors hover:text-turquoise"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          <div className="flex flex-1 flex-wrap gap-12 sm:justify-around lg:justify-end lg:gap-20">
+            {footerNavigationSections.map((section) => (
+              <div key={section.title} className="flex flex-col gap-4">
+                <h3 className="text-xs font-semibold uppercase tracking-wider text-white/30">
+                  {section.title}
+                </h3>
+                <ul className="flex flex-col gap-2.5">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="text-sm text-white/50 transition-colors hover:text-turquoise"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="border-t border-white/5">

@@ -8,42 +8,51 @@ export class LeaderboardService {
     private readonly dotaProvider: DotaProvider
   ) { }
 
-  async getLeaderboard(limit?: number) {
-    let data = await this.prisma.leaderboard.findMany({
-      take: limit,
-      orderBy: {
-        playerRank: 'asc',
-      },
-    });
+  async getLeaderboard(limit = 10, page = 1) {
+    const skip = (page - 1) * limit
 
-    if (data.length === 0) {
-      await this.syncLeaderboard();
+    const count = await this.prisma.leaderboard.count()
 
-      data = await this.prisma.leaderboard.findMany({
-        take: limit,
-        orderBy: {
-          playerRank: 'asc',
-        },
-      });
+    if (count === 0) {
+      await this.syncLeaderboard()
     }
 
-    return data;
+    const [totalCount, data] = await this.prisma.$transaction([
+      this.prisma.leaderboard.count(),
+      this.prisma.leaderboard.findMany({
+        take: limit,
+        skip,
+        orderBy: {
+          playerRank: 'asc'
+        }
+      })
+    ])
+
+    return {
+      data,
+      metadata: {
+        currentPage: page,
+        totalCount,
+        totalPages: Math.ceil(totalCount / limit)
+      }
+    };
   }
 
   async syncLeaderboard() {
-    const data = await this.dotaProvider.getLeaderboard()
+    const apiData = await this.dotaProvider.getLeaderboard()
 
-    const mappedData = data.leaderboard.map(el => ({
+    const mappedApiData = apiData.leaderboard.map(el => ({
       playerRank: el.rank,
       username: el.name,
       teamName: el.team_tag,
       teamId: el.team_id
     }))
 
-    await this.prisma.leaderboard.deleteMany()
-
-    await this.prisma.leaderboard.createMany({
-      data: mappedData
-    })
+    await this.prisma.$transaction([
+      this.prisma.leaderboard.deleteMany(),
+      this.prisma.leaderboard.createMany({
+        data: mappedApiData
+      })
+    ])
   }
 }
