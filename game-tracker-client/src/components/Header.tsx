@@ -13,7 +13,7 @@ export const Header = () => {
             className="flex items-center text-xl font-semibold tracking-wide text-white transition-opacity hover:opacity-80"
           >
             <span className="mr-2 rounded-xl bg-turquoise p-1.5">
-              <Zap color="black" />
+              <Zap className="text-black size-5" />
             </span>
             NEXUS<span className="text-turquoise">.gg</span>
           </Link>

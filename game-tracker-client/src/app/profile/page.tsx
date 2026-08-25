@@ -8,7 +8,7 @@ const page = async () => {
   return (
     <>
       <Header />
-      <section className="container mx-auto max-w-7xl px-6 py-10 font-mono">
+      <section className="container mx-auto max-w-7xl px-6">
         <div className="flex flex-col gap-10 lg:flex-row mb-10">
           <div className="flex-1">
             <ProfileCard />

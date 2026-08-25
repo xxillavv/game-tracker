@@ -39,13 +39,13 @@ export function Hero() {
           в рейтингу. Все в одному місці.
         </p>
         <div className="mt-10 flex items-center gap-4">
-          <Link href="/dashboard">
+          <Link href="/profile">
             <Button className="h-12 cursor-pointer rounded-xl bg-turquoise px-8 text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]">
               <Crosshair className="mr-1 size-5" />
               Почати трекінг
             </Button>
           </Link>
-          <Link href="/leaders">
+          <Link href="/leaders?page=1">
             <Button
               variant="outline"
               className="h-12 cursor-pointer rounded-xl border-white/10 bg-dark-blue px-8 text-base font-semibold text-white transition-all hover:border-turquoise/30 hover:bg-dark-blue/80"
@@ -54,8 +54,8 @@ export function Hero() {
             </Button>
           </Link>
         </div>
-        <div className="mt-16 grid w-full max-w-2xl grid-cols-3 gap-6">
-          <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+        <div className="mt-16 flex w-full max-w-2xl flex-col gap-6 sm:flex-row">
+          <div className="group flex-1 rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
               <div className="rounded-xl bg-turquoise/10 p-2.5">
                 <Users className="size-5 text-turquoise" />
@@ -64,7 +64,7 @@ export function Hero() {
             <p className="text-2xl font-bold text-white">12K+</p>
             <p className="mt-1 text-sm text-white/40">Гравців</p>
           </div>
-          <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+          <div className="group flex-1 rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
               <div className="rounded-xl bg-turquoise/10 p-2.5">
                 <Trophy className="size-5 text-turquoise" />
@@ -73,7 +73,7 @@ export function Hero() {
             <p className="text-2xl font-bold text-white">58K+</p>
             <p className="mt-1 text-sm text-white/40">Матчів</p>
           </div>
-          <div className="group rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+          <div className="group flex-1 rounded-2xl bg-dark-blue/60 p-6 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
             <div className="mb-3 flex items-center justify-center">
               <div className="rounded-xl bg-turquoise/10 p-2.5">
                 <TrendingUp className="size-5 text-turquoise" />
