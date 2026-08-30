@@ -4,6 +4,8 @@ import { NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   const cookieHeader = request.headers.get("cookie") || ""
 
+  console.log(cookieHeader)
+
   const response = await fetch("http://localhost:3001/api/users/me", {
     headers: {
       Cookie: cookieHeader

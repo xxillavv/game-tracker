@@ -8,6 +8,7 @@ import Link from "next/link";
 import { IFormInputs } from "@/types/auth.types";
 import { useAuth } from "@/hooks/useAuth";
 import Loading from "../loading";
+import { Spinner } from "@/components/ui/spinner";
 
 export default function LoginPage() {
   const [activeTab, setActiveTab] = useState<"login" | "register">("login");
@@ -18,8 +19,6 @@ export default function LoginPage() {
   });
 
   const { login, register } = useAuth();
-
-  if (login.isPending || register.isPending) return <Loading />;
 
   const handleFormSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -177,17 +176,27 @@ export default function LoginPage() {
             {activeTab === "login" ? (
               <Button
                 type="submit"
+                disabled={login.isPending}
                 className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
               >
-                <LogIn className="mr-1.5 size-5" />
+                {login.isPending ? (
+                  <Spinner />
+                ) : (
+                  <LogIn className="mr-1.5 size-5" />
+                )}
                 Увійти
               </Button>
             ) : (
               <Button
                 type="submit"
+                disabled={register.isPending}
                 className="mt-2 h-12 w-full cursor-pointer rounded-xl bg-turquoise text-base font-semibold text-black transition-all hover:bg-turquoise/80 hover:shadow-[0_0_24px_rgba(0,228,184,0.3)]"
               >
-                <UserPlus className="mr-1.5 size-5" />
+                {register.isPending ? (
+                  <Spinner />
+                ) : (
+                  <UserPlus className="mr-1.5 size-5" />
+                )}
                 Зареєструватися
               </Button>
             )}
