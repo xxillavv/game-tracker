@@ -1,4 +1,4 @@
-import { syncStats } from "@/app/profile/queries"
+import { syncStats } from "@/api/stats.api"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError, AxiosResponse, } from "axios"
 import { useRouter } from "next/navigation"

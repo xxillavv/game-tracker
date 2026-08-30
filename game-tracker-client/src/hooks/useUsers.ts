@@ -1,4 +1,4 @@
-import { editUserProfile, uploadFunc } from "@/app/profile/queries"
+import { editUserProfile, uploadFunc } from "@/api/user.api"
 import { IEditUserBody } from "@/types/user.types"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError, AxiosResponse } from "axios"

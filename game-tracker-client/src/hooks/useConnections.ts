@@ -1,4 +1,4 @@
-import { connectUserGameAccount, deleteConnection } from "@/app/profile/queries"
+import { connectUserGameAccount, deleteConnection } from "@/api/connections.api"
 import { ICreateConnectionBody } from "@/types/connections.types"
 import { useMutation } from "@tanstack/react-query"
 import { useRouter } from "next/navigation"

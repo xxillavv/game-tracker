@@ -1,4 +1,4 @@
-import { loginUser, logoutUser, registerUser } from "@/app/login/queries";
+import { loginUser, logoutUser, registerUser } from "@/api/auth.api";
 import { IAuthUserResponse, ILoginUser, IRegisterUser } from "@/types/auth.types"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
