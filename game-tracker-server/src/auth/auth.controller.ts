@@ -17,9 +17,8 @@ export class AuthController {
 
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
-      // expires: new Date(Date.now() + 10 * 60 * 1000),
       sameSite: 'lax',
-      // secure: true
+      secure: true
     })
 
     return user
@@ -33,8 +32,7 @@ export class AuthController {
     response.cookie('accessToken', accessToken, {
       httpOnly: true,
       sameSite: 'lax',
-      // expires: new Date(Date.now() + 10 * 60 * 1000),
-      // secure: true
+      secure: true
     })
 
     return user
@@ -47,8 +45,7 @@ export class AuthController {
     response.cookie('accessToken', newAccessToken, {
       httpOnly: true,
       sameSite: 'lax',
-      // expires: new Date(Date.now() + 10 * 60 * 1000),
-      // secure: true
+      secure: true
     })
   }
 
