@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
 
 describe('UsersController', () => {
@@ -12,6 +12,7 @@ describe('UsersController', () => {
     getById: jest.fn(),
     getByName: jest.fn(),
     editUser: jest.fn(),
+    uploadAvatar: jest.fn(),
   }
 
   beforeEach(async () => {
@@ -103,51 +104,44 @@ describe('UsersController', () => {
 
   describe('editUser', () => {
     it('should edit user email and username', async () => {
-      const updatedUser = {
-        userId: 1,
-        email: "new@test.test",
-        username: "newname",
-      }
+      mockUserService.editUser.mockResolvedValue(undefined)
 
-      mockUserService.editUser.mockResolvedValue(updatedUser)
+      const body = { email: "new@test.test", username: "newname" }
+      const mockRequest = { user: { userId: 1 } } as TRequestWithUser
 
-      const body = { password: "Test12341234", email: "new@test.test", username: "newname" }
-
-      await expect(controller.editUser(1, body)).resolves.toEqual(updatedUser)
-      expect(mockUserService.editUser).toHaveBeenCalledWith(1, "Test12341234", "new@test.test", "newname")
+      await expect(controller.editUser(body, mockRequest)).resolves.toBeUndefined()
+      expect(mockUserService.editUser).toHaveBeenCalledWith(1, "new@test.test", "newname")
     })
 
-    it('should throw NotFoundException if user does not exist', async () => {
+    it('should propagate errors from service', async () => {
       mockUserService.editUser.mockRejectedValue(new NotFoundException("User not found."))
 
-      const body = { password: "Test12341234", email: "new@test.test", username: "newname" }
+      const body = { email: "new@test.test", username: "newname" }
+      const mockRequest = { user: { userId: 999 } } as TRequestWithUser
 
-      await expect(controller.editUser(999, body)).rejects.toThrow(NotFoundException)
-      expect(mockUserService.editUser).toHaveBeenCalledWith(999, "Test12341234", "new@test.test", "newname")
+      await expect(controller.editUser(body, mockRequest)).rejects.toThrow(NotFoundException)
+      expect(mockUserService.editUser).toHaveBeenCalledWith(999, "new@test.test", "newname")
     })
+  })
 
-    it('should throw UnauthorizedException if password is incorrect', async () => {
-      mockUserService.editUser.mockRejectedValue(new UnauthorizedException("Incorrect password."))
+  describe('uploadAvatar', () => {
+    it('should upload avatar for current user', async () => {
+      mockUserService.uploadAvatar.mockResolvedValue(undefined)
 
-      const body = { password: "WrongPass123", email: "new@test.test", username: "newname" }
+      const mockRequest = { user: { userId: 1 } } as TRequestWithUser
+      const mockFile = {
+        originalname: "avatar.png",
+        buffer: Buffer.from("image content"),
+        mimetype: "image/png"
+      } as Express.Multer.File
 
-      await expect(controller.editUser(1, body)).rejects.toThrow(UnauthorizedException)
-      expect(mockUserService.editUser).toHaveBeenCalledWith(1, "WrongPass123", "new@test.test", "newname")
-    })
-
-    it('should pass undefined for optional fields', async () => {
-      const updatedUser = {
-        userId: 1,
-        email: "test@test.test",
-        username: "test",
-      }
-
-      mockUserService.editUser.mockResolvedValue(updatedUser)
-
-      const body = { password: "Test12341234" } as any
-
-      await expect(controller.editUser(1, body)).resolves.toEqual(updatedUser)
-      expect(mockUserService.editUser).toHaveBeenCalledWith(1, "Test12341234", undefined, undefined)
+      await expect(controller.uploadAvatar(mockRequest, mockFile)).resolves.toBeUndefined()
+      expect(mockUserService.uploadAvatar).toHaveBeenCalledWith(
+        "avatar.png",
+        mockFile.buffer,
+        "image/png",
+        1
+      )
     })
   })
 });

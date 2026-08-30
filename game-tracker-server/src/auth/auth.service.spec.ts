@@ -27,6 +27,7 @@ describe('AuthService', () => {
     sessions: {
       create: jest.fn(),
       upsert: jest.fn(),
+      deleteMany: jest.fn(),
     },
   };
 
@@ -233,6 +234,19 @@ describe('AuthService', () => {
 
       await expect(service.refreshToken("someToken"))
         .rejects.toThrow()
+    })
+  })
+
+  describe('logoutUser', () => {
+    it('should delete user sessions and return success message', async () => {
+      mockPrismaService.sessions.deleteMany.mockResolvedValue({ count: 1 })
+
+      const result = await service.logoutUser(1)
+
+      expect(result).toEqual({ message: "Logged out successfully!" })
+      expect(mockPrismaService.sessions.deleteMany).toHaveBeenCalledWith({
+        where: { sessionUserId: 1 }
+      })
     })
   })
 });

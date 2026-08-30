@@ -3,6 +3,8 @@ import { AuthController } from './auth.controller.js';
 import { AuthService } from './auth.service.js';
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import type { Request, Response } from 'express';
+import { AuthGuard } from '../guards/auth.guard.js';
+import type { TRequestWithUser } from '../../utils/types/request.types.js';
 
 describe('AuthController', () => {
   let controller: AuthController;
@@ -10,18 +12,25 @@ describe('AuthController', () => {
   const mockAuthService = {
     registerUser: jest.fn(),
     loginUser: jest.fn(),
-    refreshToken: jest.fn()
+    refreshToken: jest.fn(),
+    logoutUser: jest.fn(),
   }
 
   const mockResponse = {
     cookie: jest.fn(),
+    clearCookie: jest.fn(),
   } as unknown as Response
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [AuthController],
       providers: [AuthService],
-    }).overrideProvider(AuthService).useValue(mockAuthService).compile();
+    })
+      .overrideProvider(AuthService)
+      .useValue(mockAuthService)
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<AuthController>(AuthController);
   });
@@ -133,6 +142,30 @@ describe('AuthController', () => {
       mockAuthService.refreshToken.mockRejectedValue(new UnauthorizedException("Invalid token."))
 
       await expect(controller.refreshToken(mockRequest, mockResponse)).rejects.toThrow(UnauthorizedException)
+    })
+  })
+
+  describe('logoutUser', () => {
+    it('should clear cookie, call logoutUser on service and return message', async () => {
+      const serviceResult = { message: "Logged out successfully!" }
+      mockAuthService.logoutUser.mockResolvedValue(serviceResult)
+
+      const mockRequest = {
+        user: { userId: 1 }
+      } as TRequestWithUser
+
+      const result = await controller.logoutUser(mockResponse, mockRequest)
+
+      expect(mockResponse.clearCookie).toHaveBeenCalledWith(
+        'accessToken',
+        expect.objectContaining({
+          httpOnly: true,
+          secure: true,
+          sameSite: 'lax',
+        })
+      )
+      expect(mockAuthService.logoutUser).toHaveBeenCalledWith(1)
+      expect(result).toEqual(serviceResult)
     })
   })
 });
