@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const loginUser = async (body: ILoginUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
-    'http://localhost:3001/api/auth/login',
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
     body,
     {
       withCredentials: true
@@ -15,7 +15,7 @@ export const loginUser = async (body: ILoginUser) => {
 
 export const registerUser = async (body: IRegisterUser) => {
   const { data } = await axios.post<IAuthUserResponse>(
-    'http://localhost:3001/api/auth/register',
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/register`,
     body,
     {
       withCredentials: true
@@ -27,7 +27,7 @@ export const registerUser = async (body: IRegisterUser) => {
 
 export const logoutUser = async () => {
   const { data } = await axios.post(
-    'http://localhost:3001/api/auth/logout',
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/logout`,
     null,
     {
       withCredentials: true

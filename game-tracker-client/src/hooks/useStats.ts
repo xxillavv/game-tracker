@@ -1,19 +1,7 @@
+import { syncStats } from "@/app/profile/queries"
 import { useMutation } from "@tanstack/react-query"
-import axios, { AxiosError, AxiosResponse, } from "axios"
+import { AxiosError, AxiosResponse, } from "axios"
 import { useRouter } from "next/navigation"
-
-const syncStats = async () => {
-  const response = await axios.post(
-    "http://localhost:3001/api/stats/dota/sync",
-    null,
-    {
-      withCredentials: true
-    }
-  )
-
-  return response.data
-}
-
 
 export const useStats = () => {
   const router = useRouter()
@@ -25,7 +13,6 @@ export const useStats = () => {
       router.refresh()
     }
   })
-
 
   return {
     syncStats: syncStatsMutation

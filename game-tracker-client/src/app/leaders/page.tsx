@@ -30,7 +30,7 @@ const page = async ({
 
   const leaders = await getLeaderboardData(page);
 
-  if (!leaders?.data || (leaders.metadata?.totalPages > 0 && page > leaders.metadata.totalPages)) {
+  if (page > leaders.metadata.totalPages) {
     notFound();
   }
 
