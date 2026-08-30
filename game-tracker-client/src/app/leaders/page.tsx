@@ -1,6 +1,6 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getLeaderboardData } from "../queries";
 import { LeaderCard } from "@/components/LeaderCard";
 import { LeadersPagesNavigation } from "@/components/LeadersPagesNavigation";
@@ -17,13 +17,22 @@ const page = async ({
 }) => {
   const params = await searchParams;
 
-  if (!params.page) {
+  if (params.page === undefined) {
     redirect("/leaders?page=1");
   }
 
-  const page = +params.page;
+  const isPositiveInteger = /^\d+$/.test(params.page) && Number(params.page) > 0;
+  if (!isPositiveInteger) {
+    notFound();
+  }
+
+  const page = Number(params.page);
 
   const leaders = await getLeaderboardData(page);
+
+  if (!leaders?.data || (leaders.metadata?.totalPages > 0 && page > leaders.metadata.totalPages)) {
+    notFound();
+  }
 
   const uniqueTeams = new Set(
     leaders.data.map((el) => el.teamName).filter(Boolean),
