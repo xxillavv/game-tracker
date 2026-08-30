@@ -1,4 +1,4 @@
-import { Body, Controller, FileTypeValidator, Get, MaxFileSizeValidator, Param, ParseFilePipe, ParseIntPipe, Patch, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, FileTypeValidator, Get, HttpCode, HttpStatus, MaxFileSizeValidator, Param, ParseFilePipe, ParseIntPipe, Patch, Post, Query, Req, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { UsersService } from './users.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
@@ -30,8 +30,9 @@ export class UsersController {
 
   @UseGuards(AuthGuard)
   @Patch()
-  editUser(@Body() body: EditUserDto, @Req() request: TRequestWithUser) {
-    return this.usersService.editUser(request.user.userId, body.email, body.username)
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async editUser(@Body() body: EditUserDto, @Req() request: TRequestWithUser) {
+    await this.usersService.editUser(request.user.userId, body.email, body.username)
   }
 
   @UseGuards(AuthGuard)

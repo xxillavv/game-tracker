@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { UsersController } from './users.controller.js';
 import { UsersService } from './users.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
-import { NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { NotFoundException } from '@nestjs/common';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
 
 describe('UsersController', () => {

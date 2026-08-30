@@ -55,15 +55,13 @@ export class UsersService {
   }
 
   async editUser(id, email, username) {
-      await this.prisma.users.update({
+    await this.prisma.users.update({
       where: { userId: id },
       data: {
         email,
         username
       },
     })
-
-    return
   }
 
 
