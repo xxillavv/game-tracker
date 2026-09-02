@@ -34,8 +34,8 @@ describe('MatchesController', () => {
   describe('getDotaMatches', () => {
     it('should return dota matches for the current user', async () => {
       const matches = [
-        { matchId: 1, statsMatchId: 5, gameMatchId: 1, metadata: { kills: 10, deaths: 3 } },
-        { matchId: 2, statsMatchId: 5, gameMatchId: 1, metadata: { kills: 5, deaths: 8 } },
+        { matchId: 1, connectionMatchId: 10, gameMatchId: 1, metadata: { kills: 10, deaths: 3 } },
+        { matchId: 2, connectionMatchId: 10, gameMatchId: 1, metadata: { kills: 5, deaths: 8 } },
       ]
 
       mockMatchesService.getDotaMatches.mockResolvedValue(matches)

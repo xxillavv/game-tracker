@@ -2,11 +2,13 @@ import { Controller, Get, Req, UseGuards } from '@nestjs/common';
 import { MatchesService } from './matches.service.js';
 import { AuthGuard } from '../guards/auth.guard.js';
 import type { TRequestWithUser } from '../../utils/types/request.types.js';
+import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('matches')
 export class MatchesController {
   constructor(private readonly matchesService: MatchesService) { }
 
+  @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get('dota')
   getDotaMatches(@Req() request: TRequestWithUser) {
