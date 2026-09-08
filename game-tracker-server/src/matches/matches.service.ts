@@ -4,17 +4,18 @@ import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class MatchesService {
-  constructor(private readonly dotaProvider: DotaProvider,
-    private readonly prisma: PrismaService
-  ) { }
+  constructor(
+    private readonly dotaProvider: DotaProvider,
+    private readonly prisma: PrismaService,
+  ) {}
 
   async getDotaMatches(userId: number) {
     const dotaInfo = await this.prisma.games.findFirst({
-      where: { name: "DOTA" }
-    })
+      where: { name: 'DOTA' },
+    });
 
     if (!dotaInfo) {
-      throw new NotFoundException("Game 'DOTA' not found.")
+      throw new NotFoundException("Game 'DOTA' not found.");
     }
 
     const connection = await this.prisma.connections.findFirst({
@@ -23,34 +24,34 @@ export class MatchesService {
       },
       select: {
         connectionId: true,
-      }
-    })
+      },
+    });
 
     if (!connection) {
-      throw new NotFoundException("Connection not found.")
+      throw new NotFoundException('Connection not found.');
     }
 
     const matches = await this.prisma.matches.findMany({
       where: {
         connectionMatchId: connection.connectionId,
         gameMatchId: dotaInfo.gameId,
-      }
-    })
+      },
+    });
 
     if (!matches.length) {
-      return await this.syncDotaMatches(userId)
+      return await this.syncDotaMatches(userId);
     }
 
-    return matches
+    return matches;
   }
 
   async syncDotaMatches(userId: number) {
     const dotaInfo = await this.prisma.games.findFirst({
-      where: { name: "DOTA" }
-    })
+      where: { name: 'DOTA' },
+    });
 
     if (!dotaInfo) {
-      throw new NotFoundException("Game 'DOTA' not found.")
+      throw new NotFoundException("Game 'DOTA' not found.");
     }
 
     const connection = await this.prisma.connections.findFirst({
@@ -60,18 +61,20 @@ export class MatchesService {
       select: {
         connectionId: true,
         externalId: true,
-      }
-    })
+      },
+    });
 
     if (!connection) {
-      throw new NotFoundException("Connection not found.")
+      throw new NotFoundException('Connection not found.');
     }
 
     if (!connection.externalId) {
-      throw new NotFoundException("Steam ID is not found.")
+      throw new NotFoundException('Steam ID is not found.');
     }
 
-    const syncMatches = await this.dotaProvider.getMatches(connection.externalId)
+    const syncMatches = await this.dotaProvider.getMatches(
+      connection.externalId,
+    );
 
     const dataToInsert = syncMatches.map((el) => {
       return {
@@ -87,10 +90,10 @@ export class MatchesService {
           matchId: el.match_id,
           isRadiantWin: el.radiant_win,
           towerDamage: el.tower_damage,
-          heroDamage: el.hero_damage
-        }
-      }
-    })
+          heroDamage: el.hero_damage,
+        },
+      };
+    });
 
     await this.prisma.$transaction([
       this.prisma.matches.deleteMany({
@@ -101,7 +104,7 @@ export class MatchesService {
       }),
 
       this.prisma.matches.createMany({
-        data: dataToInsert
+        data: dataToInsert,
       }),
     ]);
 
@@ -109,7 +112,7 @@ export class MatchesService {
       where: {
         connectionMatchId: connection.connectionId,
         gameMatchId: dotaInfo.gameId,
-      }
-    })
+      },
+    });
   }
 }

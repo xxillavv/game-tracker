@@ -1,20 +1,23 @@
-import { Controller, DefaultValuePipe, Get, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Controller, Get, ParseIntPipe, Post, Query } from '@nestjs/common';
 import { LeaderboardService } from './leaderboard.service.js';
 import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('leaderboard')
 export class LeaderboardController {
-  constructor(private readonly leaderboardService: LeaderboardService) { }
+  constructor(private readonly leaderboardService: LeaderboardService) {}
 
   @SkipThrottle()
-  @Post("dota/sync")
+  @Post('dota/sync')
   syncLeaderboard() {
-    return this.leaderboardService.syncLeaderboard()
+    return this.leaderboardService.syncLeaderboard();
   }
 
   @SkipThrottle()
-  @Get("dota")
-  getLeaderboard(@Query('limit', new ParseIntPipe()) limit: number, @Query("page", new ParseIntPipe()) page: number) {
-    return this.leaderboardService.getLeaderboard(limit, page)
+  @Get('dota')
+  getLeaderboard(
+    @Query('limit', new ParseIntPipe()) limit: number,
+    @Query('page', new ParseIntPipe()) page: number,
+  ) {
+    return this.leaderboardService.getLeaderboard(limit, page);
   }
 }

@@ -14,12 +14,12 @@ describe('AuthController', () => {
     loginUser: jest.fn(),
     refreshToken: jest.fn(),
     logoutUser: jest.fn(),
-  }
+  };
 
   const mockResponse = {
     cookie: jest.fn(),
     clearCookie: jest.fn(),
-  } as unknown as Response
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -38,7 +38,7 @@ describe('AuthController', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
-  })
+  });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
@@ -47,114 +47,168 @@ describe('AuthController', () => {
   describe('registerUser', () => {
     it('should register user, set cookie, and return user without password', async () => {
       const serviceResult = {
-        accessToken: "accessToken123",
-        user: { userId: 1, email: "test@test.test", username: "testuser" }
-      }
-      mockAuthService.registerUser.mockResolvedValue(serviceResult)
+        accessToken: 'accessToken123',
+        user: { userId: 1, email: 'test@test.test', username: 'testuser' },
+      };
+      mockAuthService.registerUser.mockResolvedValue(serviceResult);
 
-      const body = { username: "testuser", email: "test@test.test", password: "Test12341234" }
+      const body = {
+        username: 'testuser',
+        email: 'test@test.test',
+        password: 'Test12341234',
+      };
 
-      const result = await controller.registerUser(body, mockResponse)
+      const result = await controller.registerUser(
+        body,
+        mockResponse as unknown as Response,
+      );
 
-      expect(result).toEqual({ userId: 1, email: "test@test.test", username: "testuser" })
-      expect(mockAuthService.registerUser).toHaveBeenCalledWith("testuser", "test@test.test", "Test12341234")
+      expect(result).toEqual({
+        userId: 1,
+        email: 'test@test.test',
+        username: 'testuser',
+      });
+      expect(mockAuthService.registerUser).toHaveBeenCalledWith(
+        'testuser',
+        'test@test.test',
+        'Test12341234',
+      );
       expect(mockResponse.cookie).toHaveBeenCalledWith(
         'accessToken',
         'accessToken123',
         expect.objectContaining({
           httpOnly: true,
           sameSite: 'lax',
-          secure: true
-        })
-      )
-    })
+          secure: true,
+        }),
+      );
+    });
 
     it('should propagate ConflictException from service', async () => {
-      mockAuthService.registerUser.mockRejectedValue(new ConflictException("User with this email already exists"))
+      mockAuthService.registerUser.mockRejectedValue(
+        new ConflictException('User with this email already exists'),
+      );
 
-      const body = { username: "testuser", email: "test@test.test", password: "Test12341234" }
+      const body = {
+        username: 'testuser',
+        email: 'test@test.test',
+        password: 'Test12341234',
+      };
 
-      await expect(controller.registerUser(body, mockResponse)).rejects.toThrow(ConflictException)
-    })
-  })
+      await expect(
+        controller.registerUser(body, mockResponse as unknown as Response),
+      ).rejects.toThrow(ConflictException);
+    });
+  });
 
   describe('loginUser', () => {
     it('should login user, set cookie, and return user without password', async () => {
       const serviceResult = {
-        accessToken: "accessToken123",
-        user: { userId: 1, email: "test@test.test", username: "testuser" }
-      }
-      mockAuthService.loginUser.mockResolvedValue(serviceResult)
+        accessToken: 'accessToken123',
+        user: { userId: 1, email: 'test@test.test', username: 'testuser' },
+      };
+      mockAuthService.loginUser.mockResolvedValue(serviceResult);
 
-      const body = { email: "test@test.test", password: "Test12341234" }
+      const body = { email: 'test@test.test', password: 'Test12341234' };
 
-      const result = await controller.loginUser(body, mockResponse)
+      const result = await controller.loginUser(
+        body,
+        mockResponse as unknown as Response,
+      );
 
-      expect(result).toEqual({ userId: 1, email: "test@test.test", username: "testuser" })
-      expect(mockAuthService.loginUser).toHaveBeenCalledWith("test@test.test", "Test12341234")
+      expect(result).toEqual({
+        userId: 1,
+        email: 'test@test.test',
+        username: 'testuser',
+      });
+      expect(mockAuthService.loginUser).toHaveBeenCalledWith(
+        'test@test.test',
+        'Test12341234',
+      );
       expect(mockResponse.cookie).toHaveBeenCalledWith(
         'accessToken',
         'accessToken123',
         expect.objectContaining({
           httpOnly: true,
           sameSite: 'lax',
-          secure: true
-        })
-      )
-    })
+          secure: true,
+        }),
+      );
+    });
 
     it('should propagate UnauthorizedException for wrong credentials', async () => {
-      mockAuthService.loginUser.mockRejectedValue(new UnauthorizedException("Incorrect email or password."))
+      mockAuthService.loginUser.mockRejectedValue(
+        new UnauthorizedException('Incorrect email or password.'),
+      );
 
-      const body = { email: "wrong@test.test", password: "WrongPass123" }
+      const body = { email: 'wrong@test.test', password: 'WrongPass123' };
 
-      await expect(controller.loginUser(body, mockResponse)).rejects.toThrow(UnauthorizedException)
-    })
-  })
+      await expect(
+        controller.loginUser(body, mockResponse as unknown as Response),
+      ).rejects.toThrow(UnauthorizedException);
+    });
+  });
 
   describe('refreshToken', () => {
     it('should refresh token and set new cookie', async () => {
       const mockRequest = {
-        cookies: { accessToken: "oldAccessToken" }
-      } as unknown as Request
+        cookies: { accessToken: 'oldAccessToken' },
+      } as unknown as Request;
 
-      mockAuthService.refreshToken.mockResolvedValue({ newAccessToken: "newAccessToken123" })
+      mockAuthService.refreshToken.mockResolvedValue({
+        newAccessToken: 'newAccessToken123',
+      });
 
-      await controller.refreshToken(mockRequest, mockResponse)
+      await controller.refreshToken(
+        mockRequest,
+        mockResponse as unknown as Response,
+      );
 
-      expect(mockAuthService.refreshToken).toHaveBeenCalledWith("oldAccessToken")
+      expect(mockAuthService.refreshToken).toHaveBeenCalledWith(
+        'oldAccessToken',
+      );
       expect(mockResponse.cookie).toHaveBeenCalledWith(
         'accessToken',
         'newAccessToken123',
         expect.objectContaining({
           httpOnly: true,
           sameSite: 'lax',
-          secure: true
-        })
-      )
-    })
+          secure: true,
+        }),
+      );
+    });
 
     it('should propagate UnauthorizedException for invalid token', async () => {
       const mockRequest = {
-        cookies: { accessToken: "invalidToken" }
-      } as unknown as Request
+        cookies: { accessToken: 'invalidToken' },
+      } as unknown as Request;
 
-      mockAuthService.refreshToken.mockRejectedValue(new UnauthorizedException("Invalid token."))
+      mockAuthService.refreshToken.mockRejectedValue(
+        new UnauthorizedException('Invalid token.'),
+      );
 
-      await expect(controller.refreshToken(mockRequest, mockResponse)).rejects.toThrow(UnauthorizedException)
-    })
-  })
+      await expect(
+        controller.refreshToken(
+          mockRequest,
+          mockResponse as unknown as Response,
+        ),
+      ).rejects.toThrow(UnauthorizedException);
+    });
+  });
 
   describe('logoutUser', () => {
     it('should clear cookie, call logoutUser on service and return message', async () => {
-      const serviceResult = { message: "Logged out successfully!" }
-      mockAuthService.logoutUser.mockResolvedValue(serviceResult)
+      const serviceResult = { message: 'Logged out successfully!' };
+      mockAuthService.logoutUser.mockResolvedValue(serviceResult);
 
       const mockRequest = {
-        user: { userId: 1 }
-      } as TRequestWithUser
+        user: { userId: 1 },
+      } as TRequestWithUser;
 
-      const result = await controller.logoutUser(mockResponse, mockRequest)
+      const result = await controller.logoutUser(
+        mockResponse as unknown as Response,
+        mockRequest,
+      );
 
       expect(mockResponse.clearCookie).toHaveBeenCalledWith(
         'accessToken',
@@ -162,10 +216,10 @@ describe('AuthController', () => {
           httpOnly: true,
           secure: true,
           sameSite: 'lax',
-        })
-      )
-      expect(mockAuthService.logoutUser).toHaveBeenCalledWith(1)
-      expect(result).toEqual(serviceResult)
-    })
-  })
+        }),
+      );
+      expect(mockAuthService.logoutUser).toHaveBeenCalledWith(1);
+      expect(result).toEqual(serviceResult);
+    });
+  });
 });

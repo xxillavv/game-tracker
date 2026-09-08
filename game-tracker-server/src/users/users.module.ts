@@ -7,17 +7,23 @@ import { APP_GUARD } from '@nestjs/core';
 
 @Module({
   controllers: [UsersController],
-  providers: [UsersService, {
-    provide: APP_GUARD,
-    useClass: ThrottlerGuard
-  }],
-  imports: [AuthModule, ThrottlerModule.forRoot({
-    throttlers: [
-      {
-        ttl: 60000,
-        limit: 3
-      }
-    ]
-  })]
+  providers: [
+    UsersService,
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+  ],
+  imports: [
+    AuthModule,
+    ThrottlerModule.forRoot({
+      throttlers: [
+        {
+          ttl: 60000,
+          limit: 3,
+        },
+      ],
+    }),
+  ],
 })
-export class UsersModule { }
+export class UsersModule {}

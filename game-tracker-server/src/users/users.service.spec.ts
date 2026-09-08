@@ -10,7 +10,9 @@ jest.mock('@aws-sdk/client-s3', () => {
     S3Client: jest.fn().mockImplementation(() => ({
       send: mockS3Send,
     })),
-    PutObjectCommand: jest.fn().mockImplementation((args) => args),
+    PutObjectCommand: jest
+      .fn()
+      .mockImplementation((args: Record<string, unknown>) => args),
   };
 });
 
@@ -110,7 +112,9 @@ describe('UsersService', () => {
     it('should throw NotFoundException if user is not exist', async () => {
       mockPrismaService.users.findFirst.mockResolvedValue(null);
 
-      await expect(service.getByName('Test')).rejects.toThrow(NotFoundException);
+      await expect(service.getByName('Test')).rejects.toThrow(
+        NotFoundException,
+      );
       expect(mockPrismaService.users.findFirst).toHaveBeenCalledWith({
         where: { username: 'Test' },
         select: {
@@ -177,7 +181,7 @@ describe('UsersService', () => {
           Key: `${fakeTime}_avatar.png`,
           Body: fileBuffer,
           ContentType: 'image/png',
-        })
+        }),
       );
 
       const expectedUrl = `https://game-tracker-avatars.s3.eu-north-1.amazonaws.com/${fakeTime}_avatar.png`;

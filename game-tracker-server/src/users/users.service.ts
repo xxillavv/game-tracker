@@ -1,5 +1,4 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../lib/prisma.service.js';
 import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { ConfigService } from '@nestjs/config';
@@ -8,15 +7,16 @@ import { ConfigService } from '@nestjs/config';
 export class UsersService {
   private readonly s3Client: S3Client;
 
-  constructor(private readonly prisma: PrismaService,
-    private readonly configService: ConfigService
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly configService: ConfigService,
   ) {
     this.s3Client = new S3Client({
-      region: this.configService.getOrThrow("AWS_S3_REGION"),
+      region: this.configService.getOrThrow('AWS_S3_REGION'),
       credentials: {
-        accessKeyId: this.configService.getOrThrow("AWS_ACCESS_KEY"),
-        secretAccessKey: this.configService.getOrThrow("AWS_SECRET_KEY")
-      }
+        accessKeyId: this.configService.getOrThrow('AWS_ACCESS_KEY'),
+        secretAccessKey: this.configService.getOrThrow('AWS_SECRET_KEY'),
+      },
     });
   }
 
@@ -27,15 +27,15 @@ export class UsersService {
         userId: true,
         email: true,
         username: true,
-        avatar: true
-      }
-    })
+        avatar: true,
+      },
+    });
 
     if (!user) {
-      throw new NotFoundException("User not found.")
+      throw new NotFoundException('User not found.');
     }
 
-    return user
+    return user;
   }
 
   async getByName(name: string) {
@@ -43,45 +43,49 @@ export class UsersService {
       where: { username: name },
       select: {
         userId: true,
-        username: true
-      }
-    })
+        username: true,
+      },
+    });
 
     if (!user) {
-      throw new NotFoundException("User not found.")
+      throw new NotFoundException('User not found.');
     }
 
-    return user
+    return user;
   }
 
-  async editUser(id, email, username) {
+  async editUser(id: number, email: string, username: string) {
     await this.prisma.users.update({
       where: { userId: id },
       data: {
         email,
-        username
+        username,
       },
-    })
+    });
   }
 
-
-  async uploadAvatar(fileName: string, file: Buffer, fileMimetype: string, userId: number) {
-    const dateNow = Date.now()
+  async uploadAvatar(
+    fileName: string,
+    file: Buffer,
+    fileMimetype: string,
+    userId: number,
+  ) {
+    const dateNow = Date.now();
 
     await this.s3Client.send(
       new PutObjectCommand({
         Bucket: 'game-tracker-avatars',
         Key: `${dateNow}_${fileName}`,
         Body: file,
-        ContentType: fileMimetype
-      })
-    )
+        ContentType: fileMimetype,
+      }),
+    );
 
-    const avatarUrl = `https://game-tracker-avatars.s3.eu-north-1.amazonaws.com/${dateNow}_${fileName}`
+    const avatarUrl = `https://game-tracker-avatars.s3.eu-north-1.amazonaws.com/${dateNow}_${fileName}`;
 
     await this.prisma.users.update({
       where: { userId: userId },
-      data: { avatar: avatarUrl }
-    })
+      data: { avatar: avatarUrl },
+    });
   }
 }

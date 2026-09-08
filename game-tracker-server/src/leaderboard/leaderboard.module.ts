@@ -7,6 +7,6 @@ import { HttpModule } from '@nestjs/axios';
 @Module({
   controllers: [LeaderboardController],
   providers: [LeaderboardService, DotaProvider],
-  imports: [HttpModule]
+  imports: [HttpModule],
 })
-export class LeaderboardModule { }
+export class LeaderboardModule {}

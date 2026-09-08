@@ -6,18 +6,18 @@ import { SkipThrottle } from '@nestjs/throttler';
 
 @Controller('matches')
 export class MatchesController {
-  constructor(private readonly matchesService: MatchesService) { }
+  constructor(private readonly matchesService: MatchesService) {}
 
   @SkipThrottle()
   @UseGuards(AuthGuard)
   @Get('dota')
   getDotaMatches(@Req() request: TRequestWithUser) {
-    return this.matchesService.getDotaMatches(request.user.userId)
+    return this.matchesService.getDotaMatches(request.user.userId);
   }
 
   @UseGuards(AuthGuard)
   @Get('dota/sync')
   syncDotaMatches(@Req() request: TRequestWithUser) {
-    return this.matchesService.syncDotaMatches(request.user.userId)
+    return this.matchesService.syncDotaMatches(request.user.userId);
   }
 }
