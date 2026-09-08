@@ -7,6 +7,8 @@ import { Gamepad2, Swords } from "lucide-react";
 const page = async () => {
   const matches = await getUserMatches();
 
+  console.log(matches)
+
   return (
     <>
       <Header />
@@ -82,4 +84,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default page;
