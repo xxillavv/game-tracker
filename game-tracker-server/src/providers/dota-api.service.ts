@@ -1,8 +1,8 @@
 import { HttpService } from "@nestjs/axios";
 import { Injectable, NotFoundException, ServiceUnavailableException } from "@nestjs/common";
-import { AxiosError } from "axios";
 import { IDotaMatches, IDotaPlayerStatsResponse, IDotaRatings, IDotaWinrate, ILeaderboardResponse } from "../../utils/types/providers.types.js";
 import { firstValueFrom } from "rxjs";
+import { AxiosError } from 'axios';
 
 @Injectable()
 export class DotaProvider {
