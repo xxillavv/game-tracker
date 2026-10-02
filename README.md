@@ -226,20 +226,20 @@ game-tracker/
 cd game-tracker-server
 
 # Install dependencies
-npm install
+pnpm install
 
 # Configure environment variables (see section below)
 cp .env.example .env
 # Edit .env with your values
 
 # Run database migrations
-npx prisma migrate dev
+pnpm exec prisma migrate dev
 
 # Generate Prisma client
-npx prisma generate
+pnpm exec prisma generate
 
 # Start the development server
-npm run start:dev
+pnpm start:dev
 ```
 
 The API will be available at **`http://localhost:3001/api`**
@@ -251,10 +251,10 @@ The API will be available at **`http://localhost:3001/api`**
 cd game-tracker-client
 
 # Install dependencies
-npm install
+pnpm install
 
 # Start the development server
-npm run dev
+pnpm dev
 ```
 
 The app will be available at **`http://localhost:3000`**
