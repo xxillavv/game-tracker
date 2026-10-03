@@ -1,9 +1,10 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getLeaderboardData } from "../queries";
 import { LeaderCard } from "@/components/LeaderCard";
 import { LeadersPagesNavigation } from "@/components/LeadersPagesNavigation";
+import LeaderboardSyncButton from "@/components/LeaderboardSyncButton";
 import { Crown, Gamepad2, Layers, Shield, Trophy } from "lucide-react";
 
 type TSearchParams = {
@@ -17,13 +18,22 @@ const page = async ({
 }) => {
   const params = await searchParams;
 
-  if (!params.page) {
+  if (params.page === undefined) {
     redirect("/leaders?page=1");
   }
 
-  const page = +params.page;
+  const isPositiveInteger = /^\d+$/.test(params.page) && Number(params.page) > 0;
+  if (!isPositiveInteger) {
+    notFound();
+  }
+
+  const page = Number(params.page);
 
   const leaders = await getLeaderboardData(page);
+
+  if (page > leaders.metadata.totalPages) {
+    notFound();
+  }
 
   const uniqueTeams = new Set(
     leaders.data.map((el) => el.teamName).filter(Boolean),
@@ -121,9 +131,12 @@ const page = async ({
               {leaders.data.length} гравців
             </span>
           </div>
-          <span className="text-xs text-white/40">
-            Сторінка {page} із {leaders.metadata.totalPages}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-white/40">
+              Сторінка {page} із {leaders.metadata.totalPages}
+            </span>
+            <LeaderboardSyncButton />
+          </div>
         </div>
       </section>
       <div className="container mx-auto flex flex-col gap-4 mb-10">

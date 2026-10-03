@@ -13,13 +13,18 @@ describe('UsersController', () => {
     getByName: jest.fn(),
     editUser: jest.fn(),
     uploadAvatar: jest.fn(),
-  }
+  };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UsersController],
       providers: [UsersService],
-    }).overrideProvider(UsersService).useValue(mockUserService).overrideGuard(AuthGuard).useValue({ canActivate: () => true }).compile();
+    })
+      .overrideProvider(UsersService)
+      .useValue(mockUserService)
+      .overrideGuard(AuthGuard)
+      .useValue({ canActivate: () => true })
+      .compile();
 
     controller = module.get<UsersController>(UsersController);
   });
@@ -27,7 +32,7 @@ describe('UsersController', () => {
   afterEach(() => {
     jest.restoreAllMocks();
     jest.clearAllMocks();
-  })
+  });
 
   it('should be defined', () => {
     expect(controller).toBeDefined();
@@ -37,111 +42,137 @@ describe('UsersController', () => {
     it('should return the current user by userId from request', async () => {
       const testUser = {
         userId: 1,
-        email: "test@test.test",
-        username: "test",
-      }
+        email: 'test@test.test',
+        username: 'test',
+      };
 
-      mockUserService.getById.mockResolvedValue(testUser)
+      mockUserService.getById.mockResolvedValue(testUser);
 
-      const mockRequest = { user: { userId: 1 } } as TRequestWithUser
+      const mockRequest = { user: { userId: 1 } } as TRequestWithUser;
 
-      await expect(controller.getMe(mockRequest)).resolves.toEqual(testUser)
-      expect(mockUserService.getById).toHaveBeenCalledWith(1)
-    })
+      await expect(controller.getMe(mockRequest)).resolves.toEqual(testUser);
+      expect(mockUserService.getById).toHaveBeenCalledWith(1);
+    });
 
     it('should throw NotFoundException if user does not exist', async () => {
-      mockUserService.getById.mockRejectedValue(new NotFoundException("User not found."))
+      mockUserService.getById.mockRejectedValue(
+        new NotFoundException('User not found.'),
+      );
 
-      const mockRequest = { user: { userId: 999 } } as TRequestWithUser
+      const mockRequest = { user: { userId: 999 } } as TRequestWithUser;
 
-      await expect(controller.getMe(mockRequest)).rejects.toThrow(NotFoundException)
-      expect(mockUserService.getById).toHaveBeenCalledWith(999)
-    })
-  })
+      await expect(controller.getMe(mockRequest)).rejects.toThrow(
+        NotFoundException,
+      );
+      expect(mockUserService.getById).toHaveBeenCalledWith(999);
+    });
+  });
 
   describe('getByName', () => {
     it('should return user by username', async () => {
       const testUser = {
         userId: 1,
-        username: "test",
-      }
+        username: 'test',
+      };
 
-      mockUserService.getByName.mockResolvedValue(testUser)
+      mockUserService.getByName.mockResolvedValue(testUser);
 
-      await expect(controller.getByName("test")).resolves.toEqual(testUser)
-      expect(mockUserService.getByName).toHaveBeenCalledWith("test")
-    })
+      await expect(controller.getByName('test')).resolves.toEqual(testUser);
+      expect(mockUserService.getByName).toHaveBeenCalledWith('test');
+    });
 
     it('should throw NotFoundException if user does not exist', async () => {
-      mockUserService.getByName.mockRejectedValue(new NotFoundException("User not found."))
+      mockUserService.getByName.mockRejectedValue(
+        new NotFoundException('User not found.'),
+      );
 
-      await expect(controller.getByName("nonexistent")).rejects.toThrow(NotFoundException)
-      expect(mockUserService.getByName).toHaveBeenCalledWith("nonexistent")
-    })
-  })
+      await expect(controller.getByName('nonexistent')).rejects.toThrow(
+        NotFoundException,
+      );
+      expect(mockUserService.getByName).toHaveBeenCalledWith('nonexistent');
+    });
+  });
 
   describe('getById', () => {
     it('should return user by id', async () => {
       const testUser = {
         userId: 1,
-        email: "test@test.test",
-        username: "test",
-      }
+        email: 'test@test.test',
+        username: 'test',
+      };
 
-      mockUserService.getById.mockResolvedValue(testUser)
+      mockUserService.getById.mockResolvedValue(testUser);
 
-      await expect(controller.getById(1)).resolves.toEqual(testUser)
-      expect(mockUserService.getById).toHaveBeenCalledWith(1)
-    })
+      await expect(controller.getById(1)).resolves.toEqual(testUser);
+      expect(mockUserService.getById).toHaveBeenCalledWith(1);
+    });
 
     it('should throw NotFoundException if user does not exist', async () => {
-      mockUserService.getById.mockRejectedValue(new NotFoundException("User not found."))
+      mockUserService.getById.mockRejectedValue(
+        new NotFoundException('User not found.'),
+      );
 
-      await expect(controller.getById(999)).rejects.toThrow(NotFoundException)
-      expect(mockUserService.getById).toHaveBeenCalledWith(999)
-    })
-  })
+      await expect(controller.getById(999)).rejects.toThrow(NotFoundException);
+      expect(mockUserService.getById).toHaveBeenCalledWith(999);
+    });
+  });
 
   describe('editUser', () => {
     it('should edit user email and username', async () => {
-      mockUserService.editUser.mockResolvedValue(undefined)
+      mockUserService.editUser.mockResolvedValue(undefined);
 
-      const body = { email: "new@test.test", username: "newname" }
-      const mockRequest = { user: { userId: 1 } } as TRequestWithUser
+      const body = { email: 'new@test.test', username: 'newname' };
+      const mockRequest = { user: { userId: 1 } } as TRequestWithUser;
 
-      await expect(controller.editUser(body, mockRequest)).resolves.toBeUndefined()
-      expect(mockUserService.editUser).toHaveBeenCalledWith(1, "new@test.test", "newname")
-    })
+      await expect(
+        controller.editUser(body, mockRequest),
+      ).resolves.toBeUndefined();
+      expect(mockUserService.editUser).toHaveBeenCalledWith(
+        1,
+        'new@test.test',
+        'newname',
+      );
+    });
 
     it('should propagate errors from service', async () => {
-      mockUserService.editUser.mockRejectedValue(new NotFoundException("User not found."))
+      mockUserService.editUser.mockRejectedValue(
+        new NotFoundException('User not found.'),
+      );
 
-      const body = { email: "new@test.test", username: "newname" }
-      const mockRequest = { user: { userId: 999 } } as TRequestWithUser
+      const body = { email: 'new@test.test', username: 'newname' };
+      const mockRequest = { user: { userId: 999 } } as TRequestWithUser;
 
-      await expect(controller.editUser(body, mockRequest)).rejects.toThrow(NotFoundException)
-      expect(mockUserService.editUser).toHaveBeenCalledWith(999, "new@test.test", "newname")
-    })
-  })
+      await expect(controller.editUser(body, mockRequest)).rejects.toThrow(
+        NotFoundException,
+      );
+      expect(mockUserService.editUser).toHaveBeenCalledWith(
+        999,
+        'new@test.test',
+        'newname',
+      );
+    });
+  });
 
   describe('uploadAvatar', () => {
     it('should upload avatar for current user', async () => {
-      mockUserService.uploadAvatar.mockResolvedValue(undefined)
+      mockUserService.uploadAvatar.mockResolvedValue(undefined);
 
-      const mockRequest = { user: { userId: 1 } } as TRequestWithUser
+      const mockRequest = { user: { userId: 1 } } as TRequestWithUser;
       const mockFile = {
-        originalname: "avatar.png",
-        buffer: Buffer.from("image content"),
-        mimetype: "image/png"
-      } as Express.Multer.File
+        originalname: 'avatar.png',
+        buffer: Buffer.from('image content'),
+        mimetype: 'image/png',
+      } as Express.Multer.File;
 
-      await expect(controller.uploadAvatar(mockRequest, mockFile)).resolves.toBeUndefined()
+      await expect(
+        controller.uploadAvatar(mockRequest, mockFile),
+      ).resolves.toBeUndefined();
       expect(mockUserService.uploadAvatar).toHaveBeenCalledWith(
-        "avatar.png",
+        'avatar.png',
         mockFile.buffer,
-        "image/png",
-        1
-      )
-    })
-  })
+        'image/png',
+        1,
+      );
+    });
+  });
 });

@@ -4,78 +4,82 @@ import { PrismaService } from '../lib/prisma.service.js';
 
 @Injectable()
 export class MatchesService {
-  constructor(private readonly dotaProvider: DotaProvider,
-    private readonly prisma: PrismaService
-  ) { }
+  constructor(
+    private readonly dotaProvider: DotaProvider,
+    private readonly prisma: PrismaService,
+  ) {}
 
-  async getDotaMatches(userId) {
-    const dotaInfo = await this.prisma.games.findFirstOrThrow({
-      where: { name: "DOTA" }
-    })
+  async getDotaMatches(userId: number) {
+    const dotaInfo = await this.prisma.games.findFirst({
+      where: { name: 'DOTA' },
+    });
 
-    const statsInfo = await this.prisma.gameStats.findFirstOrThrow({
+    if (!dotaInfo) {
+      throw new NotFoundException("Game 'DOTA' not found.");
+    }
+
+    const connection = await this.prisma.connections.findFirst({
       where: {
-        connections: {
-          connectinUserId: userId,
-        }
+        connectinUserId: userId,
       },
       select: {
-        statId: true
-      }
-    })
+        connectionId: true,
+      },
+    });
 
-    let matches = await this.prisma.matches.findMany({
+    if (!connection) {
+      throw new NotFoundException('Connection not found.');
+    }
+
+    const matches = await this.prisma.matches.findMany({
       where: {
-        statsMatchId: statsInfo.statId,
+        connectionMatchId: connection.connectionId,
         gameMatchId: dotaInfo.gameId,
-      }
-    })
+      },
+    });
 
     if (!matches.length) {
-      await this.syncDotaMatches(userId)
-
-      matches = await this.prisma.matches.findMany({
-        where: {
-          gameMatchId: dotaInfo.gameId,
-          statsMatchId: statsInfo.statId
-        }
-      })
+      return await this.syncDotaMatches(userId);
     }
 
-    return matches
+    return matches;
   }
 
-  async syncDotaMatches(userId) {
-    const dotaInfo = await this.prisma.games.findFirstOrThrow({
-      where: { name: "DOTA" }
-    })
+  async syncDotaMatches(userId: number) {
+    const dotaInfo = await this.prisma.games.findFirst({
+      where: { name: 'DOTA' },
+    });
 
-    const statsInfo = await this.prisma.gameStats.findFirstOrThrow({
-      where: {
-        connections: {
-          connectinUserId: userId,
-        }
-      },
-      select: {
-        statId: true,
-        connections: {
-          select: {
-            externalId: true
-          }
-        }
-      }
-    })
-
-    if (!statsInfo.connections.externalId) {
-      throw new NotFoundException("Steam ID is not found.")
+    if (!dotaInfo) {
+      throw new NotFoundException("Game 'DOTA' not found.");
     }
 
-    const syncMatches = await this.dotaProvider.getMatches(statsInfo.connections.externalId)
+    const connection = await this.prisma.connections.findFirst({
+      where: {
+        connectinUserId: userId,
+      },
+      select: {
+        connectionId: true,
+        externalId: true,
+      },
+    });
+
+    if (!connection) {
+      throw new NotFoundException('Connection not found.');
+    }
+
+    if (!connection.externalId) {
+      throw new NotFoundException('Steam ID is not found.');
+    }
+
+    const syncMatches = await this.dotaProvider.getMatches(
+      connection.externalId,
+    );
 
     const dataToInsert = syncMatches.map((el) => {
       return {
         gameMatchId: dotaInfo.gameId,
-        statsMatchId: statsInfo.statId,
+        connectionMatchId: connection.connectionId,
         metadata: {
           assists: el.assists,
           deaths: el.deaths,
@@ -85,23 +89,31 @@ export class MatchesService {
           role: el.lane_role,
           matchId: el.match_id,
           isRadiantWin: el.radiant_win,
+          isRadiant: el.player_slot < 128,
           towerDamage: el.tower_damage,
-          heroDamage: el.hero_damage
-        }
-      }
-    })
+          heroDamage: el.hero_damage,
+        },
+      };
+    });
 
     await this.prisma.$transaction([
       this.prisma.matches.deleteMany({
         where: {
-          statsMatchId: statsInfo.statId,
+          connectionMatchId: connection.connectionId,
           gameMatchId: dotaInfo.gameId,
         },
       }),
 
       this.prisma.matches.createMany({
-        data: dataToInsert
+        data: dataToInsert,
       }),
     ]);
+
+    return await this.prisma.matches.findMany({
+      where: {
+        connectionMatchId: connection.connectionId,
+        gameMatchId: dotaInfo.gameId,
+      },
+    });
   }
 }

@@ -238,6 +238,7 @@ export type ConnectionsWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   gameStats?: Prisma.XOR<Prisma.GameStatsNullableScalarRelationFilter, Prisma.GameStatsWhereInput> | null
+  matches?: Prisma.MatchesListRelationFilter
 }
 
 export type ConnectionsOrderByWithRelationInput = {
@@ -250,6 +251,7 @@ export type ConnectionsOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   users?: Prisma.UsersOrderByWithRelationInput
   gameStats?: Prisma.GameStatsOrderByWithRelationInput
+  matches?: Prisma.MatchesOrderByRelationAggregateInput
 }
 
 export type ConnectionsWhereUniqueInput = Prisma.AtLeast<{
@@ -265,6 +267,7 @@ export type ConnectionsWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
   users?: Prisma.XOR<Prisma.UsersScalarRelationFilter, Prisma.UsersWhereInput>
   gameStats?: Prisma.XOR<Prisma.GameStatsNullableScalarRelationFilter, Prisma.GameStatsWhereInput> | null
+  matches?: Prisma.MatchesListRelationFilter
 }, "connectionId">
 
 export type ConnectionsOrderByWithAggregationInput = {
@@ -303,6 +306,7 @@ export type ConnectionsCreateInput = {
   createdAt?: Date | string
   users: Prisma.UsersCreateNestedOneWithoutConnectionsInput
   gameStats?: Prisma.GameStatsCreateNestedOneWithoutConnectionsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsUncheckedCreateInput = {
@@ -314,6 +318,7 @@ export type ConnectionsUncheckedCreateInput = {
   updatedAt?: Date | string
   createdAt?: Date | string
   gameStats?: Prisma.GameStatsUncheckedCreateNestedOneWithoutConnectionsInput
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsUpdateInput = {
@@ -324,6 +329,7 @@ export type ConnectionsUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UsersUpdateOneRequiredWithoutConnectionsNestedInput
   gameStats?: Prisma.GameStatsUpdateOneWithoutConnectionsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsUncheckedUpdateInput = {
@@ -335,6 +341,7 @@ export type ConnectionsUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsCreateManyInput = {
@@ -375,6 +382,11 @@ export type ConnectionsOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
+export type ConnectionsScalarRelationFilter = {
+  is?: Prisma.ConnectionsWhereInput
+  isNot?: Prisma.ConnectionsWhereInput
+}
+
 export type ConnectionsCountOrderByAggregateInput = {
   connectionId?: Prisma.SortOrder
   connectinUserId?: Prisma.SortOrder
@@ -413,11 +425,6 @@ export type ConnectionsMinOrderByAggregateInput = {
 export type ConnectionsSumOrderByAggregateInput = {
   connectionId?: Prisma.SortOrder
   connectinUserId?: Prisma.SortOrder
-}
-
-export type ConnectionsScalarRelationFilter = {
-  is?: Prisma.ConnectionsWhereInput
-  isNot?: Prisma.ConnectionsWhereInput
 }
 
 export type ConnectionsCreateNestedManyWithoutUsersInput = {
@@ -462,6 +469,20 @@ export type ConnectionsUncheckedUpdateManyWithoutUsersNestedInput = {
   deleteMany?: Prisma.ConnectionsScalarWhereInput | Prisma.ConnectionsScalarWhereInput[]
 }
 
+export type ConnectionsCreateNestedOneWithoutMatchesInput = {
+  create?: Prisma.XOR<Prisma.ConnectionsCreateWithoutMatchesInput, Prisma.ConnectionsUncheckedCreateWithoutMatchesInput>
+  connectOrCreate?: Prisma.ConnectionsCreateOrConnectWithoutMatchesInput
+  connect?: Prisma.ConnectionsWhereUniqueInput
+}
+
+export type ConnectionsUpdateOneRequiredWithoutMatchesNestedInput = {
+  create?: Prisma.XOR<Prisma.ConnectionsCreateWithoutMatchesInput, Prisma.ConnectionsUncheckedCreateWithoutMatchesInput>
+  connectOrCreate?: Prisma.ConnectionsCreateOrConnectWithoutMatchesInput
+  upsert?: Prisma.ConnectionsUpsertWithoutMatchesInput
+  connect?: Prisma.ConnectionsWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ConnectionsUpdateToOneWithWhereWithoutMatchesInput, Prisma.ConnectionsUpdateWithoutMatchesInput>, Prisma.ConnectionsUncheckedUpdateWithoutMatchesInput>
+}
+
 export type EnumPlatformNameEmunFieldUpdateOperationsInput = {
   set?: $Enums.PlatformNameEmun
 }
@@ -487,6 +508,7 @@ export type ConnectionsCreateWithoutUsersInput = {
   updatedAt?: Date | string
   createdAt?: Date | string
   gameStats?: Prisma.GameStatsCreateNestedOneWithoutConnectionsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsUncheckedCreateWithoutUsersInput = {
@@ -497,6 +519,7 @@ export type ConnectionsUncheckedCreateWithoutUsersInput = {
   updatedAt?: Date | string
   createdAt?: Date | string
   gameStats?: Prisma.GameStatsUncheckedCreateNestedOneWithoutConnectionsInput
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsCreateOrConnectWithoutUsersInput = {
@@ -538,6 +561,64 @@ export type ConnectionsScalarWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Connections"> | Date | string
 }
 
+export type ConnectionsCreateWithoutMatchesInput = {
+  platformName: $Enums.PlatformNameEmun
+  externalId: string
+  accessToken?: string | null
+  updatedAt?: Date | string
+  createdAt?: Date | string
+  users: Prisma.UsersCreateNestedOneWithoutConnectionsInput
+  gameStats?: Prisma.GameStatsCreateNestedOneWithoutConnectionsInput
+}
+
+export type ConnectionsUncheckedCreateWithoutMatchesInput = {
+  connectionId?: number
+  connectinUserId: number
+  platformName: $Enums.PlatformNameEmun
+  externalId: string
+  accessToken?: string | null
+  updatedAt?: Date | string
+  createdAt?: Date | string
+  gameStats?: Prisma.GameStatsUncheckedCreateNestedOneWithoutConnectionsInput
+}
+
+export type ConnectionsCreateOrConnectWithoutMatchesInput = {
+  where: Prisma.ConnectionsWhereUniqueInput
+  create: Prisma.XOR<Prisma.ConnectionsCreateWithoutMatchesInput, Prisma.ConnectionsUncheckedCreateWithoutMatchesInput>
+}
+
+export type ConnectionsUpsertWithoutMatchesInput = {
+  update: Prisma.XOR<Prisma.ConnectionsUpdateWithoutMatchesInput, Prisma.ConnectionsUncheckedUpdateWithoutMatchesInput>
+  create: Prisma.XOR<Prisma.ConnectionsCreateWithoutMatchesInput, Prisma.ConnectionsUncheckedCreateWithoutMatchesInput>
+  where?: Prisma.ConnectionsWhereInput
+}
+
+export type ConnectionsUpdateToOneWithWhereWithoutMatchesInput = {
+  where?: Prisma.ConnectionsWhereInput
+  data: Prisma.XOR<Prisma.ConnectionsUpdateWithoutMatchesInput, Prisma.ConnectionsUncheckedUpdateWithoutMatchesInput>
+}
+
+export type ConnectionsUpdateWithoutMatchesInput = {
+  platformName?: Prisma.EnumPlatformNameEmunFieldUpdateOperationsInput | $Enums.PlatformNameEmun
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  users?: Prisma.UsersUpdateOneRequiredWithoutConnectionsNestedInput
+  gameStats?: Prisma.GameStatsUpdateOneWithoutConnectionsNestedInput
+}
+
+export type ConnectionsUncheckedUpdateWithoutMatchesInput = {
+  connectionId?: Prisma.IntFieldUpdateOperationsInput | number
+  connectinUserId?: Prisma.IntFieldUpdateOperationsInput | number
+  platformName?: Prisma.EnumPlatformNameEmunFieldUpdateOperationsInput | $Enums.PlatformNameEmun
+  externalId?: Prisma.StringFieldUpdateOperationsInput | string
+  accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  gameStats?: Prisma.GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput
+}
+
 export type ConnectionsCreateWithoutGameStatsInput = {
   platformName: $Enums.PlatformNameEmun
   externalId: string
@@ -545,6 +626,7 @@ export type ConnectionsCreateWithoutGameStatsInput = {
   updatedAt?: Date | string
   createdAt?: Date | string
   users: Prisma.UsersCreateNestedOneWithoutConnectionsInput
+  matches?: Prisma.MatchesCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsUncheckedCreateWithoutGameStatsInput = {
@@ -555,6 +637,7 @@ export type ConnectionsUncheckedCreateWithoutGameStatsInput = {
   accessToken?: string | null
   updatedAt?: Date | string
   createdAt?: Date | string
+  matches?: Prisma.MatchesUncheckedCreateNestedManyWithoutConnectionsInput
 }
 
 export type ConnectionsCreateOrConnectWithoutGameStatsInput = {
@@ -580,6 +663,7 @@ export type ConnectionsUpdateWithoutGameStatsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   users?: Prisma.UsersUpdateOneRequiredWithoutConnectionsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsUncheckedUpdateWithoutGameStatsInput = {
@@ -590,6 +674,7 @@ export type ConnectionsUncheckedUpdateWithoutGameStatsInput = {
   accessToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsCreateManyUsersInput = {
@@ -608,6 +693,7 @@ export type ConnectionsUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUpdateOneWithoutConnectionsNestedInput
+  matches?: Prisma.MatchesUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsUncheckedUpdateWithoutUsersInput = {
@@ -618,6 +704,7 @@ export type ConnectionsUncheckedUpdateWithoutUsersInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   gameStats?: Prisma.GameStatsUncheckedUpdateOneWithoutConnectionsNestedInput
+  matches?: Prisma.MatchesUncheckedUpdateManyWithoutConnectionsNestedInput
 }
 
 export type ConnectionsUncheckedUpdateManyWithoutUsersInput = {
@@ -630,6 +717,35 @@ export type ConnectionsUncheckedUpdateManyWithoutUsersInput = {
 }
 
 
+/**
+ * Count Type ConnectionsCountOutputType
+ */
+
+export type ConnectionsCountOutputType = {
+  matches: number
+}
+
+export type ConnectionsCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  matches?: boolean | ConnectionsCountOutputTypeCountMatchesArgs
+}
+
+/**
+ * ConnectionsCountOutputType without action
+ */
+export type ConnectionsCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ConnectionsCountOutputType
+   */
+  select?: Prisma.ConnectionsCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ConnectionsCountOutputType without action
+ */
+export type ConnectionsCountOutputTypeCountMatchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MatchesWhereInput
+}
+
 
 export type ConnectionsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   connectionId?: boolean
@@ -641,6 +757,8 @@ export type ConnectionsSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   createdAt?: boolean
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   gameStats?: boolean | Prisma.Connections$gameStatsArgs<ExtArgs>
+  matches?: boolean | Prisma.Connections$matchesArgs<ExtArgs>
+  _count?: boolean | Prisma.ConnectionsCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["connections"]>
 
 export type ConnectionsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -679,6 +797,8 @@ export type ConnectionsOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type ConnectionsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
   gameStats?: boolean | Prisma.Connections$gameStatsArgs<ExtArgs>
+  matches?: boolean | Prisma.Connections$matchesArgs<ExtArgs>
+  _count?: boolean | Prisma.ConnectionsCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ConnectionsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   users?: boolean | Prisma.UsersDefaultArgs<ExtArgs>
@@ -692,6 +812,7 @@ export type $ConnectionsPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     users: Prisma.$UsersPayload<ExtArgs>
     gameStats: Prisma.$GameStatsPayload<ExtArgs> | null
+    matches: Prisma.$MatchesPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     connectionId: number
@@ -1097,6 +1218,7 @@ export interface Prisma__ConnectionsClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   users<T extends Prisma.UsersDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UsersDefaultArgs<ExtArgs>>): Prisma.Prisma__UsersClient<runtime.Types.Result.GetResult<Prisma.$UsersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   gameStats<T extends Prisma.Connections$gameStatsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connections$gameStatsArgs<ExtArgs>>): Prisma.Prisma__GameStatsClient<runtime.Types.Result.GetResult<Prisma.$GameStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  matches<T extends Prisma.Connections$matchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Connections$matchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MatchesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1550,6 +1672,30 @@ export type Connections$gameStatsArgs<ExtArgs extends runtime.Types.Extensions.I
    */
   include?: Prisma.GameStatsInclude<ExtArgs> | null
   where?: Prisma.GameStatsWhereInput
+}
+
+/**
+ * Connections.matches
+ */
+export type Connections$matchesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Matches
+   */
+  select?: Prisma.MatchesSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Matches
+   */
+  omit?: Prisma.MatchesOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MatchesInclude<ExtArgs> | null
+  where?: Prisma.MatchesWhereInput
+  orderBy?: Prisma.MatchesOrderByWithRelationInput | Prisma.MatchesOrderByWithRelationInput[]
+  cursor?: Prisma.MatchesWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MatchesScalarFieldEnum | Prisma.MatchesScalarFieldEnum[]
 }
 
 /**

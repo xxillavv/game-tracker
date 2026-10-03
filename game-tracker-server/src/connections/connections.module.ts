@@ -6,4 +6,4 @@ import { ConnectionsController } from './connections.controller.js';
   controllers: [ConnectionsController],
   providers: [ConnectionsService],
 })
-export class ConnectionsModule { }
+export class ConnectionsModule {}

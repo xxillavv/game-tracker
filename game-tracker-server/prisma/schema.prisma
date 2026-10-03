@@ -51,14 +51,14 @@ model Games {
 
 // Таблиця з статистикою зібраних матчів користувача.
 model Matches {
-  matchId      Int @id @default(autoincrement()) @map("match_id")
-  statsMatchId Int @map("stats_id")
-  gameMatchId  Int @map("game_id")
+  matchId           Int @id @default(autoincrement()) @map("match_id")
+  connectionMatchId Int @map("connection_id")
+  gameMatchId       Int @map("game_id")
 
   metadata Json @default("{}") // JSON для уніальних даних про матч для різних ігор (Для доти свій JSON, для кс свій)
 
-  stats GameStats @relation(fields: [statsMatchId], references: [statId], onDelete: Cascade)
-  game  Games     @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
+  connections Connections @relation(fields: [connectionMatchId], references: [connectionId], onDelete: Cascade)
+  game        Games       @relation(fields: [gameMatchId], references: [gameId], onDelete: Cascade)
 
   @@map("matches")
 }
@@ -96,6 +96,7 @@ model Connections {
 
   users     Users      @relation(fields: [connectinUserId], references: [userId], onDelete: Cascade)
   gameStats GameStats?
+  matches   Matches[]
 
   @@map("connections")
 }
@@ -111,7 +112,6 @@ model GameStats {
   createdAt     DateTime        @default(now()) @map("created_at")
   updatedAt     DateTime        @updatedAt @map("updated_at")
   rankHistories RatingHistory[]
-  matches       Matches[]
 
   connections Connections @relation(fields: [statsConnectionId], references: [connectionId], onDelete: Cascade)
 

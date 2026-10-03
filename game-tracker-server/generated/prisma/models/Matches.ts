@@ -28,31 +28,31 @@ export type AggregateMatches = {
 
 export type MatchesAvgAggregateOutputType = {
   matchId: number | null
-  statsMatchId: number | null
+  connectionMatchId: number | null
   gameMatchId: number | null
 }
 
 export type MatchesSumAggregateOutputType = {
   matchId: number | null
-  statsMatchId: number | null
+  connectionMatchId: number | null
   gameMatchId: number | null
 }
 
 export type MatchesMinAggregateOutputType = {
   matchId: number | null
-  statsMatchId: number | null
+  connectionMatchId: number | null
   gameMatchId: number | null
 }
 
 export type MatchesMaxAggregateOutputType = {
   matchId: number | null
-  statsMatchId: number | null
+  connectionMatchId: number | null
   gameMatchId: number | null
 }
 
 export type MatchesCountAggregateOutputType = {
   matchId: number
-  statsMatchId: number
+  connectionMatchId: number
   gameMatchId: number
   metadata: number
   _all: number
@@ -61,31 +61,31 @@ export type MatchesCountAggregateOutputType = {
 
 export type MatchesAvgAggregateInputType = {
   matchId?: true
-  statsMatchId?: true
+  connectionMatchId?: true
   gameMatchId?: true
 }
 
 export type MatchesSumAggregateInputType = {
   matchId?: true
-  statsMatchId?: true
+  connectionMatchId?: true
   gameMatchId?: true
 }
 
 export type MatchesMinAggregateInputType = {
   matchId?: true
-  statsMatchId?: true
+  connectionMatchId?: true
   gameMatchId?: true
 }
 
 export type MatchesMaxAggregateInputType = {
   matchId?: true
-  statsMatchId?: true
+  connectionMatchId?: true
   gameMatchId?: true
 }
 
 export type MatchesCountAggregateInputType = {
   matchId?: true
-  statsMatchId?: true
+  connectionMatchId?: true
   gameMatchId?: true
   metadata?: true
   _all?: true
@@ -179,7 +179,7 @@ export type MatchesGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type MatchesGroupByOutputType = {
   matchId: number
-  statsMatchId: number
+  connectionMatchId: number
   gameMatchId: number
   metadata: runtime.JsonValue
   _count: MatchesCountAggregateOutputType | null
@@ -209,19 +209,19 @@ export type MatchesWhereInput = {
   OR?: Prisma.MatchesWhereInput[]
   NOT?: Prisma.MatchesWhereInput | Prisma.MatchesWhereInput[]
   matchId?: Prisma.IntFilter<"Matches"> | number
-  statsMatchId?: Prisma.IntFilter<"Matches"> | number
+  connectionMatchId?: Prisma.IntFilter<"Matches"> | number
   gameMatchId?: Prisma.IntFilter<"Matches"> | number
   metadata?: Prisma.JsonFilter<"Matches">
-  stats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
+  connections?: Prisma.XOR<Prisma.ConnectionsScalarRelationFilter, Prisma.ConnectionsWhereInput>
   game?: Prisma.XOR<Prisma.GamesScalarRelationFilter, Prisma.GamesWhereInput>
 }
 
 export type MatchesOrderByWithRelationInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
-  stats?: Prisma.GameStatsOrderByWithRelationInput
+  connections?: Prisma.ConnectionsOrderByWithRelationInput
   game?: Prisma.GamesOrderByWithRelationInput
 }
 
@@ -230,16 +230,16 @@ export type MatchesWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.MatchesWhereInput | Prisma.MatchesWhereInput[]
   OR?: Prisma.MatchesWhereInput[]
   NOT?: Prisma.MatchesWhereInput | Prisma.MatchesWhereInput[]
-  statsMatchId?: Prisma.IntFilter<"Matches"> | number
+  connectionMatchId?: Prisma.IntFilter<"Matches"> | number
   gameMatchId?: Prisma.IntFilter<"Matches"> | number
   metadata?: Prisma.JsonFilter<"Matches">
-  stats?: Prisma.XOR<Prisma.GameStatsScalarRelationFilter, Prisma.GameStatsWhereInput>
+  connections?: Prisma.XOR<Prisma.ConnectionsScalarRelationFilter, Prisma.ConnectionsWhereInput>
   game?: Prisma.XOR<Prisma.GamesScalarRelationFilter, Prisma.GamesWhereInput>
 }, "matchId">
 
 export type MatchesOrderByWithAggregationInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   _count?: Prisma.MatchesCountOrderByAggregateInput
@@ -254,40 +254,40 @@ export type MatchesScalarWhereWithAggregatesInput = {
   OR?: Prisma.MatchesScalarWhereWithAggregatesInput[]
   NOT?: Prisma.MatchesScalarWhereWithAggregatesInput | Prisma.MatchesScalarWhereWithAggregatesInput[]
   matchId?: Prisma.IntWithAggregatesFilter<"Matches"> | number
-  statsMatchId?: Prisma.IntWithAggregatesFilter<"Matches"> | number
+  connectionMatchId?: Prisma.IntWithAggregatesFilter<"Matches"> | number
   gameMatchId?: Prisma.IntWithAggregatesFilter<"Matches"> | number
   metadata?: Prisma.JsonWithAggregatesFilter<"Matches">
 }
 
 export type MatchesCreateInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  stats: Prisma.GameStatsCreateNestedOneWithoutMatchesInput
+  connections: Prisma.ConnectionsCreateNestedOneWithoutMatchesInput
   game: Prisma.GamesCreateNestedOneWithoutMatchesInput
 }
 
 export type MatchesUncheckedCreateInput = {
   matchId?: number
-  statsMatchId: number
+  connectionMatchId: number
   gameMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchesUpdateInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  stats?: Prisma.GameStatsUpdateOneRequiredWithoutMatchesNestedInput
+  connections?: Prisma.ConnectionsUpdateOneRequiredWithoutMatchesNestedInput
   game?: Prisma.GamesUpdateOneRequiredWithoutMatchesNestedInput
 }
 
 export type MatchesUncheckedUpdateInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
-  statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
+  connectionMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchesCreateManyInput = {
   matchId?: number
-  statsMatchId: number
+  connectionMatchId: number
   gameMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
@@ -298,7 +298,7 @@ export type MatchesUpdateManyMutationInput = {
 
 export type MatchesUncheckedUpdateManyInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
-  statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
+  connectionMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
@@ -315,32 +315,32 @@ export type MatchesOrderByRelationAggregateInput = {
 
 export type MatchesCountOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
 }
 
 export type MatchesAvgOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
 }
 
 export type MatchesMaxOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
 }
 
 export type MatchesMinOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
 }
 
 export type MatchesSumOrderByAggregateInput = {
   matchId?: Prisma.SortOrder
-  statsMatchId?: Prisma.SortOrder
+  connectionMatchId?: Prisma.SortOrder
   gameMatchId?: Prisma.SortOrder
 }
 
@@ -386,56 +386,56 @@ export type MatchesUncheckedUpdateManyWithoutGameNestedInput = {
   deleteMany?: Prisma.MatchesScalarWhereInput | Prisma.MatchesScalarWhereInput[]
 }
 
-export type MatchesCreateNestedManyWithoutStatsInput = {
-  create?: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput> | Prisma.MatchesCreateWithoutStatsInput[] | Prisma.MatchesUncheckedCreateWithoutStatsInput[]
-  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutStatsInput | Prisma.MatchesCreateOrConnectWithoutStatsInput[]
-  createMany?: Prisma.MatchesCreateManyStatsInputEnvelope
+export type MatchesCreateNestedManyWithoutConnectionsInput = {
+  create?: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput> | Prisma.MatchesCreateWithoutConnectionsInput[] | Prisma.MatchesUncheckedCreateWithoutConnectionsInput[]
+  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutConnectionsInput | Prisma.MatchesCreateOrConnectWithoutConnectionsInput[]
+  createMany?: Prisma.MatchesCreateManyConnectionsInputEnvelope
   connect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
 }
 
-export type MatchesUncheckedCreateNestedManyWithoutStatsInput = {
-  create?: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput> | Prisma.MatchesCreateWithoutStatsInput[] | Prisma.MatchesUncheckedCreateWithoutStatsInput[]
-  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutStatsInput | Prisma.MatchesCreateOrConnectWithoutStatsInput[]
-  createMany?: Prisma.MatchesCreateManyStatsInputEnvelope
+export type MatchesUncheckedCreateNestedManyWithoutConnectionsInput = {
+  create?: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput> | Prisma.MatchesCreateWithoutConnectionsInput[] | Prisma.MatchesUncheckedCreateWithoutConnectionsInput[]
+  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutConnectionsInput | Prisma.MatchesCreateOrConnectWithoutConnectionsInput[]
+  createMany?: Prisma.MatchesCreateManyConnectionsInputEnvelope
   connect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
 }
 
-export type MatchesUpdateManyWithoutStatsNestedInput = {
-  create?: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput> | Prisma.MatchesCreateWithoutStatsInput[] | Prisma.MatchesUncheckedCreateWithoutStatsInput[]
-  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutStatsInput | Prisma.MatchesCreateOrConnectWithoutStatsInput[]
-  upsert?: Prisma.MatchesUpsertWithWhereUniqueWithoutStatsInput | Prisma.MatchesUpsertWithWhereUniqueWithoutStatsInput[]
-  createMany?: Prisma.MatchesCreateManyStatsInputEnvelope
+export type MatchesUpdateManyWithoutConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput> | Prisma.MatchesCreateWithoutConnectionsInput[] | Prisma.MatchesUncheckedCreateWithoutConnectionsInput[]
+  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutConnectionsInput | Prisma.MatchesCreateOrConnectWithoutConnectionsInput[]
+  upsert?: Prisma.MatchesUpsertWithWhereUniqueWithoutConnectionsInput | Prisma.MatchesUpsertWithWhereUniqueWithoutConnectionsInput[]
+  createMany?: Prisma.MatchesCreateManyConnectionsInputEnvelope
   set?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   disconnect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   delete?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   connect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
-  update?: Prisma.MatchesUpdateWithWhereUniqueWithoutStatsInput | Prisma.MatchesUpdateWithWhereUniqueWithoutStatsInput[]
-  updateMany?: Prisma.MatchesUpdateManyWithWhereWithoutStatsInput | Prisma.MatchesUpdateManyWithWhereWithoutStatsInput[]
+  update?: Prisma.MatchesUpdateWithWhereUniqueWithoutConnectionsInput | Prisma.MatchesUpdateWithWhereUniqueWithoutConnectionsInput[]
+  updateMany?: Prisma.MatchesUpdateManyWithWhereWithoutConnectionsInput | Prisma.MatchesUpdateManyWithWhereWithoutConnectionsInput[]
   deleteMany?: Prisma.MatchesScalarWhereInput | Prisma.MatchesScalarWhereInput[]
 }
 
-export type MatchesUncheckedUpdateManyWithoutStatsNestedInput = {
-  create?: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput> | Prisma.MatchesCreateWithoutStatsInput[] | Prisma.MatchesUncheckedCreateWithoutStatsInput[]
-  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutStatsInput | Prisma.MatchesCreateOrConnectWithoutStatsInput[]
-  upsert?: Prisma.MatchesUpsertWithWhereUniqueWithoutStatsInput | Prisma.MatchesUpsertWithWhereUniqueWithoutStatsInput[]
-  createMany?: Prisma.MatchesCreateManyStatsInputEnvelope
+export type MatchesUncheckedUpdateManyWithoutConnectionsNestedInput = {
+  create?: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput> | Prisma.MatchesCreateWithoutConnectionsInput[] | Prisma.MatchesUncheckedCreateWithoutConnectionsInput[]
+  connectOrCreate?: Prisma.MatchesCreateOrConnectWithoutConnectionsInput | Prisma.MatchesCreateOrConnectWithoutConnectionsInput[]
+  upsert?: Prisma.MatchesUpsertWithWhereUniqueWithoutConnectionsInput | Prisma.MatchesUpsertWithWhereUniqueWithoutConnectionsInput[]
+  createMany?: Prisma.MatchesCreateManyConnectionsInputEnvelope
   set?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   disconnect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   delete?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
   connect?: Prisma.MatchesWhereUniqueInput | Prisma.MatchesWhereUniqueInput[]
-  update?: Prisma.MatchesUpdateWithWhereUniqueWithoutStatsInput | Prisma.MatchesUpdateWithWhereUniqueWithoutStatsInput[]
-  updateMany?: Prisma.MatchesUpdateManyWithWhereWithoutStatsInput | Prisma.MatchesUpdateManyWithWhereWithoutStatsInput[]
+  update?: Prisma.MatchesUpdateWithWhereUniqueWithoutConnectionsInput | Prisma.MatchesUpdateWithWhereUniqueWithoutConnectionsInput[]
+  updateMany?: Prisma.MatchesUpdateManyWithWhereWithoutConnectionsInput | Prisma.MatchesUpdateManyWithWhereWithoutConnectionsInput[]
   deleteMany?: Prisma.MatchesScalarWhereInput | Prisma.MatchesScalarWhereInput[]
 }
 
 export type MatchesCreateWithoutGameInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  stats: Prisma.GameStatsCreateNestedOneWithoutMatchesInput
+  connections: Prisma.ConnectionsCreateNestedOneWithoutMatchesInput
 }
 
 export type MatchesUncheckedCreateWithoutGameInput = {
   matchId?: number
-  statsMatchId: number
+  connectionMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
@@ -470,89 +470,89 @@ export type MatchesScalarWhereInput = {
   OR?: Prisma.MatchesScalarWhereInput[]
   NOT?: Prisma.MatchesScalarWhereInput | Prisma.MatchesScalarWhereInput[]
   matchId?: Prisma.IntFilter<"Matches"> | number
-  statsMatchId?: Prisma.IntFilter<"Matches"> | number
+  connectionMatchId?: Prisma.IntFilter<"Matches"> | number
   gameMatchId?: Prisma.IntFilter<"Matches"> | number
   metadata?: Prisma.JsonFilter<"Matches">
 }
 
-export type MatchesCreateWithoutStatsInput = {
+export type MatchesCreateWithoutConnectionsInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   game: Prisma.GamesCreateNestedOneWithoutMatchesInput
 }
 
-export type MatchesUncheckedCreateWithoutStatsInput = {
+export type MatchesUncheckedCreateWithoutConnectionsInput = {
   matchId?: number
   gameMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
-export type MatchesCreateOrConnectWithoutStatsInput = {
+export type MatchesCreateOrConnectWithoutConnectionsInput = {
   where: Prisma.MatchesWhereUniqueInput
-  create: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput>
+  create: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput>
 }
 
-export type MatchesCreateManyStatsInputEnvelope = {
-  data: Prisma.MatchesCreateManyStatsInput | Prisma.MatchesCreateManyStatsInput[]
+export type MatchesCreateManyConnectionsInputEnvelope = {
+  data: Prisma.MatchesCreateManyConnectionsInput | Prisma.MatchesCreateManyConnectionsInput[]
   skipDuplicates?: boolean
 }
 
-export type MatchesUpsertWithWhereUniqueWithoutStatsInput = {
+export type MatchesUpsertWithWhereUniqueWithoutConnectionsInput = {
   where: Prisma.MatchesWhereUniqueInput
-  update: Prisma.XOR<Prisma.MatchesUpdateWithoutStatsInput, Prisma.MatchesUncheckedUpdateWithoutStatsInput>
-  create: Prisma.XOR<Prisma.MatchesCreateWithoutStatsInput, Prisma.MatchesUncheckedCreateWithoutStatsInput>
+  update: Prisma.XOR<Prisma.MatchesUpdateWithoutConnectionsInput, Prisma.MatchesUncheckedUpdateWithoutConnectionsInput>
+  create: Prisma.XOR<Prisma.MatchesCreateWithoutConnectionsInput, Prisma.MatchesUncheckedCreateWithoutConnectionsInput>
 }
 
-export type MatchesUpdateWithWhereUniqueWithoutStatsInput = {
+export type MatchesUpdateWithWhereUniqueWithoutConnectionsInput = {
   where: Prisma.MatchesWhereUniqueInput
-  data: Prisma.XOR<Prisma.MatchesUpdateWithoutStatsInput, Prisma.MatchesUncheckedUpdateWithoutStatsInput>
+  data: Prisma.XOR<Prisma.MatchesUpdateWithoutConnectionsInput, Prisma.MatchesUncheckedUpdateWithoutConnectionsInput>
 }
 
-export type MatchesUpdateManyWithWhereWithoutStatsInput = {
+export type MatchesUpdateManyWithWhereWithoutConnectionsInput = {
   where: Prisma.MatchesScalarWhereInput
-  data: Prisma.XOR<Prisma.MatchesUpdateManyMutationInput, Prisma.MatchesUncheckedUpdateManyWithoutStatsInput>
+  data: Prisma.XOR<Prisma.MatchesUpdateManyMutationInput, Prisma.MatchesUncheckedUpdateManyWithoutConnectionsInput>
 }
 
 export type MatchesCreateManyGameInput = {
   matchId?: number
-  statsMatchId: number
+  connectionMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchesUpdateWithoutGameInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  stats?: Prisma.GameStatsUpdateOneRequiredWithoutMatchesNestedInput
+  connections?: Prisma.ConnectionsUpdateOneRequiredWithoutMatchesNestedInput
 }
 
 export type MatchesUncheckedUpdateWithoutGameInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
-  statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
+  connectionMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
 export type MatchesUncheckedUpdateManyWithoutGameInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
-  statsMatchId?: Prisma.IntFieldUpdateOperationsInput | number
+  connectionMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
-export type MatchesCreateManyStatsInput = {
+export type MatchesCreateManyConnectionsInput = {
   matchId?: number
   gameMatchId: number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
-export type MatchesUpdateWithoutStatsInput = {
+export type MatchesUpdateWithoutConnectionsInput = {
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   game?: Prisma.GamesUpdateOneRequiredWithoutMatchesNestedInput
 }
 
-export type MatchesUncheckedUpdateWithoutStatsInput = {
+export type MatchesUncheckedUpdateWithoutConnectionsInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
 }
 
-export type MatchesUncheckedUpdateManyWithoutStatsInput = {
+export type MatchesUncheckedUpdateManyWithoutConnectionsInput = {
   matchId?: Prisma.IntFieldUpdateOperationsInput | number
   gameMatchId?: Prisma.IntFieldUpdateOperationsInput | number
   metadata?: Prisma.JsonNullValueInput | runtime.InputJsonValue
@@ -562,61 +562,61 @@ export type MatchesUncheckedUpdateManyWithoutStatsInput = {
 
 export type MatchesSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   matchId?: boolean
-  statsMatchId?: boolean
+  connectionMatchId?: boolean
   gameMatchId?: boolean
   metadata?: boolean
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matches"]>
 
 export type MatchesSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   matchId?: boolean
-  statsMatchId?: boolean
+  connectionMatchId?: boolean
   gameMatchId?: boolean
   metadata?: boolean
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matches"]>
 
 export type MatchesSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   matchId?: boolean
-  statsMatchId?: boolean
+  connectionMatchId?: boolean
   gameMatchId?: boolean
   metadata?: boolean
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["matches"]>
 
 export type MatchesSelectScalar = {
   matchId?: boolean
-  statsMatchId?: boolean
+  connectionMatchId?: boolean
   gameMatchId?: boolean
   metadata?: boolean
 }
 
-export type MatchesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matchId" | "statsMatchId" | "gameMatchId" | "metadata", ExtArgs["result"]["matches"]>
+export type MatchesOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"matchId" | "connectionMatchId" | "gameMatchId" | "metadata", ExtArgs["result"]["matches"]>
 export type MatchesInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }
 export type MatchesIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }
 export type MatchesIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  stats?: boolean | Prisma.GameStatsDefaultArgs<ExtArgs>
+  connections?: boolean | Prisma.ConnectionsDefaultArgs<ExtArgs>
   game?: boolean | Prisma.GamesDefaultArgs<ExtArgs>
 }
 
 export type $MatchesPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Matches"
   objects: {
-    stats: Prisma.$GameStatsPayload<ExtArgs>
+    connections: Prisma.$ConnectionsPayload<ExtArgs>
     game: Prisma.$GamesPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     matchId: number
-    statsMatchId: number
+    connectionMatchId: number
     gameMatchId: number
     metadata: runtime.JsonValue
   }, ExtArgs["result"]["matches"]>
@@ -1013,7 +1013,7 @@ readonly fields: MatchesFieldRefs;
  */
 export interface Prisma__MatchesClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  stats<T extends Prisma.GameStatsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GameStatsDefaultArgs<ExtArgs>>): Prisma.Prisma__GameStatsClient<runtime.Types.Result.GetResult<Prisma.$GameStatsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  connections<T extends Prisma.ConnectionsDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ConnectionsDefaultArgs<ExtArgs>>): Prisma.Prisma__ConnectionsClient<runtime.Types.Result.GetResult<Prisma.$ConnectionsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   game<T extends Prisma.GamesDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.GamesDefaultArgs<ExtArgs>>): Prisma.Prisma__GamesClient<runtime.Types.Result.GetResult<Prisma.$GamesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1045,7 +1045,7 @@ export interface Prisma__MatchesClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface MatchesFieldRefs {
   readonly matchId: Prisma.FieldRef<"Matches", 'Int'>
-  readonly statsMatchId: Prisma.FieldRef<"Matches", 'Int'>
+  readonly connectionMatchId: Prisma.FieldRef<"Matches", 'Int'>
   readonly gameMatchId: Prisma.FieldRef<"Matches", 'Int'>
   readonly metadata: Prisma.FieldRef<"Matches", 'Json'>
 }
