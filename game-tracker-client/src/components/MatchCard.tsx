@@ -1,5 +1,6 @@
 import { Clock, Coins, Flame, Shield, Swords, Zap } from "lucide-react";
 import { IMatchCardProps } from "@/types/matches.type";
+import { laneRoles } from "@/app/matches/constants";
 
 function formatDuration(seconds: number): string {
   const mins = Math.floor(seconds / 60);
@@ -8,8 +9,8 @@ function formatDuration(seconds: number): string {
 }
 
 export function MatchCard({ match }: IMatchCardProps) {
-  const { metadata, gameMatchId } = match;
-  const isWin = metadata.isRadiantWin;
+  const { metadata } = match;
+  const isWin = metadata.isRadiant === metadata.isRadiantWin;
   const kdaRatio = (
     (metadata.kills + metadata.assists) /
     Math.max(1, metadata.deaths)
@@ -44,18 +45,18 @@ export function MatchCard({ match }: IMatchCardProps) {
               {isWin ? "Перемога" : "Поразка"}
             </span>
             <span className="text-[10px] font-medium opacity-70">
-              {isWin ? "Radiant Win" : "Dire Win"}
+              {metadata.isRadiant ? "Radiant" : "Dire"}
             </span>
           </div>
 
           <div className="flex flex-col">
             <div className="flex items-center gap-2">
               <span className="text-base font-bold text-white group-hover:text-turquoise transition-colors">
-                Матч #{gameMatchId}
+                Матч #{metadata.matchId}
               </span>
-              {metadata.role && (
+              {metadata.role !== null && laneRoles[metadata.role] && (
                 <span className="rounded-full bg-turquoise/10 px-2.5 py-0.5 text-[11px] font-semibold text-turquoise ring-1 ring-turquoise/20">
-                  {metadata.role}
+                  {laneRoles[metadata.role]}
                 </span>
               )}
             </div>

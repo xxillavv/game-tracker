@@ -5,9 +5,10 @@ export interface IGameMatchesMetadata {
   goldPerMinute: number
   heroDamage: number 
   isRadiantWin: boolean
+  isRadiant: boolean
   kills: number
   matchId: number
-  role: string | null
+  role: number | null
   towerDamage: number
 }
 

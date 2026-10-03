@@ -89,6 +89,7 @@ export class MatchesService {
           role: el.lane_role,
           matchId: el.match_id,
           isRadiantWin: el.radiant_win,
+          isRadiant: el.player_slot < 128,
           towerDamage: el.tower_damage,
           heroDamage: el.hero_damage,
         },
