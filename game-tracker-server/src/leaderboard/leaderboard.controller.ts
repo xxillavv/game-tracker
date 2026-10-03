@@ -6,7 +6,6 @@ import { SkipThrottle } from '@nestjs/throttler';
 export class LeaderboardController {
   constructor(private readonly leaderboardService: LeaderboardService) {}
 
-  @SkipThrottle()
   @Post('dota/sync')
   syncLeaderboard() {
     return this.leaderboardService.syncLeaderboard();

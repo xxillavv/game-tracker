@@ -4,6 +4,7 @@ import { notFound, redirect } from "next/navigation";
 import { getLeaderboardData } from "../queries";
 import { LeaderCard } from "@/components/LeaderCard";
 import { LeadersPagesNavigation } from "@/components/LeadersPagesNavigation";
+import LeaderboardSyncButton from "@/components/LeaderboardSyncButton";
 import { Crown, Gamepad2, Layers, Shield, Trophy } from "lucide-react";
 
 type TSearchParams = {
@@ -130,9 +131,12 @@ const page = async ({
               {leaders.data.length} гравців
             </span>
           </div>
-          <span className="text-xs text-white/40">
-            Сторінка {page} із {leaders.metadata.totalPages}
-          </span>
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-white/40">
+              Сторінка {page} із {leaders.metadata.totalPages}
+            </span>
+            <LeaderboardSyncButton />
+          </div>
         </div>
       </section>
       <div className="container mx-auto flex flex-col gap-4 mb-10">
