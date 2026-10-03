@@ -1,6 +1,7 @@
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { MatchCard } from "@/components/MatchCard";
+import MatchesSyncButton from "@/components/MatchesSyncButton";
 import { getUserMatches } from "./queries";
 import { Gamepad2, Swords } from "lucide-react";
 
@@ -56,6 +57,7 @@ const page = async () => {
               {Array.isArray(matches) ? matches.length : 0} матчів
             </span>
           </div>
+          <MatchesSyncButton />
         </div>
 
         <div className="flex flex-col gap-4 mb-20">
