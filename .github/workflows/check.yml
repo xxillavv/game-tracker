@@ -43,7 +43,12 @@ jobs:
 
   test:
     needs: [lint]
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        versions: [22, 24, 26]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: game-tracker-server
@@ -59,7 +64,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: ${{ matrix.versions }}
           cache: pnpm
           cache-dependency-path: game-tracker-server/pnpm-lock.yaml
 
