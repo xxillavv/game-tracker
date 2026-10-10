@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 export async function proxy(request: NextRequest) {
   const cookieHeader = request.headers.get("cookie") || ""
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+  const response = await fetch(`${process.env.API_URL}/users/me`, {
     headers: {
       Cookie: cookieHeader
     },
@@ -12,7 +12,7 @@ export async function proxy(request: NextRequest) {
   })
 
   if (response.status === 401 || !response.ok) {
-    const refreshResponse = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/refresh`, {
+    const refreshResponse = await fetch(`${process.env.API_URL}/auth/refresh`, {
       headers: {
         Cookie: cookieHeader
       },

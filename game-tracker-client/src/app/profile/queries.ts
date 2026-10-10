@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const getUserDotaStats = async (): Promise<IDotaStatsResponse | number> => {
   const cookieStore = await cookies()
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/stats/dota`, {
+  const response = await fetch(`${process.env.API_URL}/stats/dota`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
@@ -23,7 +23,7 @@ export const getUserDotaStats = async (): Promise<IDotaStatsResponse | number> =
 export const getCurrentUser = async (): Promise<IUser> => {
   const cookieStore = await cookies()
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users/me`, {
+  const response = await fetch(`${process.env.API_URL}/users/me`, {
     cache: "no-store",
     headers: {
       Cookie: cookieStore.toString(),
@@ -35,7 +35,7 @@ export const getCurrentUser = async (): Promise<IUser> => {
 export const getUserConnections = async (): Promise<ICreateConnectionResponse[]> => {
   const cookieStore = await cookies()
 
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/connection`, {
+  const response = await fetch(`${process.env.API_URL}/connection`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
