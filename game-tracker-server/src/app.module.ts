@@ -8,6 +8,7 @@ import { MatchesModule } from './matches/matches.module.js';
 import { ConnectionsModule } from './connections/connections.module.js';
 import { PrismaModule } from './lib/prisma.module.js';
 import { LeaderboardModule } from './leaderboard/leaderboard.module.js';
+import { HealthModule } from './health/health.module.js';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { LeaderboardModule } from './leaderboard/leaderboard.module.js';
     MatchesModule,
     ConnectionsModule,
     LeaderboardModule,
+    HealthModule,
   ],
   controllers: [],
   providers: [],

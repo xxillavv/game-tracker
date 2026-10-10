@@ -1,0 +1,78 @@
+name: Server Check
+
+on:
+  push:
+    paths:
+      - "game-tracker-server/**"
+      - ".github/workflows/check.yml"
+  pull_request:
+    paths:
+      - "game-tracker-server/**"
+      - ".github/workflows/check.yml"
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: game-tracker-server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: game-tracker-server/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: game-tracker-server/pnpm-lock.yaml
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Run lint
+        run: pnpm run lint
+
+  test:
+    needs: [lint]
+    strategy:
+      fail-fast: false
+      matrix:
+        versions: [22, 24, 26]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        working-directory: game-tracker-server
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          package_json_file: game-tracker-server/package.json
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.versions }}
+          cache: pnpm
+          cache-dependency-path: game-tracker-server/pnpm-lock.yaml
+
+      - name: Install deps
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Run tests
+        run: pnpm run test
