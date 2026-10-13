@@ -14,11 +14,11 @@ export const ProfileCard = async () => {
     typeof userGameStats === "number" ? null : userGameStats.metadata;
 
   return (
-    <div className="rounded-2xl bg-dark-blue/60 ring-1 ring-white/5 h-full flex flex-col overflow-hidden max-w-100">
-      <div className="px-8 py-8 flex flex-col flex-1">
-        <div className="flex items-center gap-5">
+    <div className="rounded-2xl bg-dark-blue/60 ring-1 ring-white/5 h-full flex flex-col overflow-hidden lg:max-w-100">
+      <div className="flex flex-1 flex-col p-5 sm:p-8">
+        <div className="flex items-center gap-4 sm:gap-5">
           <div className="group relative shrink-0">
-            <div className="size-24 overflow-hidden rounded-2xl ring-[3px] ring-dark-blue/80 shadow-lg shadow-black/30">
+            <div className="size-20 overflow-hidden sm:size-24 rounded-2xl ring-[3px] ring-dark-blue/80 shadow-lg shadow-black/30">
               {user.avatar ? (
                 <Image
                   src={user.avatar}
@@ -36,13 +36,13 @@ export const ProfileCard = async () => {
             </div>
             <EditAvatarButton />
           </div>
-          <div className="pb-1">
-            <h2 className="text-xl font-bold text-white z-50">
+          <div className="min-w-0 pb-1">
+            <h2 className="z-50 truncate text-xl font-bold text-white">
               {user.username}
             </h2>
-            <div className="mt-1 flex items-center gap-1.5 text-sm text-white/40">
-              <Mail className="size-3.5" />
-              <span>{user.email}</span>
+            <div className="mt-1 flex min-w-0 items-center gap-1.5 text-sm text-white/40">
+              <Mail className="size-3.5 shrink-0" />
+              <span className="truncate">{user.email}</span>
             </div>
           </div>
         </div>
@@ -92,7 +92,7 @@ export const ProfileCard = async () => {
             </div>
           </div>
         </div>
-        <div className="mt-auto flex flex-col gap-5">
+        <div className="mt-auto flex flex-col gap-3 pt-5 sm:gap-5">
           <ProfileEditButton />
           <LogoutButton />
         </div>
