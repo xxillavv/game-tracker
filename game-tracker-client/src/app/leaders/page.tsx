@@ -46,7 +46,7 @@ const page = async ({
       <Header />
       <section className="container mx-auto px-4 pb-8 font-mono">
         <div className="flex flex-col items-center text-center">
-          <div className="mb-10 inline-flex items-center gap-2 rounded-full bg-turquoise/10 px-4 py-1.5 text-sm text-turquoise ring-1 ring-turquoise/20">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full sm:mb-10 bg-turquoise/10 px-4 py-1.5 text-sm text-turquoise ring-1 ring-turquoise/20">
             <span className="relative flex size-2">
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-turquoise opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-turquoise" />
@@ -54,7 +54,7 @@ const page = async ({
             <Trophy className="size-4" />
             Глобальний рейтинг
           </div>
-          <h1 className="text-4xl font-bold tracking-tight text-white md:text-5xl mb-8">
+          <h1 className="mb-6 text-3xl font-bold tracking-tight text-white sm:mb-8 sm:text-4xl md:text-5xl">
             Таблиця{" "}
             <span className="relative text-turquoise">
               лідерів
@@ -74,54 +74,54 @@ const page = async ({
             </span>{" "}
             Dota 2
           </h1>
-          <p className="max-w-xl mb-10 text-base leading-relaxed text-white/60">
+          <p className="mb-8 max-w-xl text-sm leading-relaxed text-white/60 sm:mb-10 sm:text-base">
             Світовий рейтинг найкращих кіберспортсменів. Відстежуйте позиції
             топ-гравців, їхні команди та результати сезону.
           </p>
-          <div className="flex w-full max-w-4xl flex-wrap gap-4 mb-6">
-            <div className="flex-1 min-w-[calc(50%-0.5rem)] md:min-w-0 rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+          <div className="mb-6 grid w-full max-w-4xl grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
+            <div className="rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
               <div className="mb-2 flex items-center justify-center">
                 <div className="rounded-xl bg-turquoise/10 p-2">
                   <Gamepad2 className="size-4 text-turquoise" />
                 </div>
               </div>
-              <p className="text-xl font-bold text-white">
+              <p className="text-lg font-bold text-white sm:text-xl">
                 {leaders.metadata.totalCount.toLocaleString()}
               </p>
-              <p className="mt-0.5 text-xs text-white/40">Гравців у базі</p>
+              <p className="mt-0.5 text-[10px] text-white/40 sm:text-xs">Гравців у базі</p>
             </div>
-            <div className="flex-1 min-w-[calc(50%-0.5rem)] md:min-w-0 rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+            <div className="rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
               <div className="mb-2 flex items-center justify-center">
                 <div className="rounded-xl bg-turquoise/10 p-2">
                   <Crown className="size-4 text-turquoise" />
                 </div>
               </div>
-              <p className="text-xl font-bold text-white">#{topRankOnPage}</p>
-              <p className="mt-0.5 text-xs text-white/40">Топ ранг сторінки</p>
+              <p className="text-lg font-bold text-white sm:text-xl">#{topRankOnPage}</p>
+              <p className="mt-0.5 text-[10px] text-white/40 sm:text-xs">Топ ранг сторінки</p>
             </div>
-            <div className="flex-1 min-w-[calc(50%-0.5rem)] md:min-w-0 rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+            <div className="rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
               <div className="mb-2 flex items-center justify-center">
                 <div className="rounded-xl bg-turquoise/10 p-2">
                   <Shield className="size-4 text-turquoise" />
                 </div>
               </div>
-              <p className="text-xl font-bold text-white">{uniqueTeams.size}</p>
-              <p className="mt-0.5 text-xs text-white/40">Команд на сторінці</p>
+              <p className="text-lg font-bold text-white sm:text-xl">{uniqueTeams.size}</p>
+              <p className="mt-0.5 text-[10px] text-white/40 sm:text-xs">Команд на сторінці</p>
             </div>
-            <div className="flex-1 min-w-[calc(50%-0.5rem)] md:min-w-0 rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
+            <div className="rounded-2xl bg-dark-blue/60 p-4 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
               <div className="mb-2 flex items-center justify-center">
                 <div className="rounded-xl bg-turquoise/10 p-2">
                   <Layers className="size-4 text-turquoise" />
                 </div>
               </div>
-              <p className="text-xl font-bold text-white">
+              <p className="text-lg font-bold text-white sm:text-xl">
                 {page} / {leaders.metadata.totalPages}
               </p>
-              <p className="mt-0.5 text-xs text-white/40">Поточна сторінка</p>
+              <p className="mt-0.5 text-[10px] text-white/40 sm:text-xs">Поточна сторінка</p>
             </div>
           </div>
         </div>
-        <div className="mt-10 flex items-center justify-between border-b border-white/5 pb-3">
+        <div className="mt-10 flex flex-col items-start gap-3 border-b border-white/5 pb-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
             <span className="size-2 rounded-full bg-turquoise" />
             <span className="text-sm font-semibold uppercase tracking-wider text-white/70">
@@ -132,14 +132,14 @@ const page = async ({
             </span>
           </div>
           <div className="flex items-center gap-4">
-            <span className="text-xs text-white/40">
+            <span className="hidden text-xs text-white/40 sm:inline">
               Сторінка {page} із {leaders.metadata.totalPages}
             </span>
             <LeaderboardSyncButton />
           </div>
         </div>
       </section>
-      <div className="container mx-auto flex flex-col gap-4 mb-10">
+      <div className="container mx-auto mb-10 flex flex-col gap-3 px-4 sm:gap-4">
         {leaders.data.map((el) => {
           return (
             <LeaderCard

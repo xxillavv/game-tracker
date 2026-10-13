@@ -7,7 +7,7 @@ import { ISyncButtonProps } from "@/types/sync.types";
 
 const SyncButton = ({ mutation, errorMessage }: ISyncButtonProps) => {
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex flex-wrap items-center gap-2 sm:gap-4">
       {mutation.isError && (
         <p className="text-sm font-medium text-red-400 bg-red-950/30 border border-red-900/50 rounded-lg px-3 py-2 transition-all">
           {mutation.error.response?.data.message ?? errorMessage}
