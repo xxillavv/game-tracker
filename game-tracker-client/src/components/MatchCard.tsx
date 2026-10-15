@@ -18,7 +18,7 @@ export function MatchCard({ match }: IMatchCardProps) {
 
   return (
     <div
-      className={`group relative overflow-hidden rounded-2xl bg-dark-blue/60 p-5 ring-1 transition-all duration-300 hover:bg-dark-blue/90 hover:scale-[1.005] ${
+      className={`group relative overflow-hidden rounded-2xl bg-dark-blue/60 p-4 ring-1 transition-all duration-300 hover:bg-dark-blue/90 sm:p-5 sm:hover:scale-[1.005] ${
         isWin
           ? "ring-turquoise/20 hover:ring-turquoise/40 shadow-[0_4px_24px_rgba(0,228,184,0.05)]"
           : "ring-white/5 hover:ring-red-500/30 hover:shadow-[0_4px_24px_rgba(239,68,68,0.05)]"
@@ -33,15 +33,15 @@ export function MatchCard({ match }: IMatchCardProps) {
       />
 
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div className="flex flex-wrap items-center gap-4 sm:flex-nowrap">
+        <div className="flex min-w-0 items-center gap-3 sm:gap-4">
           <div
-            className={`flex h-14 w-28 shrink-0 flex-col items-center justify-center rounded-xl font-mono text-xs font-bold ring-1 transition-all ${
+            className={`flex h-12 w-24 shrink-0 flex-col items-center justify-center rounded-xl font-mono text-xs font-bold ring-1 transition-all sm:h-14 sm:w-28 ${
               isWin
                 ? "bg-turquoise/10 text-turquoise ring-turquoise/30 shadow-[0_0_15px_rgba(0,228,184,0.15)]"
                 : "bg-red-500/10 text-red-400 ring-red-500/30 shadow-[0_0_15px_rgba(239,68,68,0.15)]"
             }`}
           >
-            <span className="text-sm font-black tracking-wide uppercase">
+            <span className="text-xs font-black tracking-wide uppercase sm:text-sm">
               {isWin ? "Перемога" : "Поразка"}
             </span>
             <span className="text-[10px] font-medium opacity-70">
@@ -49,9 +49,9 @@ export function MatchCard({ match }: IMatchCardProps) {
             </span>
           </div>
 
-          <div className="flex flex-col">
-            <div className="flex items-center gap-2">
-              <span className="text-base font-bold text-white group-hover:text-turquoise transition-colors">
+          <div className="flex min-w-0 flex-col">
+            <div className="flex min-w-0 flex-wrap items-center gap-x-2 gap-y-1">
+              <span className="truncate text-sm font-bold text-white group-hover:text-turquoise transition-colors sm:text-base">
                 Матч #{metadata.matchId}
               </span>
               {metadata.role !== null && laneRoles[metadata.role] && (
@@ -75,8 +75,8 @@ export function MatchCard({ match }: IMatchCardProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-          <div className="flex items-center gap-2 rounded-xl bg-background/50 px-4 py-2.5 ring-1 ring-white/5">
+        <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:items-center sm:gap-4">
+          <div className="flex min-w-0 items-center gap-2 rounded-xl bg-background/50 px-3 py-2 ring-1 ring-white/5 sm:px-4 sm:py-2.5">
             <div className="flex size-7 items-center justify-center rounded-lg bg-turquoise/10">
               <Swords className="size-4 text-turquoise" />
             </div>
@@ -94,7 +94,7 @@ export function MatchCard({ match }: IMatchCardProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-background/50 px-4 py-2.5 ring-1 ring-white/5">
+          <div className="flex min-w-0 items-center gap-2 rounded-xl bg-background/50 px-3 py-2 ring-1 ring-white/5 sm:px-4 sm:py-2.5">
             <div className="flex size-7 items-center justify-center rounded-lg bg-amber-500/10">
               <Coins className="size-4 text-amber-400" />
             </div>
@@ -108,7 +108,7 @@ export function MatchCard({ match }: IMatchCardProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-background/50 px-4 py-2.5 ring-1 ring-white/5">
+          <div className="flex min-w-0 items-center gap-2 rounded-xl bg-background/50 px-3 py-2 ring-1 ring-white/5 sm:px-4 sm:py-2.5">
             <div className="flex size-7 items-center justify-center rounded-lg bg-rose-500/10">
               <Flame className="size-4 text-rose-400" />
             </div>
@@ -122,7 +122,7 @@ export function MatchCard({ match }: IMatchCardProps) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 rounded-xl bg-background/50 px-4 py-2.5 ring-1 ring-white/5">
+          <div className="flex min-w-0 items-center gap-2 rounded-xl bg-background/50 px-3 py-2 ring-1 ring-white/5 sm:px-4 sm:py-2.5">
             <div className="flex size-7 items-center justify-center rounded-lg bg-indigo-500/10">
               <Shield className="size-4 text-indigo-400" />
             </div>

@@ -5,7 +5,7 @@ import Link from "next/link";
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-white/5 font-mono">
-      <div className="container mx-auto px-6 py-14">
+      <div className="container mx-auto px-4 py-10 md:px-6 md:py-14">
         <div className="flex flex-col gap-12 lg:flex-row lg:justify-between">
           <div className="flex flex-col gap-5 lg:max-w-xs">
             <Link
@@ -44,7 +44,7 @@ export function Footer() {
             </div>
           </div>
 
-          <div className="flex flex-1 flex-wrap gap-12 sm:justify-around lg:justify-end lg:gap-20">
+          <div className="grid flex-1 grid-cols-2 gap-8 sm:flex sm:flex-wrap sm:justify-around sm:gap-12 lg:justify-end lg:gap-20">
             {footerNavigationSections.map((section) => (
               <div key={section.title} className="flex flex-col gap-4">
                 <h3 className="text-xs font-semibold uppercase tracking-wider text-white/30">
@@ -68,7 +68,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-white/5">
-        <div className="container mx-auto flex items-center justify-between px-6 py-5">
+        <div className="container mx-auto flex flex-col items-center gap-2 px-4 py-5 text-center sm:flex-row sm:justify-between sm:px-6 sm:text-left">
           <p className="text-xs text-white/25">
             © {new Date().getFullYear()} NEXUS.gg — Усі права захищено.
           </p>

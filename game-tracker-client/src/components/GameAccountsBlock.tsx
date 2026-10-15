@@ -6,7 +6,7 @@ const GameAccountsBlock = async () => {
   const userConnections = await getUserConnections();
 
   return (
-    <div className="rounded-2xl bg-dark-blue/60 p-8 ring-1 ring-white/5 h-full">
+    <div className="h-full rounded-2xl bg-dark-blue/60 p-5 ring-1 ring-white/5 sm:p-8">
       <div className="flex items-center gap-3 mb-5">
         <div className="flex size-10 items-center justify-center rounded-xl bg-turquoise/10 ring-1 ring-turquoise/20">
           <Gamepad2 className="size-5 text-turquoise" />

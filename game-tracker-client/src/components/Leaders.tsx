@@ -38,49 +38,49 @@ export async function Leaders() {
   );
 
   return (
-    <section className="container mx-auto font-mono mb-60">
+    <section className="container mx-auto mb-24 px-4 font-mono md:mb-60">
       <div className="flex flex-col items-center">
         <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-turquoise/10 px-4 py-1.5 text-sm text-turquoise ring-1 ring-turquoise/20">
           <Trophy className="size-3.5" />
           Топ рейтинг
         </div>
 
-        <h2 className="text-4xl font-bold tracking-tight text-white">
+        <h2 className="text-center text-3xl font-bold tracking-tight text-white sm:text-4xl">
           Лідери <span className="text-turquoise">Dota 2</span>
         </h2>
-        <p className="mt-3 max-w-lg text-center text-base text-white/50">
+        <p className="mt-3 max-w-lg text-center text-sm text-white/50 sm:text-base">
           Найкращі про-гравці за MMR рейтингом. Статистика оновлюється в
           реальному часі.
         </p>
 
-        <div className="mt-12 w-full max-w-4xl">
-          <div className="mb-3 flex items-center gap-4 px-6 text-xs font-semibold uppercase tracking-wider text-white/30">
-            <span className="w-12 shrink-0">#</span>
-            <span className="flex-1">Гравець</span>
-            <span className="flex-1">Команда</span>
+        <div className="mt-10 w-full max-w-4xl sm:mt-12">
+          <div className="mb-3 flex items-center gap-3 px-4 text-xs sm:gap-4 sm:px-6 font-semibold uppercase tracking-wider text-white/30">
+            <span className="w-10 shrink-0 sm:w-12">#</span>
+            <span className="min-w-0 flex-1">Гравець</span>
+            <span className="w-24 shrink-0 sm:w-auto sm:flex-1">Команда</span>
           </div>
 
           <div className="flex flex-col gap-2">
             {leaderboard.data.map((player) => (
               <div
                 key={player.leaderboardId}
-                className="group flex items-center gap-4 rounded-2xl bg-dark-blue/60 px-6 py-4 ring-1 ring-white/5 transition-all hover:bg-dark-blue/80 hover:ring-turquoise/20"
+                className="group flex items-center gap-3 rounded-2xl bg-dark-blue/60 px-4 py-3 ring-1 sm:gap-4 sm:px-6 sm:py-4 ring-white/5 transition-all hover:bg-dark-blue/80 hover:ring-turquoise/20"
               >
-                <div className="w-12 shrink-0">
+                <div className="w-10 shrink-0 sm:w-12">
                   <RankBadge rank={player.playerRank} />
                 </div>
 
-                <div className="flex flex-1 flex-col">
-                  <span className="text-base font-semibold text-white transition-colors group-hover:text-turquoise">
+                <div className="flex min-w-0 flex-1 flex-col">
+                  <span className="truncate text-sm font-semibold text-white transition-colors group-hover:text-turquoise sm:text-base">
                     {player.username}
                   </span>
                 </div>
 
-                <div className="flex flex-1 items-center gap-2">
-                  <div className="rounded-lg bg-turquoise/10 p-1.5">
+                <div className="flex w-24 shrink-0 items-center gap-2 sm:w-auto sm:flex-1">
+                  <div className="hidden rounded-lg bg-turquoise/10 p-1.5 sm:block">
                     <Users className="size-3.5 text-turquoise" />
                   </div>
-                  <span className="text-sm text-white/70">
+                  <span className="truncate text-sm text-white/70">
                     {player.teamName || "—"}
                   </span>
                 </div>
@@ -89,13 +89,13 @@ export async function Leaders() {
           </div>
         </div>
 
-        <div className="mt-10 flex w-full max-w-4xl flex-col gap-4 sm:flex-row">
-          <div className="flex-1 rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
-            <div className="mb-2 flex items-center gap-2">
+        <div className="mt-10 grid w-full max-w-4xl grid-cols-2 gap-3 sm:gap-4">
+          <div className="rounded-2xl bg-dark-blue/40 p-4 ring-1 sm:p-5 ring-white/5 transition-all hover:ring-turquoise/20">
+            <div className="mb-2 flex items-start gap-2 sm:items-center">
               <div className="rounded-lg bg-turquoise/10 p-2">
                 <Gamepad2 className="size-4 text-turquoise" />
               </div>
-              <span className="text-xs font-medium uppercase tracking-wider text-white/40">
+              <span className="text-[10px] font-medium uppercase tracking-wider text-white/40 sm:text-xs">
                 Гравців у рейтингу
               </span>
             </div>
@@ -104,12 +104,12 @@ export async function Leaders() {
             </p>
           </div>
 
-          <div className="flex-1 rounded-2xl bg-dark-blue/40 p-5 ring-1 ring-white/5 transition-all hover:ring-turquoise/20">
-            <div className="mb-2 flex items-center gap-2">
+          <div className="rounded-2xl bg-dark-blue/40 p-4 ring-1 sm:p-5 ring-white/5 transition-all hover:ring-turquoise/20">
+            <div className="mb-2 flex items-start gap-2 sm:items-center">
               <div className="rounded-lg bg-turquoise/10 p-2">
                 <Users className="size-4 text-turquoise" />
               </div>
-              <span className="text-xs font-medium uppercase tracking-wider text-white/40">
+              <span className="text-[10px] font-medium uppercase tracking-wider text-white/40 sm:text-xs">
                 Команд представлено
               </span>
             </div>
