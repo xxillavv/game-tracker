@@ -1,0 +1,3 @@
+- generic [active] [ref=e1]:
+  - paragraph [ref=e11]: NEXUS.gg
+  - button "Open Next.js Dev Tools" [ref=e21] [cursor=pointer]

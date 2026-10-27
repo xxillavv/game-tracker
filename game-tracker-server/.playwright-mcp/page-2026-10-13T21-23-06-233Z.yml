@@ -1,0 +1,154 @@
+- generic [active] [ref=f1e1]:
+  - banner [ref=f1e2]:
+    - generic [ref=f1e3]:
+      - link "NEXUS .gg" [ref=f1e5] [cursor=pointer]:
+        - /url: /
+        - text: NEXUS
+        - generic [ref=f1e9]: .gg
+      - button "Відкрити меню" [ref=f1e11]
+  - generic [ref=f1e14]:
+    - generic [ref=f1e15]: Платформа активна
+    - heading [level=1] [ref=f1e19]:
+      - text: Відстежуй свій
+      - generic [ref=f1e20]: прогрес
+      - text: у іграх
+    - paragraph [ref=f1e23]: Аналізуй статистику матчів, порівнюй результати з друзями та піднімайся в рейтингу. Все в одному місці.
+    - generic [ref=f1e24]:
+      - link [ref=f1e25] [cursor=pointer]:
+        - /url: /profile
+        - button "Почати трекінг" [ref=f1e26]
+      - link [ref=f1e27] [cursor=pointer]:
+        - /url: /leaders?page=1
+        - button "Переглянути лідерів" [ref=f1e28]
+    - generic [ref=f1e29]:
+      - generic [ref=f1e30]:
+        - paragraph [ref=f1e38]: 12K+
+        - paragraph [ref=f1e39]: Гравців
+      - generic [ref=f1e40]:
+        - paragraph [ref=f1e49]: 58K+
+        - paragraph [ref=f1e50]: Матчів
+      - generic [ref=f1e51]:
+        - paragraph [ref=f1e57]: 94%
+        - paragraph [ref=f1e58]: Точність
+  - generic [ref=f1e60]:
+    - generic [ref=f1e61]: Топ рейтинг
+    - heading "Лідери Dota 2" [level=2] [ref=f1e68]
+    - paragraph [ref=f1e69]: Найкращі про-гравці за MMR рейтингом. Статистика оновлюється в реальному часі.
+    - generic [ref=f1e70]:
+      - generic [ref=f1e71]:
+        - generic [ref=f1e72]: "#"
+        - generic [ref=f1e73]: Гравець
+        - generic [ref=f1e74]: Команда
+      - generic [ref=f1e75]:
+        - generic [ref=f1e76]:
+          - generic [ref=f1e81]: 9Class
+          - generic [ref=f1e83]: PV
+        - generic [ref=f1e85]:
+          - generic [ref=f1e94]: Arkadiy Khromaev
+          - generic [ref=f1e96]: —
+        - generic [ref=f1e98]:
+          - generic [ref=f1e107]: Yatoro
+          - generic [ref=f1e109]: TSpirit
+        - generic [ref=f1e111]:
+          - generic [ref=f1e112]: "#4"
+          - generic [ref=f1e115]: Satanic
+          - generic [ref=f1e117]: PV
+        - generic [ref=f1e119]:
+          - generic [ref=f1e120]: "#5"
+          - generic [ref=f1e123]: Niku
+          - generic [ref=f1e125]: NAVI
+        - generic [ref=f1e127]:
+          - generic [ref=f1e128]: "#6"
+          - generic [ref=f1e131]: panto
+          - generic [ref=f1e133]: —
+        - generic [ref=f1e135]:
+          - generic [ref=f1e136]: "#7"
+          - generic [ref=f1e139]: not_me
+          - generic [ref=f1e141]: TSpirit
+        - generic [ref=f1e143]:
+          - generic [ref=f1e144]: "#8"
+          - generic [ref=f1e147]: "Ws`"
+          - generic [ref=f1e149]: Aurora
+        - generic [ref=f1e151]:
+          - generic [ref=f1e152]: "#9"
+          - generic [ref=f1e155]: salamat1
+          - generic [ref=f1e157]: —
+        - generic [ref=f1e159]:
+          - generic [ref=f1e160]: "#10"
+          - generic [ref=f1e163]: bzm
+          - generic [ref=f1e165]: 1win
+    - generic [ref=f1e167]:
+      - generic [ref=f1e168]:
+        - generic [ref=f1e169]: Гравців у рейтингу
+        - paragraph [ref=f1e174]: "10"
+      - generic [ref=f1e175]:
+        - generic [ref=f1e176]: Команд представлено
+        - paragraph [ref=f1e184]: "5"
+  - contentinfo [ref=f1e185]:
+    - generic [ref=f1e187]:
+      - generic [ref=f1e188]:
+        - link "NEXUS .gg" [ref=f1e189] [cursor=pointer]:
+          - /url: /
+          - text: NEXUS
+          - generic [ref=f1e193]: .gg
+        - paragraph [ref=f1e194]: Відстежуй свій прогрес, аналізуй матчі та змагайся з найкращими гравцями. Твій шлях до вершини починається тут.
+        - generic [ref=f1e195]: Dota 2 • CS2 • Valorant
+        - generic [ref=f1e199]:
+          - link "GitHub" [ref=f1e200] [cursor=pointer]:
+            - /url: https://github.com
+          - link "Twitter" [ref=f1e206] [cursor=pointer]:
+            - /url: https://twitter.com
+          - link "Discord" [ref=f1e209] [cursor=pointer]:
+            - /url: https://discord.com
+      - generic [ref=f1e212]:
+        - generic [ref=f1e213]:
+          - heading "Платформа" [level=3] [ref=f1e214]
+          - list [ref=f1e215]:
+            - listitem [ref=f1e216]:
+              - link "Дашборд" [ref=f1e217] [cursor=pointer]:
+                - /url: /dashboard
+            - listitem [ref=f1e218]:
+              - link "Лідери" [ref=f1e219] [cursor=pointer]:
+                - /url: /leaders
+            - listitem [ref=f1e220]:
+              - link "Матчі" [ref=f1e221] [cursor=pointer]:
+                - /url: /matches
+            - listitem [ref=f1e222]:
+              - link "Статистика" [ref=f1e223] [cursor=pointer]:
+                - /url: /stats
+        - generic [ref=f1e224]:
+          - heading "Ресурси" [level=3] [ref=f1e225]
+          - list [ref=f1e226]:
+            - listitem [ref=f1e227]:
+              - link "Документація" [ref=f1e228] [cursor=pointer]:
+                - /url: /docs
+            - listitem [ref=f1e229]:
+              - link "API" [ref=f1e230] [cursor=pointer]:
+                - /url: /api
+            - listitem [ref=f1e231]:
+              - link "Блог" [ref=f1e232] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=f1e233]:
+              - link "Changelog" [ref=f1e234] [cursor=pointer]:
+                - /url: /changelog
+        - generic [ref=f1e235]:
+          - heading "Підтримка" [level=3] [ref=f1e236]
+          - list [ref=f1e237]:
+            - listitem [ref=f1e238]:
+              - link "FAQ" [ref=f1e239] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=f1e240]:
+              - link "Зворотній зв'язок" [ref=f1e241] [cursor=pointer]:
+                - /url: /feedback
+            - listitem [ref=f1e242]:
+              - link "Правила" [ref=f1e243] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=f1e244]:
+              - link "Конфіденційність" [ref=f1e245] [cursor=pointer]:
+                - /url: /privacy
+    - generic [ref=f1e247]:
+      - paragraph [ref=f1e248]: © 2026 NEXUS.gg — Усі права захищено.
+      - generic [ref=f1e249]: Всі системи працюють
+  - button "Open Tanstack query devtools" [ref=f1e303] [cursor=pointer]
+  - button "Open Next.js Dev Tools" [ref=f1e357] [cursor=pointer]
+  - alert [ref=f1e361]
